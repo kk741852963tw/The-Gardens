@@ -10,6 +10,9 @@ class App extends React.Component {
 
   }
 
+  handleClick() {
+    // delete this
+  }
 
   render() {
     return (
