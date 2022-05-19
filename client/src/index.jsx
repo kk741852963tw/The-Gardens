@@ -1,8 +1,6 @@
 import React from 'react';
-import render from 'react-dom'
 import ReactDOM from 'react-dom';
 
-// hakeem test git
 
 class App extends React.Component {
   constructor(props) {
@@ -10,9 +8,7 @@ class App extends React.Component {
 
   }
 
-  handleClick() {
-    // delete this
-  }
+
 
   render() {
     return (
