@@ -22,27 +22,41 @@ const url = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
 //app.get('/overview');
 
 
+
 app.get('/rnr', (req, res) => {
 
-  // A query parameter to grab the data related to the
-  // current id of the product.
-  // add header authorization.
-  axios.get(reviews)
-  .then( result => res.status(200).send(JSON.stringify(result)))
-  .catch(err => console.log('The api call did not work error: ', err);)
+  const axios = require("axios");
+  require("dotenv").config();
+
+  var config = {
+    method: 'get',
+    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/${}',
+    headers: {
+      'Authorization': process.env.APIKEY
+    }
+  };
+
+  axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
 });
 
 app.get('/questions', (req, res) => {
   const option = {
     url: url + 'qa/questions',
     headers: {
-      Authorization: ${process.env.TOKEN}
-    },
-    method: 'get'
+      Authorization: ${ process.env.TOKEN }
+},
+  method: 'get'
   };
-  axios(option)
-    .then(result => res.status(200).json(result);)
-    .catch(err => console.log('get data from questions fail', err););
+axios(option)
+  .then(result => res.status(200).json(result);)
+    .catch (err => console.log('get data from questions fail', err););
 });
 
 // Modules
