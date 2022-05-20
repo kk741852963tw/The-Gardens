@@ -27,12 +27,9 @@ app.get('/overview', (req, res) => {
 
 app.get('/rnr', (req, res) => {
 
-  const axios = require("axios");
-  require("dotenv").config();
-
   var config = {
     method: 'get',
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/${}',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/`,
     headers: {
       'Authorization': process.env.APIKEY
     }
@@ -52,13 +49,13 @@ app.get('/questions', (req, res) => {
   const option = {
     url: url + 'qa/questions',
     headers: {
-      Authorization: ${ process.env.TOKEN }
+      Authorization: `${ process.env.TOKEN }`
 },
   method: 'get'
   };
 axios(option)
-  .then(result => res.status(200).json(result);)
-    .catch (err => console.log('get data from questions fail', err););
+  .then(result => res.status(200).json(result))
+    .catch (err => console.log('get data from questions fail', err));
 });
 
 // Modules

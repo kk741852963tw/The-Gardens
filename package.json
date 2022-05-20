@@ -7,6 +7,7 @@
     "tailWind": "npx tailwindcss-cli@latest build ./client/src/styles.css -o ./client/dist/styles.css",
     "server-dev": "npx nodemon --watch server server/index.js",
     "client-dev": "npx webpack --watch",
+    "server-dev": "npx nodemon --watch server server/server.js",
     "test": "jest"
   },
   "repository": {
@@ -38,6 +39,7 @@
     "css-loader": "^6.7.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "nodemon": "^2.0.16",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "style-loader": "^3.3.1",
