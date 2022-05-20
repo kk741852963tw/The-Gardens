@@ -5,7 +5,6 @@
   "main": "config.js",
   "scripts": {
     "tailWind": "npx tailwindcss-cli@latest build ./client/src/styles.css -o ./client/dist/styles.css",
-    "server-dev": "npx nodemon --watch server server/index.js",
     "client-dev": "npx webpack --watch",
     "server-dev": "npx nodemon --watch server server/server.js",
     "test": "jest"
