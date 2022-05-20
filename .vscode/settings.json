@@ -16,7 +16,8 @@
     "titleBar.inactiveForeground": "#e7e7e799",
     "sash.hoverBorder": "#00d300",
     "statusBarItem.remoteBackground": "#00a000",
-    "statusBarItem.remoteForeground": "#e7e7e7"
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "eidtor.codeLens": true
   },
   "peacock.color": "#00a000"
 }
