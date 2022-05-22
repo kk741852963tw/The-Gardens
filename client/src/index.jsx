@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Products from './components/Overview/Products.jsx';
 import RealtedProducts from './components/Similar-Products/Similar-Products.jsx'
 
 class App extends React.Component {
@@ -14,6 +15,7 @@ class App extends React.Component {
     return (
       <div>
         <RealtedProducts/>
+        <Products />
       </div>
     )
   }
