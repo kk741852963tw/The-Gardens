@@ -1,5 +1,6 @@
 import React from 'react';
 import Headline from './Headline.jsx';
+import BagInteractButtons from './BagInteractButtons.jsx';
 const axios = require('axios');
 class Products extends React.Component {
 
@@ -19,8 +20,14 @@ class Products extends React.Component {
   render() {
     //All other sub-components should end up here
     return (
-      <div className='outer-container-overview'>
-        <Headline />
+      <div>
+        <div>
+          <Headline />
+        </div>
+        <div>
+          <BagInteractButtons className='flex'/>
+        </div>
+
       </div>
     )
   }
