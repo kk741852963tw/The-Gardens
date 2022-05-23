@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Ratings_Reviews from './components/Ratings_Reviews/Ratings_Reviews.jsx';
 
 
 class App extends React.Component {
@@ -13,7 +14,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Hello Hanging Gardens</h1>
+        <Ratings_Reviews/>
       </div>
     )
   }
