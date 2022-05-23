@@ -1,6 +1,8 @@
 {
+
   "workbench.colorCustomizations": {
     "eidtor.codeLens": true
   },
   "peacock.color": "#00a000"
+
 }

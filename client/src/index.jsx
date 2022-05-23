@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import { createRoot } from 'react-dom/client';
+import Ratings_Reviews from './components/Ratings_Reviews/Ratings_Reviews.jsx';
 import RealtedProducts from './components/Similar-Products/Similar-Products.jsx'
 import QuestionsAnswers from './components/Q&A/index.jsx'
 
@@ -15,8 +15,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* <RealtedProducts/> */}
+        <RealtedProducts/>
         <QuestionsAnswers/>
+        <Ratings_Reviews/>
       </div>
     )
   }
