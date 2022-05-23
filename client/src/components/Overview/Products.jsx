@@ -1,19 +1,36 @@
 import React from 'react';
+import Headline from './Headline.jsx';
+import BagInteractButtons from './BagInteractButtons.jsx';
+const axios = require('axios');
+class Products extends React.Component {
 
-class Products extends React.Components {
+  // constructor(props) {
+  //   super(props);
 
-  constructor(props) {
-    super(props)
+  //   this.state = {
+  //     display: []
+  //    }
 
-    this.state {
+  //   //Function Bindings
 
-    }
-
-    //Function Bindings
-  }
+  // }
   //Functions
 
   //Render
+  render() {
+    //All other sub-components should end up here
+    return (
+      <div>
+        <div>
+          <Headline />
+        </div>
+        <div>
+          <BagInteractButtons className='flex'/>
+        </div>
+
+      </div>
+    )
+  }
 };
 
 //export to main app

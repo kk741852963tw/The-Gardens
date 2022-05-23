@@ -49,6 +49,15 @@ app.get('/questions', (req, res) => {
 
     url: url + 'qa/questions',
     headers: {
+
+      Authorization: `${ process.env.TOKEN }`
+   },
+    method: 'get'
+    };
+  axios(option)
+    .then(result => res.status(200).json(result))
+      .catch (err => console.log('get data from questions fail', err));
+
       Authorization: process.env.TOKEN
 },
   method: 'get'
@@ -108,10 +117,11 @@ app.put('/questions', (req, res) => {
       .then(result => res.status(204).end())
       .catch (err => console.log('put question report to API fail', err));
   }
+
 });
 
 // Modules
 
 //Connection
 app.listen(process.env.PORT);
-console.log(`Listening at http://localhost:${process.env.PORT}`)
+console.log(`Listening at http://localhost:${process.env.PORT}`);
