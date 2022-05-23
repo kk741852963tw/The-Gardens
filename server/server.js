@@ -46,33 +46,13 @@ app.get('/rnr', (req, res) => {
 
 app.get('/questions', (req, res) => {
   const option = {
-
-    url: url + 'qa/questions',
-    headers: {
-
-      Authorization: `${ process.env.TOKEN }`
-   },
-    method: 'get'
-    };
-  axios(option)
-    .then(result => res.status(200).json(result))
-      .catch (err => console.log('get data from questions fail', err));
-
-      Authorization: process.env.TOKEN
-},
-  method: 'get'
-  };
-axios(option)
-  .then(result => res.status(200).json(result))
-    .catch (err => console.log('get data from questions fail', err));
-
     url: url + `qa/questions?product_id=${req.query.product_id}&page=2`,
     headers: { Authorization: `${ process.env.TOKEN }` },
     method: 'get'
-  };
+    };
   axios(option)
     .then(result => res.status(200).json(result.data))
-    .catch (err => console.log('get data from API fail', err));
+    .catch (err => console.log('get data from questions fail', err));
 });
 
 app.put('/answers', (req, res) => {
