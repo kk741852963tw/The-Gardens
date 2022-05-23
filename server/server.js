@@ -14,14 +14,21 @@ app.use(express.json());
 
 const url = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
 
-app.get('/rnr', (req, res) => {
+// const products = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products";
+// const reviews = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews";
+// const questions = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions";
+// const cart = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart";
+// const interactions = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/interactions";
 
-  const axios = require("axios");
-  require("dotenv").config();
+app.get('/overview', (req, res) => {
+
+});
+
+app.get('/rnr', (req, res) => {
 
   var config = {
     method: 'get',
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/${}',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/`,
     headers: {
       'Authorization': process.env.APIKEY
     }
@@ -39,6 +46,7 @@ app.get('/rnr', (req, res) => {
 
 app.get('/questions', (req, res) => {
   const option = {
+
     url: url + 'qa/questions',
     headers: {
       Authorization: process.env.TOKEN
@@ -48,6 +56,58 @@ app.get('/questions', (req, res) => {
 axios(option)
   .then(result => res.status(200).json(result))
     .catch (err => console.log('get data from questions fail', err));
+
+    url: url + `qa/questions?product_id=${req.query.product_id}&page=2`,
+    headers: { Authorization: `${ process.env.TOKEN }` },
+    method: 'get'
+  };
+  axios(option)
+    .then(result => res.status(200).json(result.data))
+    .catch (err => console.log('get data from API fail', err));
+});
+
+app.put('/answers', (req, res) => {
+  if (req.body.type === 'helpful') {
+    const option = {
+      url: url + `qa/answers/${req.body.answer_id}/helpful`,
+      headers: { Authorization: `${ process.env.TOKEN }` },
+      method: 'put'
+    };
+    axios(option)
+      .then(result => res.status(204).end())
+      .catch (err => console.log('put answer helpful to API fail', err));
+  } else {
+    const option = {
+      url: url + `qa/answers/${req.body.answer_id}/report`,
+      headers: { Authorization: `${ process.env.TOKEN }` },
+      method: 'put'
+    };
+    axios(option)
+      .then(result => res.status(204).end())
+      .catch (err => console.log('put answer report to API fail', err));
+  }
+});
+
+app.put('/questions', (req, res) => {
+  if (req.body.type === 'helpful') {
+    const option = {
+      url: url + `qa/questions/${req.body.question_id}/helpful`,
+      headers: { Authorization: `${ process.env.TOKEN }` },
+      method: 'put'
+    };
+    axios(option)
+      .then(result => res.status(204).end())
+      .catch (err => console.log('put question helpful to API fail', err));
+  } else {
+    const option = {
+      url: url + `qa/questions/${req.body.question_id}/report`,
+      headers: { Authorization: `${ process.env.TOKEN }` },
+      method: 'put'
+    };
+    axios(option)
+      .then(result => res.status(204).end())
+      .catch (err => console.log('put question report to API fail', err));
+  }
 });
 
 // Modules
