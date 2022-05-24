@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Products from './components/Overview/Products.jsx';
-import Ratings_Reviews from './components/Ratings_Reviews/Ratings_Reviews.jsx';
+import Ratings_Reviews from './components/Ratings_Reviews/Ratings_Reviews.jsx'
+import QuestionsAnswers from './components/Q&A/index.jsx';
 import RelatedProducts from './components/Similar-Products/Similar-Products.jsx'
 import QuestionsAnswers from './components/Q&A/index.jsx'
+
 
 class App extends React.Component {
   constructor(props) {
