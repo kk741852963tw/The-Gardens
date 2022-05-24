@@ -3,7 +3,7 @@ import React from 'react';
 const QuantitySelector = (props) => {
   return (
     <div>
-      <label for='quantity'>Select Quantity</label>
+      <label htmlFor='quantity'>Select Quantity</label>
       <input type='number' id='quantity'></input>
     </div>
   )

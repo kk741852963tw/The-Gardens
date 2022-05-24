@@ -44,6 +44,14 @@ app.get('/rnr', (req, res) => {
 
 });
 
+///////////////////////////////////////////////////////////////////////
+//
+// The following section contains server routes
+// handling data for the Questions and Answers
+// section.
+//
+///////////////////////////////////////////////////////////////////////
+
 app.get('/questions', (req, res) => {
   const option = {
     url: url + `qa/questions?product_id=${req.query.product_id}&page=2`,
@@ -77,7 +85,21 @@ app.put('/questions', (req, res) => {
     .catch (err => console.log(`put question ${req.body.type} to API fail`, err));
 });
 
-// Modules
+///////////////////////////////////////////////////////////////////////
+//
+// The following contains server routes handling the data for
+// Overview section
+//
+///////////////////////////////////////////////////////////////////////
+
+app.get('./carouselData', (req, res) => {
+  const options = {
+
+  };
+  axios(options)
+    .then()
+    .catch()
+});
 
 //Connection
 app.listen(process.env.PORT);
