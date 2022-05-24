@@ -9,7 +9,26 @@ const app = express();
 //Middleware
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use(express.json());
+//========================== PHILIP'S ROUTES ============================
+app.get('api/products/related', (req, res) => {
+  console.log(req.body);
+  var config = {
+    method: 'get',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.body}`,
+    headers: {
+      'Authorization': process.env.APIKEY
+    }
+  };
 
+  axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+});
+// ========================END PHILIP'S ROUTES ================
 //Routes
 
 const url = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
