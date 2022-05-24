@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Products from './components/Overview/Products.jsx';
+import Ratings_Reviews from './components/Ratings_Reviews/Ratings_Reviews.jsx';
 import RealtedProducts from './components/Similar-Products/Similar-Products.jsx'
+import QuestionsAnswers from './components/Q&A/index.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -14,9 +17,15 @@ class App extends React.Component {
     return (
       <div>
         <RealtedProducts/>
+        <Products />
+        <QuestionsAnswers/>
+        <Ratings_Reviews/>
       </div>
     )
   }
 };
 
 ReactDOM.render(<App />, document.getElementById('app'));
+// const container = document.getElementById('app');
+// const app = createRoot(container);
+// app.render(<React.StrictMode><App></App></React.StrictMode>);
