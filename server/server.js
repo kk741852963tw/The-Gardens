@@ -49,13 +49,13 @@ app.get('/questions', (req, res) => {
   const option = {
     url: url + 'qa/questions',
     headers: {
-      Authorization: `${ process.env.TOKEN }`
-},
-  method: 'get'
+      Authorization: `${process.env.TOKEN}`
+    },
+    method: 'get'
   };
-axios(option)
-  .then(result => res.status(200).json(result))
-    .catch (err => console.log('get data from questions fail', err));
+  axios(option)
+    .then(result => res.status(200).json(result))
+    .catch(err => console.log('get data from questions fail', err));
 });
 
 // Modules
