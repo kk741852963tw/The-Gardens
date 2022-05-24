@@ -5,11 +5,11 @@ import Logo from './Logo.jsx';
 const Headline = (props) => {
   //log here
   return (
-    <header className='float-top flex flex-row bg-blue-700'>
-      <div className='float-left basis-3/4'>
+    <header className='position-absolute float-top flex flex-row bg-blue-700'>
+      <div className='float-left'>
         <Logo />
       </div>
-      <div className='float-right basis-1/4'>
+      <div className='float-right'>
          <SearchBar />
       </div>
 

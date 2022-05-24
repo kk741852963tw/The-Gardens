@@ -1,4 +1,5 @@
 import React from 'react';
+import ImageCarouselData from './ImageCarousel/ImageCarouselData.jsx';
 import ImageCarousel from '../Overview/ImageCarousel/ImageCarousel.jsx';
 import Headline from './Header/Headline.jsx';
 import BagInteractButtons from './BagButtons/BagInteractButtons.jsx';
@@ -19,7 +20,7 @@ class Products extends React.Component {
 
         <div>
           <div>
-            <ImageCarousel />
+            <ImageCarousel slides={ImageCarouselData} />
           </div>
           <div>
             <BagInteractButtons/>
