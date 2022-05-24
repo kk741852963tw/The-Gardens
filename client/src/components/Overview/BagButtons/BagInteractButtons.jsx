@@ -6,7 +6,7 @@ import QuantitySelector from './QuantitySelector.jsx';
 const BagInteractButtons = (props) => {
   //Log here
   return (
-    <div className='grid grid-cols-2 sm:w-40 float-right'>
+    <div className='grid grid-cols-2 sm:w-40 float-right bg-gray-700 max-h-ful'>
       <AddToCartButton />
       <SizeSelector />
       <QuantitySelector />

@@ -111,14 +111,6 @@ app.put('/questions', (req, res) => {
 //
 ///////////////////////////////////////////////////////////////////////
 
-app.get('./carouselData', (req, res) => {
-  const options = {
-
-  };
-  axios(options)
-    .then()
-    .catch()
-});
 
 //Connection
 app.listen(process.env.PORT);
