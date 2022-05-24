@@ -6,13 +6,13 @@ import axios from "axios";
 export default function Carousel() {
   const [cards, setCards] = useState(
     [
-      { idx: 1, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", active: true },
-      { idx: 2, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-03.jpg", active: true },
-      { idx: 3, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-04.jpg", active: true },
-      { idx: 4, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: true },
-      { idx: 5, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
-      { idx: 6, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
-      { idx: 7, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
+      { id: 1, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", active: true },
+      { id: 2, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-03.jpg", active: true },
+      { id: 3, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-04.jpg", active: true },
+      { id: 4, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: true },
+      { id: 5, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
+      { id: 6, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
+      { id: 7, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
 
     ]
   );
@@ -41,17 +41,17 @@ export default function Carousel() {
     const prevState = [...cards];
 
     let newPrevState = prevState.filter((element) => element.active === true);
-    let firstActiveElementIdx = newPrevState[0].idx;
+    let firstActiveElementId = newPrevState[0].id;
 
     // set the hidden element
-    let hiddenElementBeforeFirst = prevState[firstActiveElementIdx - 2]
+    let hiddenElementBeforeFirst = prevState[firstActiveElementId - 2]
 
     // check to see if there is an element before firstActiveElement
     if (hiddenElementBeforeFirst !== undefined) {
       hiddenElementBeforeFirst.active = true;
 
       // set last active element
-      let lastActiveElement = prevState[newPrevState[newPrevState.length - 1].idx - 1]
+      let lastActiveElement = prevState[newPrevState[newPrevState.length - 1].id - 1]
       // Hide the last active element
       lastActiveElement.active = false;
     } else {
@@ -68,13 +68,13 @@ export default function Carousel() {
     const prevState = [...cards];
 
     let newPrevState = prevState.filter((element) => element.active === true);
-    let lastActiveElementIdx = newPrevState[newPrevState.length - 1].idx;
+    let lastActiveElementId = newPrevState[newPrevState.length - 1].id;
 
-    if (prevState[lastActiveElementIdx] !== undefined) {
-      prevState[lastActiveElementIdx].active = true;
+    if (prevState[lastActiveElementId] !== undefined) {
+      prevState[lastActiveElementId].active = true;
 
       // set first ACTIVE(visible) element
-      let firstActiveElement = prevState[newPrevState[0].idx - 1];
+      let firstActiveElement = prevState[newPrevState[0].id - 1];
       // change first ACTIVE(visible) element to false
       firstActiveElement.active = false;
     } else {
