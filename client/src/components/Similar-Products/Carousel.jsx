@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card.jsx";
+import axios from "axios";
 
 
 export default function Carousel() {
@@ -12,6 +13,22 @@ export default function Carousel() {
 
     ]
   );
+
+  useEffect(
+    () => {
+      console.log('useEffect! in Carousel.jsx')
+      axios.get('api/products/related', {params: {product_id: 37314 }}).then(data => {
+       // console.log(data);
+      })
+      .catch(
+        err => {
+          console.log(err)
+        }
+      )
+    },
+    []
+  )
+
 
   const handleLeftClick = (isLeft) => {
     // GOAL of handleLeftClick
