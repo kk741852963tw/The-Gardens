@@ -1,7 +1,7 @@
 import React from 'react';
-import Carousel from '../Overview/Carousel/Carousel.jsx';
-import Headline from './Headline.jsx';
-import BagInteractButtons from './BagInteractButtons.jsx';
+import ImageCarousel from '../Overview/ImageCarousel/ImageCarousel.jsx';
+import Headline from './Header/Headline.jsx';
+import BagInteractButtons from './BagButtons/BagInteractButtons.jsx';
 const axios = require('axios');
 
 
@@ -19,7 +19,7 @@ class Products extends React.Component {
 
         <div>
           <div>
-            <Carousel />
+            <ImageCarousel />
           </div>
           <div>
             <BagInteractButtons/>

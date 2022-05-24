@@ -5,7 +5,7 @@ import Logo from './Logo.jsx';
 const Headline = (props) => {
   //log here
   return (
-    <header className='float-top flex flex-row'>
+    <header className='float-top flex flex-row bg-blue-700'>
       <div className='float-left basis-3/4'>
         <Logo />
       </div>
