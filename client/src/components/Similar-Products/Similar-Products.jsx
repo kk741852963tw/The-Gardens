@@ -8,7 +8,9 @@ export default function Counter() {
 
   return (
     <>
+    <div className="relatedProducts">
       <Carousel/>
+    </div>
     </>
   );
 }

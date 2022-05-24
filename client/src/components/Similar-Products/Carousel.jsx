@@ -5,13 +5,11 @@ import Card from "./Card.jsx";
 export default function Carousel() {
   const [cards, setCards] = useState(
     [
-      { idx: 1, text: "1", active: true },
-      { idx: 2, text: "2", active: true },
-      { idx: 3, text: "3", active: true },
-      { idx: 4, text: "4", active: false },
-      { idx: 5, text: "5", active: false },
-      { idx: 6, text: "6", active: false },
-      { idx: 7, text: "7", active: false },
+      { idx: 1, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", active: true },
+      { idx: 2, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-03.jpg", active: true },
+      { idx: 3, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-04.jpg", active: true },
+      { idx: 4, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
+
     ]
   );
 
@@ -56,9 +54,9 @@ export default function Carousel() {
       prevState[lastActiveElementIdx].active = true;
 
       // set first ACTIVE(visible) element
-      let firstActiveElement =   prevState[newPrevState[0].idx - 1];
+      let firstActiveElement = prevState[newPrevState[0].idx - 1];
       // change first ACTIVE(visible) element to false
-        firstActiveElement.active = false;
+      firstActiveElement.active = false;
     } else {
       alert("last Element in the List!! TODO: hide Arrow");
     }
@@ -70,22 +68,35 @@ export default function Carousel() {
 
   return (
     <>
-      <div onClick={() => handleLeftClick()} className="text-xl md:text-5xl cursor-pointer">
-        {"<"}
+
+
+      <div className="bg-white" >
+        <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+          <div onClick={() => handleLeftClick()} className="text-xl md:text-5xl cursor-pointer">
+            {"<"}
+          </div>
+
+          <div onClick={() => handleRightClick()} className="text-xl md:text-5xl cursor-pointer">
+            {">"}
+            <div>
+              <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Related Products</h2>
+
+            </div>
+          </div>
+          <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            {
+              cards.map((card, index) => {
+                if (card.active === true)
+                  return <Card key={index} imageUrl={card.image} />
+              })
+            }
+
+          </div>
+
+        </div>
       </div>
 
 
-      {
-        cards.map((card, index) => {
-          if (card.active === true)
-            return <Card key={index} prop={card.text} />
-        })
-
-
-      }
-      <div onClick={() => handleRightClick()} className="text-xl md:text-5xl cursor-pointer">
-        {">"}
-      </div>
 
     </>
   );
