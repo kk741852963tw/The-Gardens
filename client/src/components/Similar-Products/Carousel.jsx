@@ -9,7 +9,10 @@ export default function Carousel() {
       { idx: 1, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", active: true },
       { idx: 2, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-03.jpg", active: true },
       { idx: 3, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-04.jpg", active: true },
-      { idx: 4, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
+      { idx: 4, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: true },
+      { idx: 5, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
+      { idx: 6, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
+      { idx: 7, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
 
     ]
   );
