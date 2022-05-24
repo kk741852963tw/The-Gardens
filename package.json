@@ -4,9 +4,9 @@
   "description": "Table of contents    ---------|    About |     [User Stories](#stories)|    [Use Cases](#stories)|    [Requirements](#cases) & [Test Plan](#cases)    [Prototype](#proto)|    [Use Case Diagram](#casesDiagram)|    [Wire-Frame](#wire)|    [Data Base Diagram](#database) |    [What's new](#new) |",
   "main": "config.js",
   "scripts": {
-    "tailWind": "npx tailwindcss-cli@latest build ./client/src/styles.css -o ./client/dist/styles.css",
-    "client-dev": "npx webpack --watch",
+    "tailWind": "npx tailwindcss-cli@latest build -i ./client/src/styles.css -o ./client/dist/styles.css --watch",
     "server-dev": "npx nodemon --watch server server/server.js",
+    "client-dev": "npx webpack --watch",
     "test": "jest"
   },
   "repository": {
@@ -24,23 +24,27 @@
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.17.12",
     "@babel/preset-env": "^7.17.12",
+    "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
+    "dotenv": "^16.0.1",
     "eslint-plugin-react-hooks": "^4.5.0",
     "jest": "^28.1.0",
     "nodemon": "^2.0.16",
+    "postcss": "^8.4.14",
     "tailwindcss": "^3.0.24",
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
     "@babel/preset-react": "^7.17.12",
+    "@tailwindcss/aspect-ratio": "^0.4.0",
     "axios": "^0.27.2",
     "css-loader": "^6.7.1",
-    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "nodemon": "^2.0.16",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-elastic-carousel": "^0.11.5",
     "style-loader": "^3.3.1",
     "webpack-dev-server": "^4.9.0"
   }
