@@ -14,14 +14,14 @@ const ImageCarousel = ( { slides } ) => {
 
   //Left Arrow Click Function
   const prevSlide = () => {
-    setCurrent(current === 0 ? length : current - 1);
+    setCurrent(current === 0 ? length - 1: current - 1);
   }
 
   //Check for data
   if (!Array.isArray(slides) || slides.length <= 0) {
     return null
   }
-
+  console.log(current);
   return (
     <section className='relative h-1/2 justify-center flex'>
       <div>
