@@ -3,7 +3,7 @@ import React from 'react';
 const SearchBar = (props) => {
   //log here
   return (
-    <div className="float-right">
+    <div>
       <input type='text'></input>
       <button type='submit'>Search</button>
     </div>

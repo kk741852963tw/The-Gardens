@@ -71,27 +71,9 @@ export default function AddAnswer(props) {
   }
 
   const handleUrl = function(e) {
-  //   let image = new Image();
-  //   image.onload = function() {
-  //     if (this.width > 0) {
-  //       setImage([...image, e.target.value]);
-  //       setTimeout(() => {
-  //         e.target.value = null;
-  //         setCount(count + 1);
-  //       }, 500);
-  //     } else {
-  //       alert('Url is not the image');
-  //     }
-  //   image.onerror = function() {
-  //     alert('Url is not the image');
-  //   }
-  // }
-    let request = new XMLHttpRequest();
-    request.open("GET", e.target.value, true);
-    request.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    request.send();
-    request.onload = function() {
-      if (request.status == 200) {
+    let image = new Image();
+    image.onload = function() {
+      if (this.width > 0) {
         setImage([...image, e.target.value]);
         setTimeout(() => {
           e.target.value = null;
@@ -100,7 +82,26 @@ export default function AddAnswer(props) {
       } else {
         alert('Url is not the image');
       }
+    image.onerror = function() {
+      alert('Url is not the image');
     }
+    image.src = e.target.value;
+  }
+    // let request = new XMLHttpRequest();
+    // request.open("GET", e.target.value, true);
+    // request.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    // request.send();
+    // request.onload = function() {
+    //   if (request.status == 200) {
+    //     setImage([...image, e.target.value]);
+    //     setTimeout(() => {
+    //       e.target.value = null;
+    //       setCount(count + 1);
+    //     }, 500);
+    //   } else {
+    //     alert('Url is not the image');
+    //   }
+    // }
   }
 
   return (
