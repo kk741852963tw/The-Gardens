@@ -16,7 +16,7 @@ app.get('api/products/related', (req, res) => {
     method: 'get',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.body}`,
     headers: {
-      'Authorization': process.env.APIKEY
+      'Authorization': process.env.TOKEN
     }
   };
 
@@ -31,35 +31,46 @@ app.get('api/products/related', (req, res) => {
 // ========================END PHILIP'S ROUTES ================
 //Routes
 
-const url = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
+// ======================== Hakeem's ROUTES ==================
+const apiUrl = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
 
-// const products = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products";
-// const reviews = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews";
-// const questions = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions";
-// const cart = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart";
-// const interactions = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/interactions";
+var axiosGet = function (apiDirName, queryString) {
 
-app.get('/overview', (req, res) => {
-
-});
-
-app.get('/rnr', (req, res) => {
-
-  var config = {
+  let newUrl = apiUrl + apiDirName + queryString;
+  let config = {
     method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/`,
+    url: newUrl,
     headers: {
-      'Authorization': process.env.APIKEY
+      'Authorization': process.env.TOKEN
     }
   };
 
-  axios(config)
+  return config;
+}
+
+app.get('/reviews', (req, res) => {
+
+  axios(axiosGet('reviews/', '?product_id=37314'))
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
+      console.log('Good response for reviews');
+      res.status(200).json(response.data);
     })
     .catch(function (error) {
-      console.log(error);
+      console.log('Error with the Get call', error);
+      result = error;
     });
+});
+
+app.get('/reviews/meta', (req, res) => {
+
+  axios(axiosGet('reviews/meta/', '?product_id=37314'))
+  .then(function (response) {
+    res.status(200).json(response.data);
+  })
+  .catch(function (error) {
+    console.log('Error with the Get call', error);
+    result = error;
+  });
 
 });
 
