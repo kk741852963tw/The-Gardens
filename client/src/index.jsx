@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Products from './components/Overview/Products.jsx';
 import Ratings_Reviews from './components/Ratings_Reviews/Ratings_Reviews.jsx';
+import QuestionsAnswers from './components/Q&A/index.jsx';
+import RelatedProducts from './components/Similar-Products/Similar-Products.jsx';
 
 
 class App extends React.Component {
@@ -14,6 +17,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Products />
+        <RelatedProducts/>
+        <QuestionsAnswers/>
         <Ratings_Reviews/>
       </div>
     )
@@ -21,3 +27,6 @@ class App extends React.Component {
 };
 
 ReactDOM.render(<App />, document.getElementById('app'));
+// const container = document.getElementById('app');
+// const app = createRoot(container);
+// app.render(<React.StrictMode><App></App></React.StrictMode>);
