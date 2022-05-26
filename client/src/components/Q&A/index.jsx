@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Question from './components/Question.jsx';
 import Search from './components/Search.jsx';
+import AddQuestion from './components/AddQuestion.jsx';
 
 class QuestionsAnswers extends React.Component {
   constructor(props) {
@@ -10,25 +11,49 @@ class QuestionsAnswers extends React.Component {
     this.state = {
       display: [],
       product_id: '37312',
+      product_name: 'Bright Future Sunglasses',
       count: 4,
       answers: [],
-      temp: []
+      temp: [],
+      statusQ: false,
+      helpful: {},
+      helpfulA: {},
+      reportA: {}
     }
     this.moreAnsweredQ = this.moreAnsweredQ.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.sortAnswer = this.sortAnswer.bind(this);
+    this.handleAddQ = this.handleAddQ.bind(this);
+    this.fetchData = this.fetchData.bind(this);
+    this.addHelpful = this.addHelpful.bind(this);
+    this.addHelpfulA = this.addHelpfulA.bind(this);
   }
 
   componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
     axios.get('/questions', { params: { product_id: this.state.product_id } })
       .then(result => {
+        const array = result.data.results.sort((a, b) => {
+          return b.question_helpfulness - a.question_helpfulness
+        });
+        const objQ = {};
+        const objA = {};
+        const objAR = {};
+        for (let i = 0; i < array.length; i++) {
+          objQ[array[i].question_id] = false;
+          for (let key in array[i].answers) {
+            objA[array[i].answers[key]] = false;
+            objAR[array[i].answers[key]] = false;
+          }
+        }
         this.setState({
-          display: result.data.results.sort((a, b) => {
-            return b.question_helpfulness - a.question_helpfulness
-          }),
-          temp: result.data.results.sort((a, b) => {
-            return b.question_helpfulness - a.question_helpfulness
-          })
+          display: array,
+          temp: array,
+          helpful: objQ,
+          helpfulA: objA,
+          reportA: objAR
         });
       })
       .catch(err => console.log(err));
@@ -39,37 +64,18 @@ class QuestionsAnswers extends React.Component {
       count: this.state.count + 2
     });
   }
-
-  sortAnswer(question) {
-    const tempArray = Object.values(question.answers);
-    tempArray.sort((a, b) => { return b.helpfulness - a.helpfulness });
-    tempArray.sort((a, b) => {
-      if (a.answerer_name === "Seller") {
-        return 1;
-      } else if (b.answerer_name === "Seller") {
-        return -1;
-      } else return b.helpfulness - a.helpfulness;
-    });
-    const tempObject = {};
-    for (let i = 0; i < tempArray.length; i++) {
-      tempObject[tempArray[i].id] = tempArray[i];
-    }
-    question.answers = tempObject;
-    return question;
-  }
-
+  //upperCase!!!!
   handleSearch(text) {
     if (text.length > 2) {
-      this.setState({
-        display: []
-      });
-      for (let i = 0; i < temp.length; i++) {
-        if (temp[i].question_body.includes(text)) {
-          this.setState({
-            display: [...display, temp[i]]
-          });
+      const array = [];
+      for (let i = 0; i < this.state.temp.length; i++) {
+        if (this.state.temp[i].question_body.includes(text)) {
+          array.push(this.state.temp[i]);
         }
       }
+      this.setState({
+        display: array
+      });
     } else {
       this.setState({
         display: this.state.temp
@@ -77,109 +83,81 @@ class QuestionsAnswers extends React.Component {
     }
   }
 
+  handleAddQ() {
+    if (!this.state.statusQ) {
+      this.setState({
+        statusQ: true
+      });
+    } else {
+      this.setState({
+        statusQ: false
+      });
+    }
+  }
+
+  addHelpful(question_id, question_helpfulness, index) {
+    let obj2 = this.state.display;
+    obj2[index]['question_helpfulness'] = question_helpfulness + 1;
+    let obj = this.state.helpful;
+    obj[question_id] = true;
+    this.setState({
+      helpful: obj,
+      display: obj2
+    });
+  }
+
+  addHelpfulA(answer_id, answer_helpful, index) {
+    let obj2 = this.state.display;
+    obj2[index]['answers'][answer_id.toString()].helpfulness = answer_helpful + 1;
+    let obj = this.state.helpfulA;
+    obj[answer_id] = true;
+    this.setState({
+      helpfulA: obj,
+      display: obj2
+    });
+  }
+
+  addReportA(answer_id) {
+    let obj = this.state.reportA;
+    obj[answer_id] = true;
+    this.setState({
+      reportA: obj
+    });
+  }
+
   render() {
     return (
       <div>
         <div>{"QUESTIONS & ANSWERS"}</div>
         <Search text={this.handleSearch}></Search>
-        {this.state.display.length === 0 ? <></> :
-          <>
-            {this.state.display.slice(0, this.state.count).map(question => {
-              return <Question question={this.sortAnswer(question)}></Question>
-            })}
-          </>}
-        {this.state.display.length > this.state.count ?
-          <div>
-            <button onClick={this.moreAnsweredQ}>MORE ANSWERD QUESRIONS</button>
-            <button>ADD A QUESTION</button>
-          </div> :
-          <div>
-            <button>ADD A QUESTION +</button>
-          </div>}
+        <div className="max-h-screen overflow-auto">
+          {this.state.display.length === 0 ? <></> :
+            <>
+              {this.state.display.slice(0, this.state.count).map((question, index) => {
+                return <Question
+                key={question.question_id + question.question_helpfulness}
+                question={question} product_name={this.state.product_name}
+                addHelpful={() => this.addHelpful(question.question_id, question.question_helpfulness, index)}
+                addOneTime={this.state.helpful[question.question_id]}
+                addHelpfulA={(answer_id, answer_helpful) => this.addHelpfulA(answer_id, answer_helpful, index)}
+                addOneTimeA={this.state.helpfulA} addReportA={(answer_id) => this.addReportA(answer_id, index)}
+                reportA={this.state.reportA}></Question>
+              })}
+            </>}
+          {this.state.display.length > this.state.count ?
+            <div>
+              <button onClick={this.moreAnsweredQ}>MORE ANSWERD QUESRIONS</button>
+              <button onClick={this.handleAddQ}>ADD A QUESTION</button>
+              {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
+            </div> :
+            <div>
+              <button onClick={this.handleAddQ}>ADD A QUESTION</button>
+              {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
+            </div>}
+          </div>
       </div>
     );
   }
 }
 
 export default QuestionsAnswers;
-
-//functionality version
-
-// export default function QuestionsAnswers() {
-//   const [display, setStateD] = useState([]);
-//   const [product_id, setString] = useState('37312');
-//   const [count, setCount] = useState(4);
-//   const [answers, setStateA] = useState([]);
-//   const [temp, setStateT] = useState([]);
-
-//   useEffect(() => {
-//     axios.get('/questions', { params: { product_id: product_id } })
-//       .then(result => {
-//         setStateD(result.data.results.sort((a, b) => {
-//           return b.question_helpfulness - a.question_helpfulness
-//         }));
-//         setStateT(result.data.results.sort((a, b) => {
-//           return b.question_helpfulness - a.question_helpfulness
-//         }));
-//       })
-//       .catch(err => console.log(err));
-//   }, [product_id]);
-
-//   const moreAnsweredQ = function() {
-//     setCount(count + 2);
-//   };
-
-//   const sortAnswer = function(question) {
-//     const tempArray = Object.values(question.answers);
-//     tempArray.sort((a, b) => { return b.helpfulness - a.helpfulness });
-//     tempArray.sort((a, b) => {
-//       if (a.answerer_name === "Seller") {
-//         return 1;
-//       } else if (b.answerer_name === "Seller") {
-//         return -1;
-//       } else return b.helpfulness - a.helpfulness;
-//     });
-//     const tempObject = {};
-//     for (let i = 0; i < tempArray.length; i++) {
-//       tempObject[tempArray[i].id] = tempArray[i];
-//     }
-//     question.answers = tempObject;
-//     return question;
-//   };
-
-//   const handleSearch = function(text) {
-//     if (text.length > 2) {
-//       setStateD([]);
-//       setStateD(prevState => { return prevState; });
-//       for (let i = 0; i < temp.length; i++) {
-//         if (temp[i].question_body.includes(text)) {
-//           setStateD(prevState => { return [...prevState, temp[i]]; });
-//         }
-//       }
-//     } else {
-//       setStateD(temp);
-//     }
-//   }
-
-//   return (
-//     <div>
-//       <div>{"QUESTIONS & ANSWERS"}</div>
-//       <Search text={handleSearch}></Search>
-//       {display.length === 0 ? <></> :
-//         <>
-//           {display.slice(0, count).map(question => {
-//             return <Question question={sortAnswer(question)}></Question>
-//           })}
-//         </>}
-//       {display.length > count ?
-//         <div>
-//           <button onClick={moreAnsweredQ}>MORE ANSWERD QUESRIONS</button>
-//           <button>ADD A QUESTION</button>
-//         </div> :
-//         <div>
-//           <button>ADD A QUESTION +</button>
-//         </div>}
-//     </div>
-//   );
-// }
-
