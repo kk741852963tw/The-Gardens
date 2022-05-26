@@ -9,12 +9,6 @@ const app = express();
 //Middleware
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: true
-}));
-
-const url = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
-
 
 //========================== PHILIP'S ROUTES ============================
 app.get('/api/related', (req, res) => {
@@ -44,6 +38,49 @@ app.get('/api/product/style', (req, res) => {  const config = {
 });
 
 // ========================END PHILIP'S ROUTES ================
+
+  
+  // ======================== Hakeem's ROUTES ==================
+const apiUrl = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
+var axiosGet = function (apiDirName, queryString) {
+
+  let newUrl = apiUrl + apiDirName + queryString;
+  let config = {
+    method: 'get',
+    url: newUrl,
+    headers: {
+      'Authorization': process.env.TOKEN
+    }
+  };
+
+  return config;
+}
+
+app.get('/reviews', (req, res) => {
+
+  axios(axiosGet('reviews/', '?product_id=37314'))
+    .then(function (response) {
+      console.log('Good response for reviews');
+      res.status(200).json(response.data);
+    })
+    .catch(function (error) {
+      console.log('Error with the Get call', error);
+      result = error;
+    });
+});
+
+app.get('/reviews/meta', (req, res) => {
+
+  axios(axiosGet('reviews/meta/', '?product_id=37314'))
+  .then(function (response) {
+    res.status(200).json(response.data);
+  })
+  .catch(function (error) {
+    console.log('Error with the Get call', error);
+    result = error;
+  });
+  // ======================== END Hakeem's ROUTES ==================
+
 
 //Routes
 
