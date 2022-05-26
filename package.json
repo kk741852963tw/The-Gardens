@@ -43,11 +43,8 @@
     "axios": "^0.27.2",
     "css-loader": "^6.7.1",
     "express": "^4.18.1",
-<<<<<<< HEAD
     "moment": "^2.29.3",
-=======
     "nodemon": "^2.0.16",
->>>>>>> b69f9c9d1df0371185bf7f8b77084dcf9456fc4b
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-icons": "^4.3.1",
