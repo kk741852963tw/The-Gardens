@@ -16,7 +16,7 @@ app.get('api/products/related', (req, res) => {
     method: 'get',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.body}`,
     headers: {
-      'Authorization': process.env.APIKEY
+      'Authorization': process.env.TOKEN
     }
   };
 
@@ -31,34 +31,17 @@ app.get('api/products/related', (req, res) => {
 // ========================END PHILIP'S ROUTES ================
 //Routes
 
+// ======================== Hakeem's ROUTES ==================
 const apiUrl = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
 
-<<<<<<< HEAD
 var axiosGet = function (apiDirName, queryString) {
 
   let newUrl = apiUrl + apiDirName + queryString;
   let config = {
     method: 'get',
     url: newUrl,
-=======
-// const products = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products";
-// const reviews = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews";
-// const questions = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions";
-// const cart = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart";
-// const interactions = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/interactions";
-
-app.get('/overview', (req, res) => {
-
-});
-
-app.get('/rnr', (req, res) => {
-
-  var config = {
-    method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/`,
->>>>>>> b69f9c9d1df0371185bf7f8b77084dcf9456fc4b
     headers: {
-      'Authorization': process.env.APIKEY
+      'Authorization': process.env.TOKEN
     }
   };
 
@@ -101,13 +84,6 @@ app.get('/reviews/meta', (req, res) => {
 
 app.get('/questions', (req, res) => {
   const option = {
-<<<<<<< HEAD
-    url: url + 'qa/questions',
-    headers: {
-      Authorization: process.env.APIKEY
-},
-  method: 'get'
-=======
     url: url + `qa/questions?product_id=${req.query.product_id}&page=2`,
     headers: { Authorization: `${ process.env.TOKEN }` },
     method: 'get'
@@ -122,7 +98,6 @@ app.put('/answers', (req, res) => {
     url: url + `qa/answers/${req.body.answer_id}/${req.body.type}`,
     headers: { Authorization: `${ process.env.TOKEN }` },
     method: 'put'
->>>>>>> b69f9c9d1df0371185bf7f8b77084dcf9456fc4b
   };
   axios(option)
     .then(result => res.status(204).end())
