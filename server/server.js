@@ -9,31 +9,39 @@ const app = express();
 //Middleware
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use(express.json());
+
 //========================== PHILIP'S ROUTES ============================
-app.get('api/products/related', (req, res) => {
-  console.log(req.body);
-  var config = {
-    method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.body}`,
-    headers: {
-      'Authorization': process.env.TOKEN
-    }
-  };
-
-  axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+app.get('/api/related', (req, res) => {
+  const config = {
+    headers: { Authorization: `${ process.env.TOKEN }` }
+  }
+  axios.get(url + `products/${req.query.product_id}/related`, config)
+  .then((result) => res.status(200).json(result.data))
+  .catch((err) => console.log('get data from API fail', err));
 });
+
+app.get('/api/product', (req, res) => {
+  const config = {
+    headers: { Authorization: `${ process.env.TOKEN }` }
+  }
+  axios.get(url + `products/${req.query.product_id}`, config)
+  .then((result) => res.status(200).json(result.data))
+  .catch((err) => console.log('failed to fetch /api/product/', err));
+});
+
+app.get('/api/product/style', (req, res) => {  const config = {
+    headers: { Authorization: `${ process.env.TOKEN }` }
+  }
+  axios.get(url + `products/${req.query.product_id}/styles`, config)
+  .then((result) => res.status(200).json(result.data))
+  .catch((err) => console.log('failed to fetch /api/product/styles', err));
+});
+
 // ========================END PHILIP'S ROUTES ================
-//Routes
 
-// ======================== Hakeem's ROUTES ==================
+  
+  // ======================== Hakeem's ROUTES ==================
 const apiUrl = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
-
 var axiosGet = function (apiDirName, queryString) {
 
   let newUrl = apiUrl + apiDirName + queryString;
@@ -71,8 +79,10 @@ app.get('/reviews/meta', (req, res) => {
     console.log('Error with the Get call', error);
     result = error;
   });
+  // ======================== END Hakeem's ROUTES ==================
 
-});
+
+//Routes
 
 ///////////////////////////////////////////////////////////////////////
 //
