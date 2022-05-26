@@ -12,28 +12,45 @@ app.use(express.json());
 
 //Routes
 
-const url = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
+const apiUrl = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
 
-app.get('/rnr', (req, res) => {
+var axiosGet = function (apiDirName, queryString) {
 
-  const axios = require("axios");
-  require("dotenv").config();
-
-  var config = {
+  let newUrl = apiUrl + apiDirName + queryString;
+  let config = {
     method: 'get',
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/${}',
+    url: newUrl,
     headers: {
       'Authorization': process.env.APIKEY
     }
   };
 
-  axios(config)
+  return config;
+}
+
+app.get('/reviews', (req, res) => {
+
+  axios(axiosGet('reviews/', '?product_id=37314'))
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
+      console.log('Good response for reviews');
+      res.status(200).json(response.data);
     })
     .catch(function (error) {
-      console.log(error);
+      console.log('Error with the Get call', error);
+      result = error;
     });
+});
+
+app.get('/reviews/meta', (req, res) => {
+
+  axios(axiosGet('reviews/meta/', '?product_id=37314'))
+  .then(function (response) {
+    res.status(200).json(response.data);
+  })
+  .catch(function (error) {
+    console.log('Error with the Get call', error);
+    result = error;
+  });
 
 });
 
@@ -41,7 +58,7 @@ app.get('/questions', (req, res) => {
   const option = {
     url: url + 'qa/questions',
     headers: {
-      Authorization: process.env.TOKEN
+      Authorization: process.env.APIKEY
 },
   method: 'get'
   };
