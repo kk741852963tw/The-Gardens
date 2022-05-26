@@ -9,59 +9,43 @@ const app = express();
 //Middleware
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use(express.json());
-//========================== PHILIP'S ROUTES ============================
-app.get('api/products/related', (req, res) => {
-  console.log(req.body);
-  var config = {
-    method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.body}`,
-    headers: {
-      'Authorization': process.env.APIKEY
-    }
-  };
-
-  axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-});
-// ========================END PHILIP'S ROUTES ================
-//Routes
+app.use(express.urlencoded({
+  extended: true
+}));
 
 const url = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
 
-// const products = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products";
-// const reviews = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews";
-// const questions = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions";
-// const cart = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart";
-// const interactions = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/interactions";
 
-app.get('/overview', (req, res) => {
-
+//========================== PHILIP'S ROUTES ============================
+app.get('/api/related', (req, res) => {
+  const config = {
+    headers: { Authorization: `${ process.env.TOKEN }` }
+  }
+  axios.get(url + `products/${req.query.product_id}/related`, config)
+  .then((result) => res.status(200).json(result.data))
+  .catch((err) => console.log('get data from API fail', err));
 });
 
-app.get('/rnr', (req, res) => {
-
-  var config = {
-    method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/`,
-    headers: {
-      'Authorization': process.env.APIKEY
-    }
-  };
-
-  axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
+app.get('/api/product', (req, res) => {
+  const config = {
+    headers: { Authorization: `${ process.env.TOKEN }` }
+  }
+  axios.get(url + `products/${req.query.product_id}`, config)
+  .then((result) => res.status(200).json(result.data))
+  .catch((err) => console.log('failed to fetch /api/product/', err));
 });
+
+app.get('/api/product/style', (req, res) => {  const config = {
+    headers: { Authorization: `${ process.env.TOKEN }` }
+  }
+  axios.get(url + `products/${req.query.product_id}/styles`, config)
+  .then((result) => res.status(200).json(result.data))
+  .catch((err) => console.log('failed to fetch /api/product/styles', err));
+});
+
+// ========================END PHILIP'S ROUTES ================
+
+//Routes
 
 app.get('/questions', (req, res) => {
   const option = {
