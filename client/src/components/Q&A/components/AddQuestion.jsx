@@ -37,7 +37,7 @@ export default function AddQuestion(props) {
       }
       const tempString = tempArray.join(', ');
       alert('You must enter the following: \n' + tempString);
-    } else if (!email.includes('@') || !email.includes('.') || mail.includes('@.')) {
+    } else if (!email.includes('@') || !email.includes('.') || email.includes('@.')) {
       alert('You must enter the following: \n' + 'Your email');
     } else {
       axios.post('/questions', {

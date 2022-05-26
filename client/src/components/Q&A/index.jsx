@@ -18,7 +18,8 @@ class QuestionsAnswers extends React.Component {
       statusQ: false,
       helpful: {},
       helpfulA: {},
-      reportA: {}
+      reportA: {},
+      text: ''
     }
     this.moreAnsweredQ = this.moreAnsweredQ.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -74,11 +75,13 @@ class QuestionsAnswers extends React.Component {
         }
       }
       this.setState({
-        display: array
+        display: array,
+        text: text
       });
     } else {
       this.setState({
-        display: this.state.temp
+        display: this.state.temp,
+        text: ''
       });
     }
   }
@@ -141,7 +144,8 @@ class QuestionsAnswers extends React.Component {
                 addOneTime={this.state.helpful[question.question_id]}
                 addHelpfulA={(answer_id, answer_helpful) => this.addHelpfulA(answer_id, answer_helpful, index)}
                 addOneTimeA={this.state.helpfulA} addReportA={(answer_id) => this.addReportA(answer_id, index)}
-                reportA={this.state.reportA}></Question>
+                reportA={this.state.reportA}
+                text={this.state.text}></Question>
               })}
             </>}
           {this.state.display.length > this.state.count ?
