@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Image from './Image.jsx';
 
 export default function Answer(props) {
   const [countR, setCountR] = useState(0);
+  const [modal, setModal] = useState(false);
+  const [url, setUrl] = useState('');
 
   const changeTimeFormat = function(timeData) {
     let temp = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -19,9 +22,26 @@ export default function Answer(props) {
     props.addReportA(answer_id);
   };
 
+  const handleModal = function(url) {
+    if (modal) {
+      setModal(false);
+    } else {
+      setModal(true);
+    }
+    setUrl(url);
+  }
+
   return (
     <>
-      <div>A: {props.answer.body}</div>
+      {props.i === 0 ? <div>A: {props.answer.body}</div> : <div>   {props.answer.body}</div>}
+      {props.answer.photos.length !== 0 ? props.answer.photos.map((element, index) => {
+        if (index === props.answer.photos.length - 1) {
+          return <><img src={element} className="h-9 w-16 inline mr-4" onClick={() => handleModal(element)}></img><br></br></>
+        } else {
+          return <img src={element} className="h-9 w-16 inline mr-4" onClick={() => handleModal(element)}></img>
+        }
+      }) : <></>}
+      {modal ? <Image modal={handleModal} url={url}></Image> : <></>}
       by
       {props.answer.answerer_name === "Seller" ? <span className='font-bold'> {props.answer.answerer_name}</span> : <span> {props.answer.answerer_name}</span>}
       <span>, {changeTimeFormat(props.answer.date)}  |  </span>

@@ -141,6 +141,25 @@ app.post('/questions', (req, res) => {
     .catch (err => console.log(`post question to API fail`, err));
 });
 
+app.post('/answers', (req, res) => {
+  const obj = {
+    body: req.body.body,
+    name: req.body.name,
+    email: req.body.email,
+    photos: req.body.photos
+  };
+  const option = {
+    url: url + `qa/questions/${req.body.question_id}/answers`,
+    headers: { Authorization: `${ process.env.TOKEN }` },
+    method: 'post',
+    data: obj
+  };
+  console.log(option);
+  axios(option)
+    .then(result => res.status(201).end())
+    .catch (err => console.log(`post question to API fail`, err));
+});
+
 // Modules
 ///////////////////////////////////////////////////////////////////////
 //
