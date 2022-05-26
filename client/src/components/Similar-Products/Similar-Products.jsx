@@ -1,5 +1,6 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useState, useEffect, useCallback} from 'react';
 import Carousel from "./Carousel.jsx";
+import axios from "axios";
 
 export const CardsContext = React.createContext();
 
@@ -17,6 +18,11 @@ export default function Counter() {
 
     ]
   );
+
+  // make wrapper function to give child
+  const wrapperSetParentState = useCallback(val => {
+    setCards(val);
+  }, [setCards]);
 
   const getRelatedProductsAndStore = async () => {
     const { data } = await axios.get('/api/related', { params: { product_id: '37314' } });
@@ -56,9 +62,13 @@ export default function Counter() {
 
   return (
     <>
-    <div className="relatedProducts">
-      <Carousel/>
-    </div>
+      <div className="relatedProducts">
+        {
+          <CardsContext.Provider value={cards} >
+            <Carousel setParentState={wrapperSetParentState} />
+          </CardsContext.Provider>
+        }
+      </div>
     </>
   );
 }

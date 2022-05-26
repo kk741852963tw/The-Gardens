@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Card from "./Card.jsx";
-import axios from "axios";
 import { CardsContext } from './Similar-Products.jsx';
 
 
 
-export default function Carousel() {
+export default function Carousel(setParentState) {
+  const cards = useContext(CardsContext);
 
-  const card = useContext(CardsContext);
+  console.log('oh please', setParentState.setParentState)
+  //const setCards = useContext({setCards});
 
-  const handleLeftClick = (isLeft) => {
+
+
+
+
+  const handleLeftClick = () => {
 
     // GOAL of handleLeftClick
     // 1. To show the element left of the first ACTIVE(visible) element in the list.
@@ -35,7 +40,8 @@ export default function Carousel() {
     } else {
       alert("no more elements left here TODO: hide left arrow!")
     }
-    setCards(prevState);
+    // setCards(prevState);
+    setParentState.setParentState(prevState);
   }
   const handleRightClick = () => {
     // GOAL of handleRightClick
@@ -61,7 +67,7 @@ export default function Carousel() {
 
 
 
-    setCards(prevState);
+    setParentState.setParentState(prevState);
   };
 
 
@@ -74,23 +80,23 @@ export default function Carousel() {
           </div>
         </div>
         <div class="flex-1 w-64">
-        <div className="bg-white max-w-7xl" >
-        <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-          <div>
-            <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Related Products</h2>
+          <div className="bg-white max-w-7xl" >
+            <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+              <div>
+                <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Related Products</h2>
+              </div>
+              <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                {
+                  cards.map((card) => {
+                    if (card.active === true)
+                      return (
+                        <Card card={card} />
+                      )
+                  })
+                }
+              </div>
+            </div>
           </div>
-          <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {
-              cards.map((card) => {
-                if (card.active === true)
-                  return (<CardsContext.Provider value={card}>
-                    <Card />
-                  </CardsContext.Provider>)
-              })
-            }
-          </div>
-        </div>
-      </div>
         </div>
         <div class="flex-none m-0 pt-72 max-h-0">
           <div onClick={() => handleRightClick()} className="text-xl md:text-5xl cursor-pointer">
