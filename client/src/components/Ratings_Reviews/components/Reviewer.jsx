@@ -10,7 +10,6 @@ const Reviewer = function (props) {
   return (
       <div className="reviews">
         <div>
-        {console.log(props)}
           <div className="float-left">★★★★★</div> <div className="float-right "> {props.data.reviewer_name}, {moment(props.data.date, moment.DATETIME_LOCAL_MS).format('LL')}</div><br/>
           <h3 className="float-none font-bold">{props.data.summary}</h3>
           <h6>...sub title and continuation of title</h6>
