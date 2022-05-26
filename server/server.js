@@ -10,37 +10,40 @@ const app = express();
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use(express.json());
 
+const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/';
+
 //========================== PHILIP'S ROUTES ============================
 app.get('/api/related', (req, res) => {
   const config = {
-    headers: { Authorization: `${ process.env.TOKEN }` }
+    headers: { Authorization: process.env.TOKEN }
   }
   axios.get(url + `products/${req.query.product_id}/related`, config)
-  .then((result) => res.status(200).json(result.data))
-  .catch((err) => console.log('get data from API fail', err));
+    .then((result) => res.status(200).json(result.data))
+    .catch((err) => console.log('get data from API fail', err));
 });
 
 app.get('/api/product', (req, res) => {
   const config = {
-    headers: { Authorization: `${ process.env.TOKEN }` }
+    headers: { Authorization: `${process.env.TOKEN}` }
   }
   axios.get(url + `products/${req.query.product_id}`, config)
-  .then((result) => res.status(200).json(result.data))
-  .catch((err) => console.log('failed to fetch /api/product/', err));
+    .then((result) => res.status(200).json(result.data))
+    .catch((err) => console.log('failed to fetch /api/product/', err));
 });
 
-app.get('/api/product/style', (req, res) => {  const config = {
-    headers: { Authorization: `${ process.env.TOKEN }` }
+app.get('/api/product/style', (req, res) => {
+  const config = {
+    headers: { Authorization: `${process.env.TOKEN}` }
   }
   axios.get(url + `products/${req.query.product_id}/styles`, config)
-  .then((result) => res.status(200).json(result.data))
-  .catch((err) => console.log('failed to fetch /api/product/styles', err));
+    .then((result) => res.status(200).json(result.data))
+    .catch((err) => console.log('failed to fetch /api/product/styles', err));
 });
 
 // ========================END PHILIP'S ROUTES ================
 
-  
-  // ======================== Hakeem's ROUTES ==================
+
+// ======================== Hakeem's ROUTES ==================
 const apiUrl = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
 var axiosGet = function (apiDirName, queryString) {
 
@@ -72,13 +75,14 @@ app.get('/reviews', (req, res) => {
 app.get('/reviews/meta', (req, res) => {
 
   axios(axiosGet('reviews/meta/', '?product_id=37314'))
-  .then(function (response) {
-    res.status(200).json(response.data);
-  })
-  .catch(function (error) {
-    console.log('Error with the Get call', error);
-    result = error;
-  });
+    .then(function (response) {
+      res.status(200).json(response.data);
+    })
+    .catch(function (error) {
+      console.log('Error with the Get call', error);
+      result = error;
+    });
+});
   // ======================== END Hakeem's ROUTES ==================
 
 
@@ -95,34 +99,34 @@ app.get('/reviews/meta', (req, res) => {
 app.get('/questions', (req, res) => {
   const option = {
     url: url + `qa/questions?product_id=${req.query.product_id}&page=2`,
-    headers: { Authorization: `${ process.env.TOKEN }` },
+    headers: { Authorization: `${process.env.TOKEN}` },
     method: 'get'
-    };
+  };
   axios(option)
     .then(result => res.status(200).json(result.data))
-    .catch (err => console.log('get data from API fail', err));
+    .catch(err => console.log('get data from API fail', err));
 });
 
 app.put('/answers', (req, res) => {
   const option = {
     url: url + `qa/answers/${req.body.answer_id}/${req.body.type}`,
-    headers: { Authorization: `${ process.env.TOKEN }` },
+    headers: { Authorization: `${process.env.TOKEN}` },
     method: 'put'
   };
   axios(option)
     .then(result => res.status(204).end())
-    .catch (err => console.log(`put answer ${req.body.type} to API fail`, err));
+    .catch(err => console.log(`put answer ${req.body.type} to API fail`, err));
 });
 
 app.put('/questions', (req, res) => {
   const option = {
     url: url + `qa/questions/${req.body.question_id}/${req.body.type}`,
-    headers: { Authorization: `${ process.env.TOKEN }` },
+    headers: { Authorization: `${process.env.TOKEN}` },
     method: 'put'
   };
   axios(option)
     .then(result => res.status(204).end())
-    .catch (err => console.log(`put question ${req.body.type} to API fail`, err));
+    .catch(err => console.log(`put question ${req.body.type} to API fail`, err));
 });
 
 ///////////////////////////////////////////////////////////////////////
