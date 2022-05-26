@@ -35,8 +35,20 @@ export default function Counter() {
       setOutfitCards(val);
     }, [setOutfitCards]);
 
-
   const getRelatedProductsAndStore = async () => {
+// First axios call fetches all related product data.It gets back an array of all related products ie.
+/* [
+  37311,
+  37312,
+  37314,
+] */
+// Second and Third axios calls are wrapped in a loop and make a get request for each individual product in the array
+// the information is stored in an object (id, name, category, price, url etc..) which is pushed to an array
+// at the end the state is updated with the correct information
+
+// NOTE*** the await keyword means it will wait until it fetches everything before proceeding ***
+// ** this is an async function **
+
     const { data } = await axios.get('/api/related', { params: { product_id: '37314' } });
 
     let array = [];
@@ -63,9 +75,7 @@ export default function Counter() {
       array.push(card);
       i++;
     }
-
     setRelatedCards([...array]);
-
   };
 
   useEffect(() => {
