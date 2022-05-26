@@ -46,7 +46,7 @@ app.get('/rnr', (req, res) => {
 
 app.get('/questions', (req, res) => {
   const option = {
-    url: url + `qa/questions?product_id=${req.query.product_id}&page=2`,
+    url: url + `qa/questions?product_id=${req.query.product_id}&count=100`,
     headers: { Authorization: `${ process.env.TOKEN }` },
     method: 'get'
     };
@@ -75,6 +75,18 @@ app.put('/questions', (req, res) => {
   axios(option)
     .then(result => res.status(204).end())
     .catch (err => console.log(`put question ${req.body.type} to API fail`, err));
+});
+
+app.post('/questions', (req, res) => {
+  const option = {
+    url: url + 'qa/questions',
+    headers: { Authorization: `${ process.env.TOKEN }` },
+    method: 'post',
+    data: req.body
+  };
+  axios(option)
+    .then(result => res.status(201).end())
+    .catch (err => console.log(`post question to API fail`, err));
 });
 
 // Modules
