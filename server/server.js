@@ -168,6 +168,39 @@ app.post('/answers', (req, res) => {
 //
 ///////////////////////////////////////////////////////////////////////
 
+app.get('/styleData', (req, res) => {
+
+  const option ={
+    url: url + `products/${req.query.product_id}/styles`,
+    headers: { Authorization: process.env.TOKEN },
+    method: 'get'
+  };
+
+  axios(option)
+    .then((result) => {
+      res.status(200).send(result.data);
+    })
+    .catch((err) => {
+      console.log('Error in style data Get Method', err)
+    });
+});
+
+app.get('/productData', (req, res) => {
+  console.log()
+  const option ={
+    url: url + `products/${req.query.product_id}`,
+    headers: { Authorization: process.env.TOKEN },
+    method: 'get'
+  }
+
+  axios(option)
+    .then((result) => {
+      res.status(200).send(result.data);
+    })
+    .catch((err) => {
+      console.log('Error in server prod data get method', err);
+    })
+});
 
 //Connection
 app.listen(process.env.PORT);
