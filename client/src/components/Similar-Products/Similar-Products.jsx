@@ -6,7 +6,7 @@ import Card from "./Card.jsx";
 
 export const CardsContext = React.createContext();
 
-export default function Counter() {
+export default function RelatedProducts() {
 
   const [related_cards, setRelatedCards] = useState(
     [
@@ -27,10 +27,10 @@ export default function Counter() {
     ]
   );
 
-  const [isStarClicked, setHandleStarClick] = useState(false);
+  const [isStarClicked, setHandleStarClick] = useState({isClicked: false, cardId: 0});
 
-  function toggleModal(isClicked) {
-    setHandleStarClick(isClicked)
+  function toggleModal(isClicked, cardId) {
+    setHandleStarClick({isClicked: isClicked, cardId: cardId})
     console.log(isStarClicked);
   }
 
@@ -69,6 +69,7 @@ export default function Counter() {
       card["name"] = product.data.name;
       card["category"] = product.data.category;
       card["price"] = "$" + product.data.default_price;
+      card["features"] = product.data.features;
 
       let productStyle = await axios.get('/api/product/style', { params: { product_id: id } });
       if (productStyle.data.results[0].photos[0].url !== null) {
@@ -87,6 +88,7 @@ export default function Counter() {
     setRelatedCards([...array]);
   };
 
+
   useEffect(() => {
     getRelatedProductsAndStore();
   }, []);
@@ -95,7 +97,7 @@ export default function Counter() {
   return (
     <>
     {
-      isStarClicked ? <Modal toggleModal={toggleModal}></Modal> : null
+      isStarClicked.isClicked ? <Modal toggleModal={toggleModal} compareCardId={isStarClicked.cardId} cards={related_cards}></Modal> : null
     }
 
       <div className="relatedProducts pt-60">

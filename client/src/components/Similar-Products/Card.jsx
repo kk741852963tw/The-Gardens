@@ -8,7 +8,7 @@ export default function Card({card, toggleModal }) {
       <div className="group relative">
 
         <div >
-          <i className="z-10 absolute fa-regular fa-star" onClick={() =>  {toggleModal(true)} }></i>
+          <i className="z-10 absolute fa-regular fa-star" onClick={(e) =>  {toggleModal(true, card.id)}}></i>
         </div>
         <div
           className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
