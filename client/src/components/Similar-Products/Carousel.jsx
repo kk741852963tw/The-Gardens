@@ -114,19 +114,17 @@ export default function Carousel() {
 
 
   return (
-<<<<<<< HEAD
+
     <>
-      <div class="flex mx-auto max-w-7xl">
-        <div class="flex-none m-0 pt-72 max-h-0">
-=======
-      <div>
+      <div className="flex mx-auto max-w-7xl">
+
         <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
->>>>>>> CamCarouselDev
+
           <div onClick={() => handleLeftClick()} className="text-xl md:text-5xl cursor-pointer">
-            <i class=" w-half fa-regular fa-circle-left flex items-left "></i>
+            <i className=" w-half fa-regular fa-circle-left flex items-left "></i>
           </div>
         </div>
-        <div class="flex-1 w-64">
+        <div className="flex-1 w-64">
         <div className="bg-white max-w-7xl" >
         <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
           <div>
@@ -144,11 +142,11 @@ export default function Carousel() {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
+
         </div>
-        <div class="flex-none m-0 pt-72 max-h-0">
+        <div className="flex-none m-0 pt-72 max-h-0">
           <div onClick={() => handleRightClick()} className="text-xl md:text-5xl cursor-pointer">
-            <i class="fa-regular fa-circle-right items-right"></i>
+            <i className="fa-regular fa-circle-right items-right"></i>
           </div>
         </div>
       </div>
@@ -157,7 +155,5 @@ export default function Carousel() {
 
 
     </>
-=======
->>>>>>> CamCarouselDev
   );
 }

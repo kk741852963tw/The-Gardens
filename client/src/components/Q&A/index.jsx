@@ -133,7 +133,6 @@ class QuestionsAnswers extends React.Component {
       <div>
         <div>{"QUESTIONS & ANSWERS"}</div>
         <Search text={this.handleSearch}></Search>
-<<<<<<< HEAD
         <div className="max-h-screen overflow-auto">
           {this.state.display.length === 0 ? <></> :
             <>
@@ -151,7 +150,7 @@ class QuestionsAnswers extends React.Component {
             </>}
           {this.state.display.length > this.state.count ?
             <div>
-              <button onClick={this.moreAnsweredQ}>MORE ANSWERD QUESRIONS</button>
+              <button onClick={this.moreAnsweredQ}>MORE ANSWERED QUESTIONS</button>
               <button onClick={this.handleAddQ}>ADD A QUESTION</button>
               {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
             </div> :
@@ -160,22 +159,6 @@ class QuestionsAnswers extends React.Component {
               {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
             </div>}
           </div>
-=======
-        {this.state.display.length === 0 ? <></> :
-          <>
-            {this.state.display.slice(0, this.state.count).map(question => {
-              return <Question question={this.sortAnswer(question)}></Question>
-            })}
-          </>}
-        {this.state.display.length > this.state.count ?
-          <div>
-            <button onClick={this.moreAnsweredQ}>MORE ANSWERED QUESTIONS</button>
-            <button>ADD A QUESTION</button>
-          </div> :
-          <div>
-            <button>ADD A QUESTION +</button>
-          </div>}
->>>>>>> CamCarouselDev
       </div>
     );
   }
