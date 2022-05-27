@@ -150,7 +150,7 @@ class QuestionsAnswers extends React.Component {
             </>}
           {this.state.display.length > this.state.count ?
             <div>
-              <button onClick={this.moreAnsweredQ}>MORE ANSWERD QUESRIONS</button>
+              <button onClick={this.moreAnsweredQ}>MORE ANSWERED QUESTIONS</button>
               <button onClick={this.handleAddQ}>ADD A QUESTION</button>
               {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
             </div> :
