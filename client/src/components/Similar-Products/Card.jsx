@@ -1,21 +1,18 @@
 
+export default function Card({card, toggleModal }) {
 
-export default function Card({ card }) {
-  /*   const [editable, setEditable] = useState(false);
-    const handleClick = () => {
-      setEditable(!editable);
-    }; */
+
   return (
     <>
 
       <div className="group relative">
 
-
+        <div >
+          <i className="z-10 absolute fa-regular fa-star" onClick={() =>  {toggleModal(true)} }></i>
+        </div>
         <div
           className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-          <div className="">
-          <i className="z-10  absolute fa-regular fa-star"></i>
-          </div>
+
           <img src={card.url} alt="Front of men&#039;s Basic Tee in black."
             className="w-full h-full object-center object-cover lg:w-full lg:h-full">
           </img>

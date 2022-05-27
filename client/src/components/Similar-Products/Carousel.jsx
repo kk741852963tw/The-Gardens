@@ -44,6 +44,7 @@ export default function Carousel() {
 
     const prevState = [...parentContext.cards];
 
+
     let newPrevState = prevState.filter((element) => element.active === true);
     let lastActiveElementId = newPrevState[newPrevState.length - 1].id;
 
@@ -83,7 +84,7 @@ export default function Carousel() {
                   parentContext.cards.map((card, index) => {
                     if (card.active === true)
                       return (
-                        <Card key={index} card={card} />
+                        <Card key={index} card={card} toggleModal={parentContext.toggleModal} />
                       )
                   })
                 }

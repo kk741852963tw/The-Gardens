@@ -1,6 +1,8 @@
 import React, { Component, useState, useEffect, useCallback } from 'react';
 import Carousel from "./Carousel.jsx";
 import axios from "axios";
+import Modal from "./Modal.jsx";
+import Card from "./Card.jsx";
 
 export const CardsContext = React.createContext();
 
@@ -24,6 +26,13 @@ export default function Counter() {
       { id: 1, name: "Add to outfit", category: "", price: "", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Circled_plus.svg/1200px-Circled_plus.svg.png", active: true }
     ]
   );
+
+  const [isStarClicked, setHandleStarClick] = useState(false);
+
+  function toggleModal(isClicked) {
+    setHandleStarClick(isClicked)
+    console.log(isStarClicked);
+  }
 
   // make wrapper function to set state for RelatedProducts
   const setRelatedCardsState = useCallback(val => {
@@ -82,11 +91,16 @@ export default function Counter() {
     getRelatedProductsAndStore();
   }, []);
 
+
   return (
     <>
+    {
+      isStarClicked ? <Modal toggleModal={toggleModal}></Modal> : null
+    }
+
       <div className="relatedProducts pt-60">
         {
-          <CardsContext.Provider value={{ cards: related_cards, setParentState: setRelatedCardsState, name:"Related Products"}} >
+          <CardsContext.Provider value={{ cards: related_cards, setParentState: setRelatedCardsState, name:"Related Products", toggleModal: toggleModal}} >
             <Carousel />
           </CardsContext.Provider>
         }
