@@ -2,8 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import Card from "./Card.jsx";
 import { CardsContext } from './Similar-Products.jsx';
 
-
-
 export default function Carousel() {
   const parentContext = useContext(CardsContext);
 
@@ -99,10 +97,6 @@ export default function Carousel() {
           </div>
         </div>
       </div>
-
-
-
-
     </>
   );
 }

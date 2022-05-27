@@ -1,13 +1,16 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useRef, useState, useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import {data} from '../Overview/StyleSelector/StyleSelector.jsx'
+
+
 
 export default function Modal({ toggleModal, compareCardId, cards }) {
   const [open, setOpen] = useState(true)
   const cancelButtonRef = useRef(null)
 
   const compareCard = cards.find((element) => element.id === compareCardId);
-  console.log("cardID", compareCardId, cards);
+  //console.log("hello", data);
 
 
   return (
@@ -63,7 +66,6 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
                               </tr>
                             </thead>
                             <tbody>
-                              {/* foreach feature make a row */}
 
                               {
                                 compareCard.features.map((feature) =>
@@ -79,7 +81,6 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
                                     </td>
                                     </tr>
                                   </>
-
                                 )
                               }
                               {/*   <td class="px-6 py-4">
