@@ -3,7 +3,7 @@ import React from 'react';
 const ProductBlurb = ( { productData } ) => {
   //Pull out features and stack to the right of slogan
   return (
-    <div>
+    <div className="position-relative">
 
       <div>
         <h2>{productData.slogan}</h2>

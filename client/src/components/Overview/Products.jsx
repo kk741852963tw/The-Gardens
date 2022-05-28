@@ -7,9 +7,6 @@ import ProductInfo from './StyleSelector/ProductInfo.jsx';
 import ProductBlurb from './ProductDesc/ProductBlurb.jsx';
 const axios = require('axios');
 
-
-
-
 class Products extends React.Component {
 
   constructor(props) {
@@ -18,6 +15,7 @@ class Products extends React.Component {
     this.state = {
       horizontalCar: [],
       verticalCar: [],
+      allStyles: [],
       productData: [],
       activeStyle: []
     }
@@ -48,8 +46,9 @@ class Products extends React.Component {
         let active = data.filter(element => element.active);
 
         this.setState({
-          horizontalCar: data,
-          activeStyle: active
+          horizontalCar: active,
+          activeStyle: active,
+          allStyles: data
           })
         })
       .catch((err) => {
@@ -59,20 +58,31 @@ class Products extends React.Component {
 
     fetchDataProduct() {
       axios.get('/productData', { params : {product_id: 37314}})
-        .then((res) => {
-          this.setState({
-            productData: res.data
-          })
+      .then((res) => {
+        this.setState({
+          productData: res.data
         })
-        .catch((err) => {
-          console.log('Error retrieving product data: ' + err);
-        })
+      })
+      .catch((err) => {
+        console.log('Error retrieving product data: ', err);
+      })
     }
 
   //Render
   render() {
-    //All other sub-components should end up here
-    let slideData = [];
+    //Splits thumbnails and ids for vertical carousel
+    //and style selector components
+    const thumbnailArray = [];
+      for (let i = 0; i < this.state.allStyles.length; i++) {
+        let current = this.state.allStyles[i];
+        let innerObj = {
+          style_id: current.style_id,
+          image: current.photos[0].thumbnail_url,
+          name: current.name
+        };
+        thumbnailArray.push(innerObj);
+      }
+
     return (
 
       <div>
@@ -83,12 +93,14 @@ class Products extends React.Component {
 
         <div className="relative grid grid-cols-2 gap-4 ">
           <div className='justify-center'>
-            <ImageCarousel slides={slideData} />
+            <ImageCarousel activeStyle={this.state.activeStyle} />
             <ProductBlurb  productData={this.state.productData} />
           </div>
           <div className='relative grid grid-cols-1 justify-center'>
             <ProductInfo productData={this.state.productData} />
-            <StyleSelector activeStyle={this.state.activeStyle} />
+            <StyleSelector thumbnailArray={thumbnailArray}
+                           updateActive={this.updateActive}
+                           activeStyle={this.state.activeStyle} />
             <BagInteractButtons activeStyle={this.state.activeStyle} />
           </div>
         </div>
