@@ -6,7 +6,6 @@ const StyleSelector = ( { activeStyle, thumbnailArray} ) => {
   if (!thumbnailArray || !activeStyle[0]) {
     return null;
   }
-  console.log(activeStyle[0].name);
   return (
     <div>
       <h2>Style {">"} {activeStyle[0].name}</h2>
