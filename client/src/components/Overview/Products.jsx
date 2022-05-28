@@ -65,7 +65,7 @@ class Products extends React.Component {
           })
         })
         .catch((err) => {
-          console.log('Error retrieving product data: ' + err);
+          console.log('Error retrieving product data: ', err);
         })
     }
 
