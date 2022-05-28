@@ -30,7 +30,7 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
         </Transition.Child>
 
         <div className="fixed z-10 inset-0 overflow-y-auto">
-          <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
+          <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0" onClick={() => {toggleModal(false)}}>
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -68,27 +68,30 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
                             </thead>
                             <tbody>
 
-                              {
-                                () => {
-
-                                  compareCard.features.map((feature) => {
-                                    if (feature !== undefined) {
-                                      return <>
-                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                          <td className="px-6 py-4">
-                                          </td>
-                                          <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                            {feature.feature}
-                                          </th>
-                                          <td className="px-6 py-4">
-                                            {feature.value}
-                                          </td>
-                                        </tr>
-                                      </>
-                                    }
-                                  }
+                            {
+                                compareCard.features === undefined ?
+                                  <>
+                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                      <td className="px-6 py-4">
+                                        No Data
+                                      </td>
+                                    </tr>
+                                  </>
+                                  :
+                                  compareCard.features.map((feature) =>
+                                    <>
+                                      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <td className="px-6 py-4">
+                                        </td>
+                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                          {feature.feature}
+                                        </th>
+                                        <td className="px-6 py-4">
+                                          {feature.value}
+                                        </td>
+                                      </tr>
+                                    </>
                                   )
-                                }
                               }
                               {/*   <td className="px-6 py-4">
                                 </td>
