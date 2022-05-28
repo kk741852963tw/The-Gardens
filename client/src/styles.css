@@ -2,3 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  #Question::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  #Question::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #f7f4ed;
+  }
+
+  #Question::-webkit-scrollbar-thumb {
+    background: #e0cbcb;
+    border-radius: 100vh;
+    /* border: 3px solid #f6f7ed; */
+  }
+
+  #Question::-webkit-scrollbar-thumb:hover {
+    background: #c0a0b9;
+  }
+
+  #Answer::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  #Answer::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #E4F4F2;
+  }
+
+  #Answer::-webkit-scrollbar-thumb {
+    background: #CCCCFF;
+    border-radius: 100vh;
+    /* border: 3px solid #CCCCFF; */
+  }
+
+  #Answer::-webkit-scrollbar-thumb:hover {
+    background: #CC99FF;
+  }
+}
+
+
+#Question {
+  padding: 0.5px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+#Answer {
+  padding: 0.5px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+#gridQ {
+  grid-template-columns: 1fr 26fr 10fr;
+}
+
+#gridA {
+  grid-template-columns: 1fr 36fr;
+}
