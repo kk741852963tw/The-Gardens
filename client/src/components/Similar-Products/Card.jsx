@@ -1,3 +1,4 @@
+import React from 'React'
 
 export default function Card({card, toggleModal }) {
 
