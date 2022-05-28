@@ -6,7 +6,6 @@ const BagInteractButtons = ( { activeStyle } ) => {
   let skus = activeStyle.map((item) => {
     return item.skus;
   });
-  //console.log(skus);
 
   return (
     <div className='grid grid-cols-2 sm:w-40 float-right bg-gray-700 max-h-full float-right'>

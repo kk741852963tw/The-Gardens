@@ -1,26 +1,25 @@
 import React from 'react';
 
 
-const StyleSelector = ( { activeStyle } ) => {
+const StyleSelector = ( { activeStyle, thumbnailArray} ) => {
   //Data Check
-  if (!activeStyle[0]) {
+  if (!thumbnailArray || !activeStyle[0]) {
     return null;
   }
-  const styleID = activeStyle[0].style_id;
-
-  //Separate thumb and image urls
-  const photoThumbUrl = activeStyle[0].photos.map(photo => {
-    return photo.thumbnail_url;
-  });
-
-
+  console.log(activeStyle[0].name);
   return (
-    <div className='grid grid-cols-4 gap-2'>
-      {photoThumbUrl.map((photo, index) => {
-        console.log(photo);
-        return (<img key={photo} value={styleID} src={photo}
-          className='rounded-full h-full' />)
-      })}
+    <div>
+      <h2>Style {">"} {activeStyle[0].name}</h2>
+      <div className='grid grid-cols-4 gap-2'>
+        {thumbnailArray.map((photo, index) => {
+          return (
+          <img key={photo.style_id}
+            value={photo.style_id}
+            src={photo.image}
+            className='rounded-full h-full'
+            />)
+        })}
+      </div>
     </div>
   )
 
