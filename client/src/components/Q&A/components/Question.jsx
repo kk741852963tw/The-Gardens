@@ -5,13 +5,34 @@ import AddAnswer from './AddAnswer.jsx';
 
 export default function Question(props) {
   const [count, setCount] = useState(2);
-  const [answers, setAnswer] = useState({});
+  const [answers, setAnswer] = useState([]);
   const [statusA, setStatus] = useState(false);
+  const [i, setI] = useState(0);
+  const [question_body, setQuestionBody] = useState(props.question.question_body);
+  const [statusLoadA, setStatusLoadA] = useState(false);
 
   useEffect(() => {
     const temp = sortAnswer(props.question);
     setAnswer(temp);
   }, [props]);
+
+  const questionBodySpecHead = function(question_body) {
+    let index = question_body.indexOf(props.text);
+    if (!props.text) {
+      return question_body;
+    } else {
+      return question_body.substring(0, index);
+    }
+  }
+
+  const questionBodySpecTail = function(question_body) {
+    let index = question_body.indexOf(props.text);
+    if (!props.text) {
+      return;
+    } else {
+      return question_body.substring(index + props.text.length, question_body.length);
+    }
+  }
 
   const sortAnswer = function(question) {
     const tempArray = Object.values(question.answers);
@@ -23,16 +44,12 @@ export default function Question(props) {
         return -1;
       } else return b.helpfulness - a.helpfulness;
     });
-    const tempObject = {};
-    for (let i = 0; i < tempArray.length; i++) {
-      tempObject[tempArray[i].id] = tempArray[i];
-    }
-    question.answers = tempObject;
-    return question;
+    return tempArray;
   };
 
   const moreAnswers = function() {
     setCount(count + 2);
+    setStatusLoadA(true);
   };
 
   const handleHelpful = function(question_id) {
@@ -42,43 +59,45 @@ export default function Question(props) {
 
   const handleAddA = function() {
     if (!statusA) {
+      setI(i + 1);
       setStatus(true);
     } else {
+      setI(i + 1);
       setStatus(false);
     }
   }
 
   return (
-    <>
-      <div className="flex">
-        <div>Q: {props.question.question_body}</div>
-        <div>Helpful?
-          <span className='underline' onClick={() => {!props.addOneTime ? handleHelpful(props.question.question_id) : console.log('bad')}}>Yes </span>
-          <span>({props.question.question_helpfulness})  |  </span>
-          <button onClick={handleAddA}>Add Answer</button>
-          {statusA ? <AddAnswer status={handleAddA} body={props.question.question_body} product_name={props.product_name}></AddAnswer> : <></>}
-        </div>
+    <div id="gridQ" className="grid">
+      <div className="font-black mt-2">Q:</div>
+      <div className="max-h-full font-black mt-2">{questionBodySpecHead(question_body)}<span className="bg-yellow-300">{props.text}</span>{questionBodySpecTail(question_body)}</div>
+      <div className="flex justify-end mt-2">
+        <span className="mr-2">Helpful?</span>
+        {!props.addOneTime ? <span className='mr-4 bg-white hover:bg-gray-300 hover:text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer place-self-start' onClick={() => handleHelpful(props.question.question_id)}>Yes{`(${props.question.question_helpfulness})`} </span> : <span className='mr-4  bg-gray-300 text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full'>Yes{`(${props.question.question_helpfulness})`} </span>}
+        <span className="bg-white hover:bg-gray-300 hover:text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer place-self-start" onClick={handleAddA}>Add Answer</span>
+        {statusA ? <AddAnswer status={handleAddA} body={props.question.question_body} product_name={props.product_name} key={i} question_id={props.question.question_id}></AddAnswer> : <></>}
       </div>
-      <>
-        {answers.answers ?
-          <>
-            <div className="max-h-halfscreen overflow-auto">
-              {Object.keys(answers.answers).slice(0, count).map(function(key, index) {
-                return <Answer
-                key={answers.answers[key].id}
-                answer={answers.answers[key]}
-                addHelpfulA={props.addHelpfulA}
-                addOneTimeA={props.addOneTimeA}
-                addReportA={props.addReportA}
-                reportA={props.reportA}></Answer>
-              })}
-            </div>
-            {Object.keys(answers.answers).length > count ?
-              <div>
-                <button onClick={moreAnswers}>LOAD MORE ANSWERS</button>
-              </div> : <div>Collapse answers</div>}
-          </> : <></>}
-      </>
-    </>
+      <div className="col-span-3">
+        {answers.length !== 0 ?
+          <div id="Answer" className="m-auto max-h-halfscreen">
+            {answers.slice(0, count).map((answer, index) => {
+              return <Answer
+              key={answer.id}
+              i={index}
+              answer={answer}
+              addHelpfulA={props.addHelpfulA}
+              addOneTimeA={props.addOneTimeA}
+              addReportA={props.addReportA}
+              reportA={props.reportA}></Answer>
+            })}
+          </div> : <></>}
+        </div>
+        <div></div>
+        <div>
+          {answers.length !== 0 && answers.length > count ?
+          <span className="bg-white hover:bg-gray-300 hover:text-white border-1 border-stone-900 shadow shadow-blue-500/40 py-0.5 px-4 rounded-full cursor-pointer" onClick={moreAnswers}>LOAD MORE ANSWERS</span> : statusLoadA ? <span className="bg-gray-300 text-white border-1 border-stone-900 shadow shadow-blue-500/40 py-0.5 px-4 rounded-full">Collapse answers</span> : <></>}
+        </div>
+        <div></div>
+    </div>
   );
 }

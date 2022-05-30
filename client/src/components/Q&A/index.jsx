@@ -12,13 +12,14 @@ class QuestionsAnswers extends React.Component {
       display: [],
       product_id: '37312',
       product_name: 'Bright Future Sunglasses',
-      count: 4,
+      count: 2,
       answers: [],
       temp: [],
       statusQ: false,
       helpful: {},
       helpfulA: {},
-      reportA: {}
+      reportA: {},
+      text: ''
     }
     this.moreAnsweredQ = this.moreAnsweredQ.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -74,11 +75,13 @@ class QuestionsAnswers extends React.Component {
         }
       }
       this.setState({
-        display: array
+        display: array,
+        text: text
       });
     } else {
       this.setState({
-        display: this.state.temp
+        display: this.state.temp,
+        text: ''
       });
     }
   }
@@ -128,9 +131,9 @@ class QuestionsAnswers extends React.Component {
   render() {
     return (
       <div>
-        <div>{"QUESTIONS & ANSWERS"}</div>
+        <div className="m-auto w-3/5 h-8">{"QUESTIONS & ANSWERS"}</div>
         <Search text={this.handleSearch}></Search>
-        <div className="max-h-screen overflow-auto">
+        <div id="Question" className="m-auto w-3/5 max-h-screen">
           {this.state.display.length === 0 ? <></> :
             <>
               {this.state.display.slice(0, this.state.count).map((question, index) => {
@@ -141,20 +144,21 @@ class QuestionsAnswers extends React.Component {
                 addOneTime={this.state.helpful[question.question_id]}
                 addHelpfulA={(answer_id, answer_helpful) => this.addHelpfulA(answer_id, answer_helpful, index)}
                 addOneTimeA={this.state.helpfulA} addReportA={(answer_id) => this.addReportA(answer_id, index)}
-                reportA={this.state.reportA}></Question>
+                reportA={this.state.reportA}
+                text={this.state.text}></Question>
               })}
             </>}
-          {this.state.display.length > this.state.count ?
-            <div>
-              <button onClick={this.moreAnsweredQ}>MORE ANSWERD QUESRIONS</button>
-              <button onClick={this.handleAddQ}>ADD A QUESTION</button>
-              {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
-            </div> :
-            <div>
-              <button onClick={this.handleAddQ}>ADD A QUESTION</button>
-              {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
-            </div>}
-          </div>
+            </div>
+        {this.state.display.length > this.state.count ?
+          <div  className="m-auto w-3/5 h-8 flex justify-between">
+            <span className="bg-white hover:bg-gray-300 hover:text-white border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer" onClick={this.moreAnsweredQ}>MORE ANSWERD QUESRIONS</span>
+            <span className="bg-white hover:bg-gray-300 hover:text-white border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer" onClick={this.handleAddQ}>ADD A QUESTION</span>
+            {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
+          </div> :
+          <div  className="m-auto w-3/5 h-8 flex justify-end hover:bg-gray-300 hover:text-white border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer">
+            <button onClick={this.handleAddQ}>ADD A QUESTION</button>
+            {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
+          </div>}
       </div>
     );
   }

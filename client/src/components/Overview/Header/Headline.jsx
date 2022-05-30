@@ -5,7 +5,7 @@ import Logo from './Logo.jsx';
 const Headline = (props) => {
   //log here
   return (
-    <header className='position-absolute float-top flex flex-row bg-blue-700'>
+    <header className='max-w-[1240px] mx-auto px-4 flex justify-between'>
       <div className='float-left'>
         <Logo />
       </div>
