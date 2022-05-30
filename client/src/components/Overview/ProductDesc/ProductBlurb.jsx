@@ -11,7 +11,7 @@ const ProductBlurb = ( { productData } ) => {
   return (
     <div className="position-relative flex inline-flex">
 
-      <div>
+      <div className='position-relative'>
         <h2>{productData.slogan}</h2>
         <p>{productData.description}</p>
       </div>

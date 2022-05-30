@@ -34,23 +34,22 @@ const ImageCarousel = ({ activeStyle }) => {
   //  Carousel Construct
   return (
     <section className='relative h-1/2 justify-center flex-left'>
-      <div className='scale-125 h-[500px]'>
+      <div>
         <div className='absolute top-1/2 left-8 z-10 cursor-pointer select-none text-5xl'>
             <FaArrowAltCircleLeft onClick={prevSlide}/>
         </div>
         <div className='absolute top-1/2 right-8 z-10 cursor-pointer select-none text-5xl'>
             <FaArrowAltCircleRight onClick={nextSlide}/>
         </div>
-
-        {photoUrl.map((image, index) => {
-          return (
-            <div className={'test'} key={index}>
-
-              {index === current && (<img src={image} alt='random image' className='rounded-md object-fill overflow-hidden'/>)}
-            </div>
-          )
-        })}
-
+          <div className='overflow-y-hidden'>
+            {photoUrl.map((image, index) => {
+              return (
+                <>
+                    {index === current && (<img key={index} src={image} alt='random image' className='rounded-md h-96 w-38 object-fill flex items-center justify-center'/>)}
+                </>
+              )
+            })}
+        </div>
       </div>
     </section>
   )

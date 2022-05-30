@@ -29,6 +29,8 @@ const SizeQuantSelector = ( { skus } ) => {
   }
 
   const [currentQuant, setCurrentQuant] = useState(buttonData[0].quantity);
+  const [selectedSize, setSelectedSize] = useState(buttonData[0].size);
+
 
   return (
     <div>
@@ -39,17 +41,41 @@ const SizeQuantSelector = ( { skus } ) => {
       }}>
 
       {buttonData.map((option) =>
-        <option value={option.quantity} id={option.id} key={option.id}>{option.size}</option>
+        <option value={option.quantity}
+                id={option.id}
+                key={option.id}>{option.size}</option>
       )}
       </select>
 
       < div>
         <label htmlFor='quantity'>Select Quantity</label>
-        <div>
-          <input type="number" min='0' key={currentQuant} max={currentQuant} placeholder='0'></input>
-        </div>
+          <select>
+            {(() => {
+              if (currentQuant < 15) {
+                const range = [ ...Array(currentQuant).keys() ].map( i => i+1);
+                return (
+                  <>
+                    {range.map((value) => {
+                      <option value={value} key={value}>{value}</option>
+                    })}
+                  </>
+                )
+              } else {
+                const range = [ ...Array(15).keys() ].map( i => i+1);
+                return (
+                  <>
+                    {range.map((value) => {
+                      <option value={value} key={value}>{value}</option>
+                    })}
+                  </>
+                )
+              }
+            })()}
+          </select>
       </div>
-
+      <div>
+        <button>Add to Cart</button>
+      </div>
     </div>
   )
 };

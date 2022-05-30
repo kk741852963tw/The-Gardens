@@ -31,11 +31,10 @@ class Products extends React.Component {
 
 
   fetchDataStyle() {
-    axios.get('/styleData', { params : {product_id: 37314}})
+    axios.get('/styleData', { params : {product_id: 37315}})
       .then((res) => {
         //Adds active property.
         //default style is active first
-        console.log(res.data.results)
         let data = res.data.results.map((obj, key) => {
           if (obj['default?'] === true) {
             return {...obj, active: true};
@@ -58,7 +57,7 @@ class Products extends React.Component {
     }
 
     fetchDataProduct() {
-      axios.get('/productData', { params : {product_id: 37314}})
+      axios.get('/productData', { params : {product_id: 37315}})
       .then((res) => {
         this.setState({
           productData: res.data
@@ -89,7 +88,9 @@ class Products extends React.Component {
         }
       }
     }
+    addToCart() {
 
+    }
   //Render
   render() {
     //Splits thumbnails and ids for vertical carousel
@@ -117,7 +118,9 @@ class Products extends React.Component {
           <div className='justify-center'>
             <ImageCarousel activeStyle={this.state.activeStyle} />
 
+            <div>
             <ProductBlurb  productData={this.state.productData} />
+            </div>
           </div>
           <div className='relative grid grid-cols-1 justify-center'>
 
