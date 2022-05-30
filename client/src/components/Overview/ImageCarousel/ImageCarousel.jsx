@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 const axios = require('axios');
 
 const ImageCarousel = ({ activeStyle }) => {
@@ -9,6 +9,7 @@ const ImageCarousel = ({ activeStyle }) => {
   const photoUrl = activeStyle[0].photos.map(photo => {
     return photo.url;
   });
+  //console.log(photoUrl);
 
   // State Hooks
   const [current, setCurrent] = useState(0);
