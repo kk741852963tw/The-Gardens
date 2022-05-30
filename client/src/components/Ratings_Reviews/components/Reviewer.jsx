@@ -18,6 +18,12 @@ const Reviewer = function (props) {
     subSummary = props.data.summary.substring(60);
   }
 
+  let mainBody = '';
+  let subBody = '';
+  if (props.data.body) {
+    mainBody = props.data.body.split('', 250);
+  }
+
   useEffect(() => {
     let newWidth = props.data.rating/5 * 100;
     newWidth = newWidth.toString() + '%';
@@ -69,6 +75,7 @@ const Reviewer = function (props) {
 
 /********************Build this functionality out first*********************/
 // By default the first 250 characters of the review should display. If the review is longer than 250 characters, below the body a link reading “Show more” will appear. Upon clicking this link, the review tile should expand and the rest of the review should display.
+
 // Any images that were submitted as part of the review should appear as thumbnails below the review text. Upon clicking a thumbnail, the image should open in a modal window, displaying at full resolution. The only functionality available within this modal should be the ability to close the window.
 
 /****************/// Recommend - If the reviewer recommends buying the product, the text “I recommend this product” and a checkmark icon will display below the review. If the reviewer does not recommend the product, nothing will display here.
