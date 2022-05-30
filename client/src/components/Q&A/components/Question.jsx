@@ -73,9 +73,8 @@ export default function Question(props) {
       <div className="max-h-full font-black mt-2">{questionBodySpecHead(question_body)}<span className="bg-yellow-300">{props.text}</span>{questionBodySpecTail(question_body)}</div>
       <div className="flex justify-end mt-2">
         <span className="mr-2">Helpful?</span>
-        <span className='underline hover:bg-purple-400 cursor-pointer' onClick={() => {!props.addOneTime ? handleHelpful(props.question.question_id) : console.log('bad')}}>Yes </span>
-        <span className="mr-2">{`(${props.question.question_helpfulness})`}</span>
-        <span className="bg-white hover:bg-gray-300 border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer h-8" onClick={handleAddA}>Add Answer</span>
+        {!props.addOneTime ? <span className='mr-4 bg-white hover:bg-gray-300 hover:text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer place-self-start' onClick={() => handleHelpful(props.question.question_id)}>Yes{`(${props.question.question_helpfulness})`} </span> : <span className='mr-4  bg-gray-300 text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full'>Yes{`(${props.question.question_helpfulness})`} </span>}
+        <span className="bg-white hover:bg-gray-300 hover:text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer place-self-start" onClick={handleAddA}>Add Answer</span>
         {statusA ? <AddAnswer status={handleAddA} body={props.question.question_body} product_name={props.product_name} key={i} question_id={props.question.question_id}></AddAnswer> : <></>}
       </div>
       <div className="col-span-3">
@@ -96,7 +95,7 @@ export default function Question(props) {
         <div></div>
         <div>
           {answers.length !== 0 && answers.length > count ?
-          <span className="bg-white hover:bg-gray-300 border-2 border-stone-900 shadow shadow-blue-500/40 py-0.5 px-4 rounded-full cursor-pointer" onClick={moreAnswers}>LOAD MORE ANSWERS</span> : statusLoadA ? <div>Collapse answers</div> : <></>}
+          <span className="bg-white hover:bg-gray-300 hover:text-white border-1 border-stone-900 shadow shadow-blue-500/40 py-0.5 px-4 rounded-full cursor-pointer" onClick={moreAnswers}>LOAD MORE ANSWERS</span> : statusLoadA ? <span className="bg-gray-300 text-white border-1 border-stone-900 shadow shadow-blue-500/40 py-0.5 px-4 rounded-full">Collapse answers</span> : <></>}
         </div>
         <div></div>
     </div>
