@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import {FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 const axios = require('axios');
 
 const ImageCarousel = ({ activeStyle }) => {
+  //Data Check
   if (!activeStyle[0]) {
     return null;
   }
+
   const photoUrl = activeStyle[0].photos.map(photo => {
     return photo.url;
   });
@@ -24,7 +26,7 @@ const ImageCarousel = ({ activeStyle }) => {
     setCurrent(current === 0 ? length - 1 : current - 1)
   }
 
-  // Check for data
+  //Data Check
   if (!Array.isArray(photoUrl) || photoUrl.length <= 0) {
     return null
   }

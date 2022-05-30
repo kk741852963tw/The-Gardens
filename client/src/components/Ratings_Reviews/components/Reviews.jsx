@@ -37,7 +37,7 @@ const Ratings_Reviews = function (props) {
           </select>
         </div>
         {initialReviews.map(result => (
-          <Reviewer data={result}/>
+          <Reviewer key={result} data={result}/>
         ))}
         <div>
           {
