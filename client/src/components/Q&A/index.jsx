@@ -151,11 +151,11 @@ class QuestionsAnswers extends React.Component {
             </div>
         {this.state.display.length > this.state.count ?
           <div  className="m-auto w-3/5 h-8 flex justify-between">
-            <span className="bg-white hover:bg-gray-300 border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer" onClick={this.moreAnsweredQ}>MORE ANSWERD QUESRIONS</span>
-            <span className="bg-white hover:bg-gray-300 border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer" onClick={this.handleAddQ}>ADD A QUESTION</span>
+            <span className="bg-white hover:bg-gray-300 hover:text-white border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer" onClick={this.moreAnsweredQ}>MORE ANSWERD QUESRIONS</span>
+            <span className="bg-white hover:bg-gray-300 hover:text-white border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer" onClick={this.handleAddQ}>ADD A QUESTION</span>
             {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
           </div> :
-          <div  className="m-auto w-3/5 h-8 flex justify-end">
+          <div  className="m-auto w-3/5 h-8 flex justify-end hover:bg-gray-300 hover:text-white border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer">
             <button onClick={this.handleAddQ}>ADD A QUESTION</button>
             {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
           </div>}

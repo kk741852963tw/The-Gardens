@@ -64,3 +64,8 @@
 #gridA {
   grid-template-columns: 1fr 36fr;
 }
+
+#answerImage {
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+}
