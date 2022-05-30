@@ -27,7 +27,6 @@ class Products extends React.Component {
   componentDidMount() {
     this.fetchDataProduct();
     this.fetchDataStyle();
-    console.log('Change');
   }
 
 
@@ -79,14 +78,15 @@ class Products extends React.Component {
         }
 
         if (styles[i].style_id === Number(e.target.name)) {
+          //Set active flag
           styles[i].active = true;
-          console.log(styles[i])
+          //Wrap in brackets
+          //Data downstream expects array of one object
           this.setState({
             activeStyle: [styles[i]]
           })
         }
       }
-      console.log(this.state.activeStyle);
     }
 
   //Render
