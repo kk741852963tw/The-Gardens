@@ -17,9 +17,9 @@ const ProductBlurb = ( { productData } ) => {
       </div>
 
       <div className>
-       {features.map((feat) => {
+       {features.map((feat, index) => {
          return (
-           <div key={feat.feature}>
+           <div key={index}>
               <p>{feat.feature}</p>
               <p>{feat.value}</p>
           </div>

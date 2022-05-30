@@ -13,7 +13,7 @@ const StyleSelector = ( { activeStyle, thumbnailArray, updateActive} ) => {
       <div className='grid grid-cols-4 h-[100px] w-[100px] max-h-[100px]'>
           {thumbnailArray.map((photo) => {
             return (
-            <img key={photo.image}
+            <img key={photo.style_id}
               name={photo.style_id}
               src={photo.image}
               onClick={(e)=>updateActive(e)}

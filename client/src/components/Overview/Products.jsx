@@ -35,6 +35,7 @@ class Products extends React.Component {
       .then((res) => {
         //Adds active property.
         //default style is active first
+        console.log(res.data.results)
         let data = res.data.results.map((obj, key) => {
           if (obj['default?'] === true) {
             return {...obj, active: true};

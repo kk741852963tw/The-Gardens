@@ -7,12 +7,10 @@ const ImageCarousel = ({ activeStyle }) => {
   if (!activeStyle[0]) {
     return null;
   }
-  console.log(activeStyle);
+
   const photoUrl = activeStyle[0].photos.map(photo => {
-    console.log(photo.url);
     return photo.url;
   });
-  console.log(photoUrl);
 
   // State Hooks
   const [current, setCurrent] = useState(0);
