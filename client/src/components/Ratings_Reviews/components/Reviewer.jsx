@@ -1,10 +1,9 @@
-import {useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import moment from 'moment';
 
 
 
 const Reviewer = function (props) {
-
 
   let isRecommended = <p></p>;
   if (props.data.recommend) {
@@ -16,6 +15,18 @@ const Reviewer = function (props) {
   if (props.data.summary) {
     mainSummary = props.data.summary.split('', 60);
     subSummary = props.data.summary.substring(60);
+  }
+
+  let mainBody = '';
+  const [subBody, setSubBody] = useState('');
+  if (props.data.body) {
+    mainBody = props.data.body.split('', 250);
+  }
+
+  let showMore = function (event) {
+
+    setSubBody(props.data.body.substring(250));
+    event.target.hidden = true;
   }
 
   useEffect(() => {
@@ -31,6 +42,7 @@ const Reviewer = function (props) {
 
   return (
     <div className="reviews">
+      {console.log(props.data)}
       <div>
         <div className="float-left">
           <div className="star-ratings text-lg text-gray-400 relative m-0 p-0">
@@ -47,7 +59,23 @@ const Reviewer = function (props) {
         <h6>...{subSummary}</h6>
       </div>
       <div>
-        {props.data.body}
+        {mainBody}
+        {subBody}
+        {
+          mainBody.length === 20 &&
+          <button className='bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 mx-2' onClick={showMore}>Show More</button>
+        }
+        {props.data.photos.map(urls => (
+          <div>
+            <img src={urls.url} id='myImg' className='object-cover h-14 w-14 rounded hover:opacity-70'></img>
+            <div id="myModal" className="modal hidden fixed z-3 pt-[100px] top-0 left-0 w-full h-full overflow-auto bg-gray-800/75">
+              <span className="close absolute top-3.5 right-9 text-[#f1f1f1] text-4xl font-bold hover:no-underline	hover:text-[bbbbbb]">&times;</span>
+
+              <img src={urls.url} className="modal-content m-auto block w-10/12 max-w-3xl" id="img01"></img>
+
+            </div>
+          </div>
+        ))}
         {isRecommended}
         <div>Helpful? <button className="underline">Yes</button> ({props.data.helpfulness}) | <button className="underline">Report</button></div>
       </div>
@@ -68,7 +96,8 @@ const Reviewer = function (props) {
 // Users should be able to submit up to 5 images along with a single review.
 
 /********************Build this functionality out first*********************/
-// By default the first 250 characters of the review should display. If the review is longer than 250 characters, below the body a link reading “Show more” will appear. Upon clicking this link, the review tile should expand and the rest of the review should display.
+/***************/// By default the first 250 characters of the review should display. If the review is longer than 250 characters, below the body a link reading “Show more” will appear. Upon clicking this link, the review tile should expand and the rest of the review should display.
+
 // Any images that were submitted as part of the review should appear as thumbnails below the review text. Upon clicking a thumbnail, the image should open in a modal window, displaying at full resolution. The only functionality available within this modal should be the ability to close the window.
 
 /****************/// Recommend - If the reviewer recommends buying the product, the text “I recommend this product” and a checkmark icon will display below the review. If the reviewer does not recommend the product, nothing will display here.
