@@ -243,7 +243,8 @@ app.post('/cartData', (req, res) => {
   const option = {
     url: url + 'cart',
     headers: { Authorization: process.env.TOKEN },
-    method: 'post'
+    method: 'post',
+
   };
 
   axios(option)

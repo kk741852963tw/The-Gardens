@@ -93,8 +93,12 @@ class Products extends React.Component {
         }
       }
     }
+
     addToCart() {
-      console.log('linked')
+      axios.post('/cartData', {id: this.state.cartSize})
+        .then((res) => {
+          console.log('Item Added!')
+        })
     }
 
     //Event Listeners
@@ -151,7 +155,8 @@ class Products extends React.Component {
                            activeStyle={this.state.activeStyle} />
             <BagInteractButtons activeStyle={this.state.activeStyle}
                                 sizeListener={this.sizeListener}
-                                quantityListener={this.quantityListener}/>
+                                quantityListener={this.quantityListener}
+                                addToCart={this.addToCart}/>
           </div>
         </div>
 

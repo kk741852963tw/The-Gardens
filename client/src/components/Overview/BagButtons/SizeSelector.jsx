@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SizeQuantSelector = ( { skus, sizeListener, quantityListener } ) => {
+const SizeQuantSelector = ( { skus, sizeListener, quantityListener, addToCart } ) => {
   //Separate Data
   let ids = skus.map(items => {
     return Object.keys(items);
@@ -13,7 +13,7 @@ const SizeQuantSelector = ( { skus, sizeListener, quantityListener } ) => {
   options = options[0];
 
   //Check for Data
-  if (!options || !ids || !sizeListener || !quantityListener) {
+  if (!options || !ids || !sizeListener || !quantityListener || !addToCart) {
     return null;
   }
 
@@ -29,10 +29,7 @@ const SizeQuantSelector = ( { skus, sizeListener, quantityListener } ) => {
   }
   //Used to link buttons
   const [listedQuant, setListQuant] = useState(buttonData[0].quantity);
-  //Used to send data to
-  const [selectedSize, setSelectedSize] = useState(buttonData[0].size);
 
-  //console.log(selectedSize, listedQuant);
 
   return (
     <div>
@@ -90,7 +87,15 @@ const SizeQuantSelector = ( { skus, sizeListener, quantityListener } ) => {
             })()}
       </div>
       <div>
-        <button>Add to Cart</button>
+        {(() => {
+          if (listedQuant === 0) {
+            return null;
+          } else {
+            return (
+              <button onClick={()=>{addToCart()}}>Add to Cart</button>
+            )
+          }
+        })()}
       </div>
     </div>
   )

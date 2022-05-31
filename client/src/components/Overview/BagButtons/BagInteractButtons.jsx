@@ -2,7 +2,7 @@ import React from 'react';
 
 import SizeQuantSelector from './SizeSelector.jsx';
 
-const BagInteractButtons = ( { activeStyle, sizeListener, quantityListener } ) => {
+const BagInteractButtons = ( { activeStyle, sizeListener, quantityListener, addToCart } ) => {
   let skus = activeStyle.map((item) => {
     return item.skus;
   });
@@ -13,7 +13,8 @@ const BagInteractButtons = ( { activeStyle, sizeListener, quantityListener } ) =
 
       <SizeQuantSelector skus={skus}
                          sizeListener={sizeListener}
-                         quantityListener={quantityListener}/>
+                         quantityListener={quantityListener}
+                         addToCart={addToCart}/>
     </div>
   )
 };
