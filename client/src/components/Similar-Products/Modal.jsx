@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useRef, useState, useContext } from 'react'
+import React , { Fragment, useRef, useState, useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import {data} from '../Overview/StyleSelector/StyleSelector.jsx'
 
@@ -47,21 +47,21 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
                     </div> */}
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <div className="mt-2">
-                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                               <tr>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" className="px-6 py-3">
                                   Current Product
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" className="px-6 py-3">
                                   Feature
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" className="px-6 py-3">
                                   Compared Product
                                 </th>
-                                <th scope="col" class="px-6 py-3">
-                                  <span class="sr-only">Edit</span>
+                                <th scope="col" className="px-6 py-3">
+                                  <span className="sr-only">Edit</span>
                                 </th>
                               </tr>
                             </thead>
@@ -70,13 +70,13 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
                               {
                                 compareCard.features.map((feature) =>
                                   <>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td class="px-6 py-4">
+                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td className="px-6 py-4">
                                     </td>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                       {feature.feature}
                                     </th>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">
                                       {feature.value}
                                     </td>
                                     </tr>
