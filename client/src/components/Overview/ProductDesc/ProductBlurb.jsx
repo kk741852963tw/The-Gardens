@@ -16,7 +16,7 @@ const ProductBlurb = ( { productData } ) => {
         <p>{productData.description}</p>
       </div>
 
-      <div className>
+      <div>
        {features.map((feat, index) => {
          return (
            <div key={index}>

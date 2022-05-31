@@ -51,14 +51,13 @@ const SizeQuantSelector = ( { skus } ) => {
             {(() => {
               if (currentQuant < 15) {
                 const range = [ ...Array(currentQuant).keys() ].map( i => i+1);
-                console.log(range);
                 return (
                   <div>
                   <label htmlFor='quantity'>Select Quantity</label>
-                  <select name='quantity' value='' disable selected>
-                      {range.map((value) => {
+                  <select name='quantity'>
+                      {range.map((value) =>
                         <option value={value} key={value}>{value}</option>
-                      })}
+                      )}
                   </select>
                   </div>
                 )
@@ -68,9 +67,9 @@ const SizeQuantSelector = ( { skus } ) => {
                   <div>
                   <label htmlFor='quantity'>Select Quantity</label>
                   <select name='quantity'>
-                      {range.map((value) => {
+                      {range.map((value) =>
                         <option value={value} key={value}>{value}</option>
-                      })}
+                      )}
                   </select>
                   </div>
                 )
