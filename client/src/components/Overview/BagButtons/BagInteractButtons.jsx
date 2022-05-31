@@ -2,7 +2,7 @@ import React from 'react';
 
 import SizeQuantSelector from './SizeSelector.jsx';
 
-const BagInteractButtons = ( { activeStyle } ) => {
+const BagInteractButtons = ( { activeStyle, sizeListener, quantityListener } ) => {
   let skus = activeStyle.map((item) => {
     return item.skus;
   });
@@ -11,7 +11,9 @@ const BagInteractButtons = ( { activeStyle } ) => {
   return (
     <div className='grid grid-cols-2 sm:w-40 float-right bg-gray-700 max-h-full float-right'>
 
-      <SizeQuantSelector skus={skus}/>
+      <SizeQuantSelector skus={skus}
+                         sizeListener={sizeListener}
+                         quantityListener={quantityListener}/>
     </div>
   )
 };

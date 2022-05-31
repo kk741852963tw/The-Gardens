@@ -17,10 +17,15 @@ class Products extends React.Component {
       verticalCar: [],
       allStyles: [],
       productData: [],
-      activeStyle: []
+      activeStyle: [],
+      cartSize: '',
+      cartQuant: 0
     }
     //Function Bindings
     this.updateActive = this.updateActive.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.sizeListener = this.sizeListener.bind(this);
+    this.quantityListener = this.quantityListener.bind(this);
   }
 
   //Function Definitions
@@ -91,6 +96,22 @@ class Products extends React.Component {
     addToCart() {
 
     }
+
+    //Event Listeners
+    sizeListener(size) {
+      this.setState({
+        cartSize: size
+      })
+      //console.log(this.state.cartSize, this.state.cartQuant)
+    }
+
+    quantityListener(e) {
+      this.setState({
+        cartQuant: e.target.value
+      })
+      console.log(this.state.cartQuant);
+    }
+
   //Render
   render() {
     //Splits thumbnails and ids for vertical carousel
@@ -129,7 +150,9 @@ class Products extends React.Component {
             <StyleSelector thumbnailArray={thumbnailArray}
                            updateActive={this.updateActive}
                            activeStyle={this.state.activeStyle} />
-            <BagInteractButtons activeStyle={this.state.activeStyle}/>
+            <BagInteractButtons activeStyle={this.state.activeStyle}
+                                sizeListener={this.sizeListener}
+                                quantityListener={this.quantityListener}/>
           </div>
         </div>
 

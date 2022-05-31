@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SizeQuantSelector = ( { skus } ) => {
+const SizeQuantSelector = ( { skus, sizeListener, quantityListener } ) => {
   //Separate Data
   let ids = skus.map(items => {
     return Object.keys(items);
@@ -13,7 +13,7 @@ const SizeQuantSelector = ( { skus } ) => {
   options = options[0];
 
   //Check for Data
-  if (!options || !ids) {
+  if (!options || !ids || !sizeListener || !quantityListener) {
     return null;
   }
 
@@ -27,48 +27,57 @@ const SizeQuantSelector = ( { skus } ) => {
     }
     buttonData.push(innerObj);
   }
-
-  const [currentQuant, setCurrentQuant] = useState(buttonData[0].quantity);
+  //Used to link buttons
+  const [listedQuant, setListQuant] = useState(buttonData[0].quantity);
+  //Used to send data to
   const [selectedSize, setSelectedSize] = useState(buttonData[0].size);
 
+  //console.log(selectedSize, listedQuant);
 
   return (
     <div>
       <label htmlFor='selectSize'>Select Size</label>
       <select id='selectSize' onChange={(e) => {
         const quant = e.target.value;
-        setCurrentQuant(quant);
-      }}>
+        setListQuant(quant);
+        }}>
 
-      {buttonData.map((option) =>
+      <option value="none" selected disabled hidden>Choose Size</option>
+      {buttonData.map((option, index) =>
         <option value={option.quantity}
-                id={option.id}
-                key={option.id}>{option.size}</option>
+                name={option.id}
+                key={index}
+                >{option.size}</option>
       )}
       </select>
 
       < div>
             {(() => {
-              if (currentQuant < 15) {
-                const range = [ ...Array(currentQuant).keys() ].map( i => i+1);
+              if (listedQuant < 15) {
+                let range = [ ...Array(Number(listedQuant)).keys() ].map( i => i+1);
                 return (
                   <div>
-                  <label htmlFor='quantity'>Select Quantity</label>
-                  <select name='quantity'>
+                  <label htmlFor='quantity' >Select Quantity</label>
+                  <select name='quantity' onChange={(e)=>{quantityListener(e)}}>
+
+                      <option value="none" selected disabled hidden>-</option>
                       {range.map((value) =>
-                        <option value={value} key={value}>{value}</option>
+                        <option value={value}
+                                key={value}>{value}</option>
                       )}
                   </select>
                   </div>
                 )
               } else {
-                const range = [ ...Array(15).keys() ].map( i => i+1);
+                let range = [ ...Array(15).keys() ].map( i => i+1);
                 return (
                   <div>
                   <label htmlFor='quantity'>Select Quantity</label>
-                  <select name='quantity'>
+                  <select name='quantity' onChange={(e)=>{quantityListener(e)}}>
+                      <option value="none" selected disabled hidden>-</option>
                       {range.map((value) =>
-                        <option value={value} key={value}>{value}</option>
+                        <option value={value}
+                                key={value}>{value}</option>
                       )}
                   </select>
                   </div>
