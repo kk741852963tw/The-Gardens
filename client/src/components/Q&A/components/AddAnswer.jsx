@@ -10,6 +10,7 @@ export default function AddAnswer(props) {
   const [imagedisplay, setImageD] = useState([]);
   const [count, setCount] = useState(0);
   const [spec, setSpec] = useState([".tiff", ".pjp", ".jfif", ".bmp", ".gif", ".svg", ".png", ".xbm", ".dib", ".jxl", ".jpeg", ".svgz", ".jpg", ".webp", ".ico", ".tif", "pjpeg", ".avif"]);
+  const [string, setString] = useState('');
   const fileInput = React.useRef();
 
   const handleAnswer= function(e) {
@@ -64,6 +65,7 @@ export default function AddAnswer(props) {
 
   const handleImage = function(e) {
     let fileFormat = e.target.value.substring(e.target.value.indexOf('.'), e.target.value.length);
+    setString('loading...');
     if (spec.includes(fileFormat)) {
       let form = new FormData();
       form.append('image', e.target.files[0]);
@@ -76,6 +78,7 @@ export default function AddAnswer(props) {
         setImage([...image, result.data.data.url]);
         setCount(count + 1);
         let reader = URL.createObjectURL(e.target.files[0]);
+        setString('');
         setImageD([...imagedisplay, reader]);
       }).catch(err => console.log('err'));
       // let reader = new FileReader();
@@ -154,8 +157,9 @@ export default function AddAnswer(props) {
                     </div> : <></>}
                     <br></br>
                     {imagedisplay.map(element => {
-                      return <img src={element} className="h-9 w-16 mr-2 object-contain inline"></img>
+                      return <img src={element} className="h-18 w-32 mr-2 object-contain inline rounded-md"></img>
                     })}
+                    {string}
                   </div>
                 </div>
               </div>

@@ -24,8 +24,8 @@
   }
 
   #Answer::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
   }
 
   #Answer::-webkit-scrollbar-track {
@@ -59,6 +59,7 @@
 
 #gridQ {
   grid-template-columns: 1fr 26fr 10fr;
+  border-color: #e0cbcb;
 }
 
 #gridA {
@@ -68,4 +69,8 @@
 #answerImage {
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
+}
+
+#gridQA {
+  border-color: #CCCCFF;
 }
