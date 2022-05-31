@@ -1,29 +1,65 @@
 import React, {useState, useEffect} from 'react';
 import Reviewer from './Reviewer.jsx';
+import axios from 'axios';
 
 const Ratings_Reviews = function (props) {
 
   let initialReviews = [];
-  let lastIndex = 2;
 
   const [revs, setRevs] = useState([]);
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if(props.reviewData.results) {
-      initialReviews.push(props.reviewData.results[lastIndex]);
-    }
-  });
+  const [index, setIndex] = useState(2);
 
   const addMore = function (event) {
-    setRevs([...revs, props.reviewData.results[index]]);
-    setIndex(index + 1);
+
+    if (props.reviewData.results[index] && props.reviewData.results[index + 1]) {
+      setRevs([...revs, props.reviewData.results[index], props.reviewData.results[index + 1]]);
+      setIndex(index + 2);
+
+    } else {
+
+      setRevs([...initialReviews, ...revs, props.reviewData.results[index]]);
+
+      axios(props.reviewOption)
+      .then((result) => {
+
+        props.setPage(props.page + 1);
+        if (result.data.results.length > 0) {
+          props.setReviews(result.data);
+          setIndex(0);
+        } else {
+          document.getElementById('moreReviewsBtn').hidden = true;
+        }
+      })
+      .catch (err => console.log('get data from reviews fail', err));
+    }
+    // Grab more data when you reach the end of the index value
+    // Change only the page number.
   }
 
-  if (props.reviewData.results) {
+  if (props.reviewData.results && props.page) {
 
-    initialReviews.push(props.reviewData.results[0]);
-    initialReviews.push(props.reviewData.results[1]);
+    if (props.reviewData.results.length >= 2 && props.page === 2) {
+
+      initialReviews.push(props.reviewData.results[0]);
+      initialReviews.push(props.reviewData.results[1]);
+    } else if (props.reviewData.results.length >= 2 && props.page === 2) {
+
+      initialReviews.push(props.reviewData.results[0]);
+    } else if (props.reviewData.results.length < 1) {
+
+      initialReviews.push({
+        body: '',
+        data: '2022-01-01T00:00:00.000Z',
+        helpfulness: 0,
+        photos: [],
+        rating: 0,
+        recommend: false,
+        response: null,
+        review_id: 0,
+        reviewer_name: '',
+        summary: 'There are no reviews!'
+      });
+    }
 
     return (
       <div id="Reviews" className= "text-xs basis-2/3 content-center  border-2 border-solid mx-8">
@@ -36,9 +72,14 @@ const Ratings_Reviews = function (props) {
             <option value="sortOption">Rating</option>
           </select>
         </div>
-        {initialReviews.map(result => (
-          <Reviewer data={result}/>
-        ))}
+        <div className="overflow-y-auto max-h-96">
+          {initialReviews.map(result => (
+            <Reviewer data={result}/>
+          ))}
+          {revs.map(result => (
+            <Reviewer data={result}/>
+          ))}
+        </div>
         <div>
           {
             props.reviewData.results.length > 2 &&

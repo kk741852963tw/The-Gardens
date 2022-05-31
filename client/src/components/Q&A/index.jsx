@@ -10,16 +10,18 @@ class QuestionsAnswers extends React.Component {
     super(props);
     this.state = {
       display: [],
-      product_id: '37312',
-      product_name: 'Bright Future Sunglasses',
-      count: 4,
+      product_id: '37312', //'37408', //'37312',
+      product_name: 'Bright Future Sunglasses', //'Leopold Pants',//'Bright Future Sunglasses',
+      count: 2,
       answers: [],
       temp: [],
       statusQ: false,
       helpful: {},
       helpfulA: {},
       reportA: {},
-      text: ''
+      text: '',
+      tempA: [],
+      tempA: []
     }
     this.moreAnsweredQ = this.moreAnsweredQ.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -45,8 +47,8 @@ class QuestionsAnswers extends React.Component {
         for (let i = 0; i < array.length; i++) {
           objQ[array[i].question_id] = false;
           for (let key in array[i].answers) {
-            objA[array[i].answers[key]] = false;
-            objAR[array[i].answers[key]] = false;
+            objA[array[i].answers[key].id] = false;
+            objAR[array[i].answers[key].id] = false;
           }
         }
         this.setState({
@@ -62,7 +64,7 @@ class QuestionsAnswers extends React.Component {
 
   moreAnsweredQ() {
     this.setState({
-      count: this.state.count + 2
+      count: this.state.display.length
     });
   }
   //upperCase!!!!
@@ -74,14 +76,58 @@ class QuestionsAnswers extends React.Component {
           array.push(this.state.temp[i]);
         }
       }
+      const objQ = {};
+      const objA = {};
+      const objAR = {};
+      const tempAarray = [];
+      const tempQarray = [];
+      for (let i = 0; i < array.length; i++) {
+        objQ[array[i].question_id] = this.state.helpful[array[i].question_id];
+        tempQarray.push(array[i].question_id);
+        for (let key in array[i].answers) {
+          objA[array[i].answers[key].id] = this.state.helpfulA[array[i].answers[key].id];
+          objAR[array[i].answers[key].id] = this.state.reportA[array[i].answers[key].id];
+          tempAarray.push(array[i].answers[key].id);
+        }
+      }
       this.setState({
+        tempAhelpful: this.state.helpfulA,
+        tempQhelpful: this.state.helpful,
+        tempAreport: this.state.reportA,
         display: array,
-        text: text
+        text: text,
+        helpful: objQ,
+        helpfulA: objA,
+        reportA: objAR,
+        tempA: tempAarray,
+        tempQ: tempQarray
       });
     } else {
+      const objQ = {};
+      const objA = {};
+      const objAR = {};
+      for (let i = 0; i < this.state.temp.length; i++) {
+        if (this.state.tempQ.includes(this.state.temp[i].question_id)) {
+          objQ[this.state.temp[i].question_id] = this.state.helpful[this.state.temp[i].question_id];
+        } else {
+          objQ[this.state.temp[i].question_id] = this.state.tempQhelpful[this.state.temp[i].question_id];
+        }
+        for (let key in this.state.temp[i].answers) {
+          if (this.state.tempA.includes(this.state.temp[i].answers[key].id)) {
+            objA[this.state.temp[i].answers[key].id] = this.state.helpfulA[this.state.temp[i].answers[key].id];
+            objAR[this.state.temp[i].answers[key].id] = this.state.reportA[this.state.temp[i].answers[key].id];
+          } else {
+            objA[this.state.temp[i].answers[key].id] = this.state.tempAhelpful[this.state.temp[i].answers[key].id];
+            objAR[this.state.temp[i].answers[key].id] = this.state.tempAreport[this.state.temp[i].answers[key].id];
+          }
+        }
+      }
       this.setState({
         display: this.state.temp,
-        text: ''
+        text: '',
+        helpful: objQ,
+        helpfulA: objA,
+        reportA: objAR
       });
     }
   }
@@ -103,9 +149,12 @@ class QuestionsAnswers extends React.Component {
     obj2[index]['question_helpfulness'] = question_helpfulness + 1;
     let obj = this.state.helpful;
     obj[question_id] = true;
+    const array = obj2.sort((a, b) => {
+      return b.question_helpfulness - a.question_helpfulness
+    });
     this.setState({
       helpful: obj,
-      display: obj2
+      display: array
     });
   }
 
@@ -130,10 +179,10 @@ class QuestionsAnswers extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>{"QUESTIONS & ANSWERS"}</div>
+      <div className="font-mono">
+        <h2 className="m-auto w-3/5 text-2xl font-extrabold mb-1">{"QUESTIONS & ANSWERS"}</h2>
         <Search text={this.handleSearch}></Search>
-        <div className="max-h-screen overflow-auto">
+        <div id="Question" className="m-auto w-3/5 max-h-screen">
           {this.state.display.length === 0 ? <></> :
             <>
               {this.state.display.slice(0, this.state.count).map((question, index) => {
@@ -148,17 +197,20 @@ class QuestionsAnswers extends React.Component {
                 text={this.state.text}></Question>
               })}
             </>}
-          {this.state.display.length > this.state.count ?
-            <div>
-              <button onClick={this.moreAnsweredQ}>MORE ANSWERED QUESTIONS</button>
+            </div>
+        {this.state.display.length > this.state.count ?
+          <div  className="m-auto w-3/5 flex justify-between">
+            <span className="bg-white hover:bg-gray-300 hover:text-white border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer" onClick={this.moreAnsweredQ}>More Answered Questions</span>
+            <span className="bg-white hover:bg-gray-300 hover:text-white border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer" onClick={this.handleAddQ}>ADD A QUESTION</span>
+            {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
+          </div> :
+          <div  className="m-auto w-3/5 flex justify-between">
+            <span  className="hover:bg-gray-300 hover:text-white border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer">
               <button onClick={this.handleAddQ}>ADD A QUESTION</button>
               {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
-            </div> :
-            <div>
-              <button onClick={this.handleAddQ}>ADD A QUESTION</button>
-              {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
-            </div>}
-          </div>
+            </span>
+            <span></span>
+          </div>}
       </div>
     );
   }

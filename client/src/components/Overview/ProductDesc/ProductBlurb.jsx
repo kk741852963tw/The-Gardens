@@ -1,17 +1,30 @@
 import React from 'react';
 
 const ProductBlurb = ( { productData } ) => {
-  //Pull out features and stack to the right of slogan
+  //Data Check
+  if (!productData.features) {
+    return null;
+  }
+
+  let features = productData.features;
+
   return (
-    <div>
+    <div className="position-relative flex inline-flex">
 
       <div>
         <h2>{productData.slogan}</h2>
         <p>{productData.description}</p>
       </div>
 
-      <div>
-
+      <div className>
+       {features.map((feat, index) => {
+         return (
+           <div key={index}>
+              <p>{feat.feature}</p>
+              <p>{feat.value}</p>
+          </div>
+         )
+       })}
       </div>
 
     </div>

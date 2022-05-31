@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Characteristics from './Characteristics.jsx';
 
 const Ratings_Reviews = function (props) {
@@ -30,11 +30,27 @@ const Ratings_Reviews = function (props) {
     characterTraits = Object.keys(props.ratingsData.characteristics);
   }
 
+  useEffect(() => {
+    let newWidth = (reviewAvg/5 * 100).toString() + '%';
+    document.getElementById('avgRating').style.width = newWidth;
+    document.getElementById('avgRating').style.color = 'orange';
+
+  });
+
   return (
     <div id="Ratings" className= "basis-1/3 mx-8 border-2 border-solid text-xs">
       <h5 className="text-xs">RATINGS & REVIEWS</h5>
       <h2 className="text-4xl float-left">{reviewAvg}</h2>
-      <p className="mx-8">★★★★★</p>
+      <div className="float-left">
+          <div className="star-ratings text-lg text-gray-400 relative m-0 p-0">
+            <div id='avgRating'  className="fill-ratings p-0 absolute z-[1] block top-0 left-0 truncate ">
+              <span className="inline-block">★★★★★</span>
+            </div>
+            <div className="empty-ratings p-0 z-0 block">
+              <span className="inline-block ">★★★★★</span>
+            </div>
+          </div>
+        </div>
       <br/><br/>
       <h6>{recommended}% of reviews recommend this product</h6>
       <div className="mb-9">

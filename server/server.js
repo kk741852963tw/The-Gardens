@@ -54,26 +54,51 @@ app.get('/api/reviews', (req, res) => {
 
 
 // ======================== Hakeem's ROUTES ==================
-const apiUrl = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
-var axiosGet = function (apiDirName, queryString) {
+var hackConfig = function (apiDirName, queryString = '?product_id=37314&page=1&count=25', method = 'get', data = '') {
 
-  let newUrl = apiUrl + apiDirName + queryString;
+  let newUrl = url + apiDirName + queryString;
   let config = {
-    method: 'get',
+    method,
     url: newUrl,
     headers: {
       'Authorization': process.env.TOKEN
-    }
+    },
+    data
   };
 
   return config;
 }
 
+var hackConfigParam = function (apiDirName, {product_id, page = 1, count = 25}, method = 'get', data = '') {
+
+  console.log('page and count', count);
+  let newUrl = url + apiDirName;
+  let config = {
+    method,
+    url: newUrl,
+    headers: {
+      'Authorization': process.env.TOKEN
+    },
+    params:{
+      product_id: product_id.toString(),
+      page: page.toString(),
+      count: count.toString()
+    },
+    data
+  };
+
+  return config;
+}
+
+// Take in a value for the page and count
+// Hold the state of the page and count in Ratings and Reviews
+
 app.get('/reviews', (req, res) => {
 
-  axios(axiosGet('reviews/', '?product_id=37314'))
+  // console.log('test params', req.query);
+
+  axios(hackConfigParam('reviews/', req.query))
     .then(function (response) {
-      console.log('Good response for reviews');
       res.status(200).json(response.data);
     })
     .catch(function (error) {
@@ -84,7 +109,7 @@ app.get('/reviews', (req, res) => {
 
 app.get('/reviews/meta', (req, res) => {
 
-  axios(axiosGet('reviews/meta/', '?product_id=37314'))
+  axios(hackConfig('reviews/meta/', '?product_id=37314'))
     .then(function (response) {
       res.status(200).json(response.data);
     })
@@ -92,6 +117,18 @@ app.get('/reviews/meta', (req, res) => {
       console.log('Error with the Get call', error);
       result = error;
     });
+});
+
+app.post('/add/reviews', (req, res) => {
+
+  axios(hackConfig('reviews', '', 'post', req.body))
+    .then(data => (
+      console.log('Passed here is data', data.data),
+      res.status(201).end()
+    ))
+    .catch(err => (
+      console.log('Error with post reviews call', err)
+    ));
 });
   // ======================== END Hakeem's ROUTES ==================
 
