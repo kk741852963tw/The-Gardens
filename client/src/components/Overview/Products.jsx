@@ -94,22 +94,21 @@ class Products extends React.Component {
       }
     }
     addToCart() {
-
+      console.log('linked')
     }
 
     //Event Listeners
     sizeListener(size) {
+      console.log(size);
       this.setState({
         cartSize: size
       })
-      //console.log(this.state.cartSize, this.state.cartQuant)
     }
 
     quantityListener(e) {
       this.setState({
         cartQuant: e.target.value
       })
-      console.log(this.state.cartQuant);
     }
 
   //Render

@@ -37,16 +37,20 @@ const SizeQuantSelector = ( { skus, sizeListener, quantityListener } ) => {
   return (
     <div>
       <label htmlFor='selectSize'>Select Size</label>
-      <select id='selectSize' onChange={(e) => {
-        const quant = e.target.value;
+      <select onChange={(e) => {
+        let data = e.target.value.split(',');
+        let quant = data[0];
+        let size = data[1];
+        sizeListener(size)
         setListQuant(quant);
         }}>
 
       <option value="none" selected disabled hidden>Choose Size</option>
       {buttonData.map((option, index) =>
-        <option value={option.quantity}
-                name={option.id}
+        <option value={[option.quantity, option.id]}
+                id={option.id}
                 key={index}
+
                 >{option.size}</option>
       )}
       </select>
