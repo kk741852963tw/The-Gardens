@@ -223,12 +223,11 @@ app.get('/styleData', (req, res) => {
 });
 
 app.get('/productData', (req, res) => {
-  console.log()
   const option ={
     url: url + `products/${req.query.product_id}`,
     headers: { Authorization: process.env.TOKEN },
     method: 'get'
-  }
+  };
 
   axios(option)
     .then((result) => {
@@ -238,6 +237,24 @@ app.get('/productData', (req, res) => {
       console.log('Error in server prod data get method', err);
     })
 });
+
+app.post('/cartData', (req, res) => {
+  console.log(req.body);
+  const option = {
+    url: url + 'cart',
+    headers: { Authorization: process.env.TOKEN },
+    method: 'post'
+  };
+
+  axios(option)
+    .then((result) => {
+      res.status(200).end()
+    })
+    .catch((err) => {
+      console.log('Error in cart post method:', err);
+    })
+
+})
 
 //Connection
 app.listen(process.env.PORT);
