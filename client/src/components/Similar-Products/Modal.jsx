@@ -2,7 +2,7 @@
 import React from 'react'
 import { Fragment, useRef, useState, useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { data } from '../Overview/StyleSelector/StyleSelector.jsx'
+import { getActiveStyle } from '../Overview/Products.jsx'
 
 
 
@@ -67,7 +67,6 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
                               </tr>
                             </thead>
                             <tbody>
-
                             {
                                 compareCard.features === undefined ?
                                   <>
@@ -82,6 +81,7 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
                                     <>
                                       <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <td className="px-6 py-4">
+                                          {console.log(getActiveStyle)}
                                         </td>
                                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                           {feature.feature}

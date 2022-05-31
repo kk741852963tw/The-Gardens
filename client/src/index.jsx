@@ -9,15 +9,25 @@ import RelatedProducts from './components/Similar-Products/Similar-Products.jsx'
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      currentCard: [],
+    }
+    this.setCardHandler = this.setCardHandler.bind(this);
+  }
 
+  setCardHandler(value){
+    this.setState({
+      currentCard: value
+    })
   }
 
 
 
   render() {
+    console.log('in index.js' , this.state.currentCard)
     return (
       <div className='max-w-[1240px] mx-auto px-4'>
-        <Products />
+        <Products currentCard={this.state.currentCard} setCard={this.setCardHandler} />
         <RelatedProducts/>
         <QuestionsAnswers/>
         <Ratings_Reviews/>

@@ -9,7 +9,6 @@ const axios = require('axios');
 
 
 
-
 class Products extends React.Component {
 
   constructor(props) {
@@ -21,8 +20,11 @@ class Products extends React.Component {
       productData: [],
       activeStyle: []
     }
+
+  //
     //Function Bindings
   }
+
 
   //Function Definitions
   componentDidMount() {

@@ -31,6 +31,7 @@ export default function Card({card, toggleModal }) {
             <p className="mt-1 text-sm text-gray-500">{card.category}</p>
           </div>
           <p className="text-sm font-medium text-gray-900">{card.price}</p>
+          <p className="text-sm font-medium text-gray-900">{card.price}</p>
         </div>
       </div>
     </>
