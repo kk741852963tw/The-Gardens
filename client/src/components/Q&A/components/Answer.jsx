@@ -33,19 +33,19 @@ export default function Answer(props) {
 
   return (
     <div id="gridA" className="grid">
-      {props.i === 0 ? <div className="font-black row-span-2 mt-3">A:</div> : <div className="row-span-2 mt-3"></div>}
+      {props.i === 0 ? <div className="font-black row-span-2 mt-3 ml-1">A:</div> : <div className="row-span-2 mt-3"></div>}
       <div>
         <div className="mt-3">{props.answer.body}</div>
         {props.answer.photos.length !== 0 ? props.answer.photos.map((element, index) => {
           if (index === props.answer.photos.length - 1) {
-            return <><img id="answerImage" src={element} className="h-18 w-32 object-contain inline mr-4 hover:opacity-70" onClick={() => handleModal(element)}></img><br></br></>
+            return <><img id="answerImage" src={element} className="h-18 w-32 object-contain inline mr-4 hover:opacity-70 rounded-md" onClick={() => handleModal(element)}></img><br></br></>
           } else {
-            return <img id="answerImage" src={element} className="h-18 w-32 object-contain inline mr-4 hover:opacity-70" onClick={() => handleModal(element)}></img>
+            return <img id="answerImage" src={element} className="h-18 w-32 object-contain inline mr-4 hover:opacity-70 rounded-md" onClick={() => handleModal(element)}></img>
           }
         }) : <></>}
         {modal ? <Image modal={handleModal} url={url}></Image> : <></>}
       </div>
-      <div className="mt-2">
+      <div className="mt-2 text-xs">
         <span className="mr-2">by</span>
         {props.answer.answerer_name === "Seller" ? <span className='font-black'> {props.answer.answerer_name}</span> : <span> {props.answer.answerer_name}</span>}
         <span className="mr-2">, {changeTimeFormat(props.answer.date)}   &#124;</span>
