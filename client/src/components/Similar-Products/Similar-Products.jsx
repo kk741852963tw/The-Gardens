@@ -31,7 +31,6 @@ export default function RelatedProducts() {
 
   function toggleModal(isClicked, cardId) {
     setHandleStarClick({ isClicked: isClicked, cardId: cardId })
-    console.log(isStarClicked);
   }
 
   // make wrapper function to set state for RelatedProducts
@@ -60,12 +59,17 @@ export default function RelatedProducts() {
 
 
 
-    let productRating = await axios.get('/api/reviews', { params: { product_id: '37314' } });
-    console.log('productRating', productRating.data.count)
+
 
     const { data } = await axios.get('/api/related', { params: { product_id: '37314' } });
+    let currentSelectedProduct = await axios.get('/api/product', { params: { product_id: '37314' } });
+    let card = {};
+    card["id"] = 0;
+    card["features"] = currentSelectedProduct.data.features;
+
 
     let array = [];
+    array.push(card);
     let i = 1;
     for (let id of data) {
       let card = {};
@@ -90,7 +94,14 @@ export default function RelatedProducts() {
       array.push(card);
       i++;
 
+      // gets reviews loops through and get the average
+      let productRating = await axios.get('/api/reviews', { params: { product_id: id } });
+      let total = 0;
+      for (let data of productRating.data.results) {
+        total += data.rating;
+      }
 
+      card['rating'] = total / productRating.data.results.length
     }
 
 
