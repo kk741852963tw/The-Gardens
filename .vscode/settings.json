@@ -2,6 +2,7 @@
 
   "workbench.colorCustomizations": {
     "eidtor.codeLens": true,
+<<<<<<< HEAD
     "activityBar.activeBackground": "#00d300",
     "activityBar.activeBorder": "#6060ff",
     "activityBar.background": "#00d300",
@@ -15,7 +16,29 @@
     "titleBar.activeBackground": "#00a000",
     "titleBar.activeForeground": "#e7e7e7",
     "titleBar.inactiveBackground": "#00a00099",
-    "titleBar.inactiveForeground": "#e7e7e799"
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "sash.hoverBorder": "#00d300",
+    "statusBarItem.remoteBackground": "#00a000",
+    "statusBarItem.remoteForeground": "#e7e7e7"
+=======
+    "activityBar.activeBackground": "#11ff11",
+    "activityBar.activeBorder": "#8080ff",
+    "activityBar.background": "#11ff11",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#8080ff",
+    "activityBarBadge.foreground": "#15202b",
+    "sash.hoverBorder": "#11ff11",
+    "statusBar.background": "#00dd00",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#00aa00",
+    "statusBarItem.remoteBackground": "#00dd00",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#00dd00",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#00dd0099",
+    "titleBar.inactiveForeground": "#15202b99"
+>>>>>>> addStar
   },
   "peacock.color": "#00a000"
 

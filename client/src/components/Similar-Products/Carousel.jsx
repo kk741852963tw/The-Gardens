@@ -28,48 +28,59 @@ export default function Carousel() {
       let lastActiveElement = prevState[newPrevState[newPrevState.length - 1].id - 1]
       // Hide the last active element
       lastActiveElement.active = false;
+      //unhide right arrow arrow
+      let rightArrow = document.getElementById('rightArrow');
+      rightArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0');
+
     } else {
-      alert("no more elements left here TODO: hide left arrow!")
+      //hide left arrow
+      let leftArrow = document.getElementById('leftArrow');
+      leftArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0 hidden');
     }
     // setCards(prevState);
     parentContext.setParentState(prevState);
   }
+
+
   const handleRightClick = () => {
     // GOAL of handleRightClick
     // 1. To show the element right of the last ACTIVE(visible) element in list.
     // If there is no element hide right arrow
     // 2. To hide the First ACTIVE(visible) element in the list
 
-    const prevState = [...parentContext.cards];
+    let rightArrow = document.getElementById('rightArrow');
+    //sets prevState filters out the first car which does not need to be displayed
+    const prevState = [...parentContext.cards.filter((card) => card.id > 0)];
 
 
     let newPrevState = prevState.filter((element) => element.active === true);
     let lastActiveElementId = newPrevState[newPrevState.length - 1].id;
 
     if (prevState[lastActiveElementId] !== undefined) {
+
       prevState[lastActiveElementId].active = true;
 
       // set first ACTIVE(visible) element
       let firstActiveElement = prevState[newPrevState[0].id - 1];
       // change first ACTIVE(visible) element to false
       firstActiveElement.active = false;
+
+      //unhide left arrow
+      let leftArrow = document.getElementById('leftArrow');
+      leftArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0');
     } else {
-      alert("last Element in the List!! TODO: hide Arrow");
+      // hide arrow
+      rightArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0 hidden');
     }
-
-
-
     parentContext.setParentState(prevState);
   };
 
-
   return (
-
     <>
       <div className="flex mx-auto max-w-7xl">
-        <div className="flex-none m-0 pt-72 max-h-0">
+        <div id="leftArrow" className="flex-none m-0 pt-72 max-h-0">
           <div onClick={() => handleLeftClick()} className="text-xl md:text-5xl cursor-pointer">
-            <i className=" w-half fa-regular fa-circle-left flex items-left "></i>
+            <i className=" w-half fa-regular fa-circle-left flex items-left"></i>
           </div>
         </div>
         <div className="flex-1 w-64">
@@ -91,7 +102,7 @@ export default function Carousel() {
             </div>
           </div>
         </div>
-        <div className="flex-none m-0 pt-72 max-h-0">
+        <div id="rightArrow" className="flex-none m-0 pt-72 max-h-0">
           <div onClick={() => handleRightClick()} className="text-xl md:text-5xl cursor-pointer">
             <i className="fa-regular fa-circle-right items-right"></i>
           </div>

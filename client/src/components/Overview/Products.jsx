@@ -21,12 +21,15 @@ class Products extends React.Component {
       cartSize: '',
       cartQuant: 0
     }
+
+  //
     //Function Bindings
     this.updateActive = this.updateActive.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.sizeListener = this.sizeListener.bind(this);
     this.quantityListener = this.quantityListener.bind(this);
   }
+
 
   //Function Definitions
   componentDidMount() {

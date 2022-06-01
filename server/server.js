@@ -40,6 +40,16 @@ app.get('/api/product/style', (req, res) => {
     .catch((err) => console.log('failed to fetch /api/product/styles', err));
 });
 
+app.get('/api/reviews', (req, res) => {
+  const config = {
+    headers: { Authorization: process.env.TOKEN }
+  }
+  //t('reviews/', '?product_id=37314'))
+  axios.get(url + 'reviews/' + '?product_id=' + `${req.query.product_id}`, config)
+    .then((result) => res.status(200).json(result.data))
+    .catch((err) => console.log('failed to fetch /api/reviews', err));
+});
+
 // ========================END PHILIP'S ROUTES ================
 
 

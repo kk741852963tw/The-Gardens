@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
-import React , { Fragment, useRef, useState, useContext } from 'react'
+import React from 'react'
+import { Fragment, useRef, useState, useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import {data} from '../Overview/StyleSelector/StyleSelector.jsx'
 
 
 
@@ -9,8 +9,9 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
   const [open, setOpen] = useState(true)
   const cancelButtonRef = useRef(null)
 
+  const currentCard = cards[0]
   const compareCard = cards.find((element) => element.id === compareCardId);
-  //console.log("hello", data);
+
 
 
   return (
@@ -29,7 +30,7 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
         </Transition.Child>
 
         <div className="fixed z-10 inset-0 overflow-y-auto">
-          <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
+          <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0" onClick={() => { toggleModal(false) }}>
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -66,9 +67,8 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
                               </tr>
                             </thead>
                             <tbody>
-
                               {
-                                compareCard.features.map((feature) =>
+                                compareCard.features === undefined ?
                                   <>
                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td className="px-6 py-4">
@@ -81,14 +81,36 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
                                     </td>
                                     </tr>
                                   </>
-                                )
+                                  :
+                                  compareCard.features.map((feature, index) =>
+                                    <>
+                                      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        {
+                                          <td className="px-6 py-4">
+                                            {
+                                              index < currentCard.features.length &&
+                                                currentCard.features[index].feature === feature.feature ? currentCard.features[index].value
+                                                : null
+                                            }
+                                          </td>
+                                        }
+                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                          {feature.feature}
+                                        </th>
+                                        <td className="px-6 py-4">
+                                          {feature.value}
+                                        </td>
+                                      </tr>
+                                    </>
+                                  )
+
                               }
-                              {/*   <td class="px-6 py-4">
+                              {/*   <td className="px-6 py-4">
                                 </td>
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                   Apple MacBook Pro 17"
                                 </th>
-                                <td class="px-6 py-4">
+                                <td className="px-6 py-4">
                                   Laptop
                                 </td> */}
 
@@ -103,7 +125,7 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
                   <button
                     type="button"
                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={() => { setOpen(false), toggleModal(false) }}
+                    onClick={() => { setOpen(false), toggleModal(false), console.log('yo', cards) }}
                   >
                     Close
                   </button>
