@@ -1,7 +1,24 @@
 {
 
   "workbench.colorCustomizations": {
-    "eidtor.codeLens": true
+    "eidtor.codeLens": true,
+    "activityBar.activeBackground": "#11ff11",
+    "activityBar.activeBorder": "#8080ff",
+    "activityBar.background": "#11ff11",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#8080ff",
+    "activityBarBadge.foreground": "#15202b",
+    "sash.hoverBorder": "#11ff11",
+    "statusBar.background": "#00dd00",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#00aa00",
+    "statusBarItem.remoteBackground": "#00dd00",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#00dd00",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#00dd0099",
+    "titleBar.inactiveForeground": "#15202b99"
   },
   "peacock.color": "#00dd00"
 
