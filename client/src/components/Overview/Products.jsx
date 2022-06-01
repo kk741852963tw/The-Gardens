@@ -145,8 +145,8 @@ class Products extends React.Component {
           <Headline />
         </div>
 
-        <div className="relative grid grid-cols-2 gap-4 h-1/2">
-          <div className='justify-center'>
+        <div className="grid grid-cols-5 gap-4 h-96">
+          <div className='h-full flex flex-col col-span-4 justify-center'>
             <ImageCarousel activeStyle={this.state.activeStyle} />
 
           </div>

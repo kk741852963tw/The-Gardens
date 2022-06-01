@@ -12,14 +12,14 @@ const ProductBlurb = ( { productData } ) => {
     <div className="position-relative flex items-center pt-10">
 
       <div>
-        <h2 className='text-5xl font-bold py-4'>{productData.slogan}</h2>
-        <p className='text-xl position-relative w-1/2 p-0 m-0'>{productData.description}</p>
+        <h2 className='text-slate-400 text-6xl font-bold py-6 font-poppins'>{productData.slogan}</h2>
+        <p className='text-xl position-relative m-0'>{productData.description}</p>
       </div>
-
+        <div className='border-l-4 border-gray-700 h-48 mr-8'></div>
       <div>
        {features.map((feat, index) => {
          return (
-           <div key={index}>
+           <div key={index} >
               <p className='font-bold'>{feat.feature}: {feat.value}</p>
           </div>
          )

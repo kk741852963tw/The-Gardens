@@ -2,11 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  p {
-    font-family: Proxima Nova, system-ui, sans-serif;
-  }
-}
+
 
 @layer utilities {
   #Question::-webkit-scrollbar {

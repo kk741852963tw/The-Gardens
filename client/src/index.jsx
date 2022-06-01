@@ -12,11 +12,9 @@ class App extends React.Component {
 
   }
 
-
-
   render() {
     return (
-      <div className='max-w-[1240px] mx-auto px-4 w-3/4'>
+      <div className='max-w-[1240px] mx-auto px-4 w-1/2'>
         <Products />
         <RelatedProducts/>
         <QuestionsAnswers/>
