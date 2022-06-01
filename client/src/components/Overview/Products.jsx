@@ -144,17 +144,14 @@ class Products extends React.Component {
 
       <div>
 
-        <div className='w-full h-[90px] bg-grey-800'>
+        <div>
           <Headline />
         </div>
 
-        <div className="relative grid grid-cols-2 gap-4 ">
-          <div className='justify-center'>
+        <div className="grid grid-cols-5 gap-4 h-96">
+          <div className='h-full flex flex-col col-span-4 justify-center'>
             <ImageCarousel activeStyle={this.state.activeStyle} />
 
-            <div>
-            <ProductBlurb  productData={this.state.productData} />
-            </div>
           </div>
           <div className='relative grid grid-cols-1 justify-center'>
 
@@ -163,14 +160,19 @@ class Products extends React.Component {
             <StyleSelector thumbnailArray={thumbnailArray}
                            updateActive={this.updateActive}
                            activeStyle={this.state.activeStyle} />
-            <BagInteractButtons activeStyle={this.state.activeStyle}
-                                sizeListener={this.sizeListener}
-                                quantityListener={this.quantityListener}
-                                addToCart={this.addToCart}
-                                cartSize={this.state.cartSize}/>
+            <div>
+              <BagInteractButtons activeStyle={this.state.activeStyle}
+                                  sizeListener={this.sizeListener}
+                                  quantityListener={this.quantityListener}
+                                  addToCart={this.addToCart}
+                                  cartSize={this.state.cartSize}/>
+            </div>
           </div>
         </div>
 
+            <div className='float-none mt-4 w-2/3'>
+            <ProductBlurb  productData={this.state.productData} />
+            </div>
       </div>
     )
   }
