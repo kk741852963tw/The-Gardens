@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SizeQuantSelector = ( { skus, sizeListener, quantityListener, addToCart } ) => {
+const SizeQuantSelector = ( { skus, sizeListener, quantityListener, addToCart, cartSize } ) => {
   //Separate Data
   let ids = skus.map(items => {
     return Object.keys(items);
@@ -54,14 +54,21 @@ const SizeQuantSelector = ( { skus, sizeListener, quantityListener, addToCart } 
 
       < div>
             {(() => {
-              if (listedQuant < 15) {
+              if (cartSize === '') {
+                return (
+                  <div>
+                    <label htmlFor='quantity' >Select Quantity</label>
+                    <select name='quantity' id='sizeSelector' onChange={(e)=>{quantityListener(e)}}>
+                    <option value="none" selected disabled hidden>-</option>
+                    </select>
+                  </div>
+                )
+              } else if (listedQuant < 15) {
                 let range = [ ...Array(Number(listedQuant)).keys() ].map( i => i+1);
                 return (
                   <div>
                   <label htmlFor='quantity' >Select Quantity</label>
                   <select name='quantity' onChange={(e)=>{quantityListener(e)}}>
-
-                      <option value="none" selected disabled hidden>-</option>
                       {range.map((value) =>
                         <option value={value}
                                 key={value}>{value}</option>
@@ -75,7 +82,6 @@ const SizeQuantSelector = ( { skus, sizeListener, quantityListener, addToCart } 
                   <div>
                   <label htmlFor='quantity'>Select Quantity</label>
                   <select name='quantity' onChange={(e)=>{quantityListener(e)}}>
-                      <option value="none" selected disabled hidden>-</option>
                       {range.map((value) =>
                         <option value={value}
                                 key={value}>{value}</option>
