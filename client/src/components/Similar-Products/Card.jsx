@@ -1,7 +1,7 @@
 import React from 'React'
 
+import React from 'react';
 export default function Card({card, toggleModal }) {
-
 
   return (
     <>

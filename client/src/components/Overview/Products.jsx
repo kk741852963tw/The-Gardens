@@ -17,12 +17,17 @@ class Products extends React.Component {
       verticalCar: [],
       allStyles: [],
       productData: [],
-      activeStyle: []
+      activeStyle: [],
+      cartSize: '',
+      cartQuant: 0
     }
 
   //
     //Function Bindings
     this.updateActive = this.updateActive.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.sizeListener = this.sizeListener.bind(this);
+    this.quantityListener = this.quantityListener.bind(this);
   }
 
 
@@ -34,11 +39,10 @@ class Products extends React.Component {
 
 
   fetchDataStyle() {
-    axios.get('/styleData', { params : {product_id: 37314}})
+    axios.get('/styleData', { params : {product_id: 37315}})
       .then((res) => {
         //Adds active property.
         //default style is active first
-        console.log(res.data.results)
         let data = res.data.results.map((obj, key) => {
           if (obj['default?'] === true) {
             return {...obj, active: true};
@@ -61,7 +65,7 @@ class Products extends React.Component {
     }
 
     fetchDataProduct() {
-      axios.get('/productData', { params : {product_id: 37314}})
+      axios.get('/productData', { params : {product_id: 37315}})
       .then((res) => {
         this.setState({
           productData: res.data
@@ -76,7 +80,7 @@ class Products extends React.Component {
       //pull out state to avoid changes
       let styles = this.state.allStyles;
       //update active flag
-      for (let i = 0; i < styles.length; i++ ) {
+      for (let i = 0; i < styles.length; i ++ ) {
         if (styles[i].active) {
           styles[i].active = false;
         }
@@ -91,6 +95,34 @@ class Products extends React.Component {
           })
         }
       }
+    }
+
+    addToCart() {
+      if (this.state.cartSize === '') {
+        alert('You must choose a size.');
+
+      } else {
+        axios.post('/cartData', {id: this.state.cartSize})
+        .then((res) => {
+          console.log('Item Added!');
+        })
+        .catch((err) => {
+          console.log('Failed to add to cart.', err);
+        })
+      }
+    }
+
+    //Event Listeners
+    sizeListener(size) {
+      this.setState({
+        cartSize: size
+      })
+    }
+
+    quantityListener(e) {
+      this.setState({
+        cartQuant: e.target.value
+      })
     }
 
   //Render
@@ -120,7 +152,9 @@ class Products extends React.Component {
           <div className='justify-center'>
             <ImageCarousel activeStyle={this.state.activeStyle} />
 
+            <div>
             <ProductBlurb  productData={this.state.productData} />
+            </div>
           </div>
           <div className='relative grid grid-cols-1 justify-center'>
 
@@ -129,7 +163,11 @@ class Products extends React.Component {
             <StyleSelector thumbnailArray={thumbnailArray}
                            updateActive={this.updateActive}
                            activeStyle={this.state.activeStyle} />
-            <BagInteractButtons activeStyle={this.state.activeStyle}/>
+            <BagInteractButtons activeStyle={this.state.activeStyle}
+                                sizeListener={this.sizeListener}
+                                quantityListener={this.quantityListener}
+                                addToCart={this.addToCart}
+                                cartSize={this.state.cartSize}/>
           </div>
         </div>
 

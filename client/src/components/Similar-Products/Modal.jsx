@@ -1,6 +1,10 @@
 /* This example requires Tailwind CSS v2.0+ */
+<<<<<<< HEAD
 import React from 'react'
 import { Fragment, useRef, useState, useContext } from 'react'
+=======
+import React , { Fragment, useRef, useState, useContext } from 'react'
+>>>>>>> 73720e0695d554c80fa23877acc5e381539ac94a
 import { Dialog, Transition } from '@headlessui/react'
 import { getActiveStyle } from '../Overview/Products.jsx'
 
@@ -71,9 +75,14 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
                                 compareCard.features === undefined ?
                                   <>
                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                      <td className="px-6 py-4">
-                                        No Data
-                                      </td>
+                                    <td className="px-6 py-4">
+                                    </td>
+                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                      {feature.feature}
+                                    </th>
+                                    <td className="px-6 py-4">
+                                      {feature.value}
+                                    </td>
                                     </tr>
                                   </>
                                   :
