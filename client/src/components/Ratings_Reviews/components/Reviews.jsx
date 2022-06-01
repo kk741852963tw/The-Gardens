@@ -65,11 +65,9 @@ const Ratings_Reviews = function (props) {
       <div id="Reviews" className= "text-xs basis-2/3 content-center  border-2 border-solid mx-8">
         <div className="font-bold">
           {props.reviewData.count} reviews, sorted by <select type="dropdown" className="font-bold underline decoration-9">
-            <option value="sortOption">Relevance</option>
+            <option value="sortOption">Relevant</option>
             <option value="sortOption">Newest</option>
-            <option value="sortOption">Oldest</option>
-            <option value="sortOption">Most Helpful</option>
-            <option value="sortOption">Rating</option>
+            <option value="sortOption">Helpful</option>
           </select>
         </div>
         <div className="overflow-y-auto max-h-96">
@@ -77,6 +75,7 @@ const Ratings_Reviews = function (props) {
             <Reviewer data={result}/>
           ))}
           {revs.map(result => (
+
             <Reviewer data={result}/>
           ))}
         </div>
@@ -94,3 +93,19 @@ const Ratings_Reviews = function (props) {
 }
 
 export default Ratings_Reviews;
+
+// Helpful - This sort order will prioritize reviews that have been found helpful. The order can be found by subtracting “No” responses from “Yes” responses and sorting such that the highest score appears at the top.
+
+
+// Newest - This is a straightforward sort based on the date the review was submitted. The most recent reviews should appear first.
+
+
+// Relevant - Relevance will be determined by a combination of both the date that the review was submitted as well as ‘helpfulness’ feedback received. This combination should weigh the two characteristics such that recent reviews appear near the top, but do not outweigh reviews that have been found helpful. Similarly, reviews that have been helpful should appear near the top, but should yield to more recent reviews if they are older.
+
+// check the date and helpfulness values
+// sort by helpfulness
+
+
+// Write a sorting function or see if there is one already created
+
+// Create a btn that is connected to the option selection

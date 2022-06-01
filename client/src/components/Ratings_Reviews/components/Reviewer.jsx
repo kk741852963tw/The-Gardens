@@ -7,7 +7,7 @@ const Reviewer = function (props) {
 
   let isRecommended = <p></p>;
   if (props.data.recommend) {
-    isRecommended = <p>✓ I recommend this product</p>;
+    isRecommended = <p className="float-none p-3">✓ I recommend this product</p>;
   }
 
   let mainSummary = '';
@@ -29,6 +29,16 @@ const Reviewer = function (props) {
     event.target.hidden = true;
   }
 
+  const [showPhoto, setShowPhoto] = useState(false);
+  let photoClick = function () {
+
+    if (showPhoto) {
+      setShowPhoto(false);
+    } else {
+      setShowPhoto(true);
+    }
+  }
+
   useEffect(() => {
     let newWidth = props.data.rating/5 * 100;
     newWidth = newWidth.toString() + '%';
@@ -42,11 +52,11 @@ const Reviewer = function (props) {
 
   return (
     <div className="reviews">
-      {console.log(props.data)}
+      {console.log(props)}
       <div>
         <div className="float-left">
           <div className="star-ratings text-lg text-gray-400 relative m-0 p-0">
-            <div id={props.data.review_id}  className="fill-ratings p-0 absolute z-[1] block top-0 left-0 truncate ">
+            <div id={props.data.review_id}  className="fill-ratings p-0 absolute z-1 block top-0 left-0 truncate ">
               <span className="inline-block">★★★★★</span>
             </div>
             <div className="empty-ratings p-0 z-0 block">
@@ -65,17 +75,23 @@ const Reviewer = function (props) {
           mainBody.length === 20 &&
           <button className='bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 mx-2' onClick={showMore}>Show More</button>
         }
+        <div className="mb-10 float-none">
         {props.data.photos.map(urls => (
           <div>
-            <img src={urls.url} id='myImg' className='object-cover h-14 w-14 rounded hover:opacity-70'></img>
-            <div id="myModal" className="modal hidden fixed z-3 pt-[100px] top-0 left-0 w-full h-full overflow-auto bg-gray-800/75">
-              <span className="close absolute top-3.5 right-9 text-[#f1f1f1] text-4xl font-bold hover:no-underline	hover:text-[bbbbbb]">&times;</span>
+            <img src={urls.url} onClick={photoClick} id='myImg' className='object-cover h-14 w-14 rounded hover:opacity-70 float-left'></img>
+            {
+              showPhoto &&
+              <div id="myModal" className="modal fixed z-3 pt-[100px] top-0 left-0 w-full h-full overflow-auto bg-gray-800">
+                <span className="close absolute top-3.5 right-9 text-[#f1f1f1] text-4xl font-bold text-gray-400 hover:no-underline z-4	hover:text-gray-300" onClick={photoClick}>&times;</span>
 
-              <img src={urls.url} className="modal-content m-auto block w-10/12 max-w-3xl" id="img01"></img>
-
-            </div>
+                <img src={urls.url} className="modal-content m-auto block w-10/12 max-w-3xl" id="img01"></img>
+              </div>
+            }
           </div>
         ))}
+        </div>
+
+        <br/>
         {isRecommended}
         <div>Helpful? <button className="underline">Yes</button> ({props.data.helpfulness}) | <button className="underline">Report</button></div>
       </div>
@@ -98,7 +114,7 @@ const Reviewer = function (props) {
 /********************Build this functionality out first*********************/
 /***************/// By default the first 250 characters of the review should display. If the review is longer than 250 characters, below the body a link reading “Show more” will appear. Upon clicking this link, the review tile should expand and the rest of the review should display.
 
-// Any images that were submitted as part of the review should appear as thumbnails below the review text. Upon clicking a thumbnail, the image should open in a modal window, displaying at full resolution. The only functionality available within this modal should be the ability to close the window.
+/***************/// Any images that were submitted as part of the review should appear as thumbnails below the review text. Upon clicking a thumbnail, the image should open in a modal window, displaying at full resolution. The only functionality available within this modal should be the ability to close the window.
 
 /****************/// Recommend - If the reviewer recommends buying the product, the text “I recommend this product” and a checkmark icon will display below the review. If the reviewer does not recommend the product, nothing will display here.
 
