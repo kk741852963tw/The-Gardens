@@ -239,16 +239,16 @@ app.get('/productData', (req, res) => {
 });
 
 app.post('/cartData', (req, res) => {
-  console.log(req.body);
   const option = {
-    url: url + 'cart',
+    url: url + `cart/`,
     headers: { Authorization: process.env.TOKEN },
-    method: 'post'
+    method: 'post',
+    data: {sku_id: req.body.id}
   };
 
   axios(option)
     .then((result) => {
-      res.status(200).end()
+      res.status(201).end()
     })
     .catch((err) => {
       console.log('Error in cart post method:', err);

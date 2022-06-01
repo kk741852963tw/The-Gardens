@@ -77,7 +77,7 @@ class Products extends React.Component {
       //pull out state to avoid changes
       let styles = this.state.allStyles;
       //update active flag
-      for (let i = 0; i < styles.length; i++ ) {
+      for (let i = 0; i < styles.length; i ++ ) {
         if (styles[i].active) {
           styles[i].active = false;
         }
@@ -93,13 +93,24 @@ class Products extends React.Component {
         }
       }
     }
+
     addToCart() {
-      console.log('linked')
+      if (this.state.cartSize === '') {
+        alert('You must choose a size.');
+
+      } else {
+        axios.post('/cartData', {id: this.state.cartSize})
+        .then((res) => {
+          console.log('Item Added!');
+        })
+        .catch((err) => {
+          console.log('Failed to add to cart.', err);
+        })
+      }
     }
 
     //Event Listeners
     sizeListener(size) {
-      console.log(size);
       this.setState({
         cartSize: size
       })
@@ -151,7 +162,9 @@ class Products extends React.Component {
                            activeStyle={this.state.activeStyle} />
             <BagInteractButtons activeStyle={this.state.activeStyle}
                                 sizeListener={this.sizeListener}
-                                quantityListener={this.quantityListener}/>
+                                quantityListener={this.quantityListener}
+                                addToCart={this.addToCart}
+                                cartSize={this.state.cartSize}/>
           </div>
         </div>
 
