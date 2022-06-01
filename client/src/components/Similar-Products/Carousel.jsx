@@ -49,7 +49,8 @@ export default function Carousel() {
     // 2. To hide the First ACTIVE(visible) element in the list
 
     let rightArrow = document.getElementById('rightArrow');
-    const prevState = [...parentContext.cards];
+    //sets prevState filters out the first car which does not need to be displayed
+    const prevState = [...parentContext.cards.filter((card) => card.id > 0)];
 
 
     let newPrevState = prevState.filter((element) => element.active === true);
@@ -63,6 +64,7 @@ export default function Carousel() {
       let firstActiveElement = prevState[newPrevState[0].id - 1];
       // change first ACTIVE(visible) element to false
       firstActiveElement.active = false;
+
       //unhide left arrow
       let leftArrow = document.getElementById('leftArrow');
       leftArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0');
@@ -70,15 +72,10 @@ export default function Carousel() {
       // hide arrow
       rightArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0 hidden');
     }
-
-
-
     parentContext.setParentState(prevState);
   };
 
-
   return (
-
     <>
       <div className="flex mx-auto max-w-7xl">
         <div id="leftArrow" className="flex-none m-0 pt-72 max-h-0">

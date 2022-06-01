@@ -11,7 +11,7 @@ export default function Modal({ toggleModal, compareCardId, cards }) {
 
   const currentCard = cards[0]
   const compareCard = cards.find((element) => element.id === compareCardId);
- // console.log("hello", currentCard.features[0].feature, currentCard, compareCard);
+
 
 
   return (
