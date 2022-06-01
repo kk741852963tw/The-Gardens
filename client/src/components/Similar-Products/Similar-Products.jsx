@@ -10,13 +10,13 @@ export default function RelatedProducts() {
 
   const [related_cards, setRelatedCards] = useState(
     [
-      { id: 1, name: "coolpants", category: "pants", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", active: true },
-      { id: 2, name: "coolhat", category: "hats", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-03.jpg", active: true },
-      { id: 3, name: "coolshirt", category: "shirts", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-04.jpg", active: true },
-      { id: 4, name: "coolshoes", category: "Jackets", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: true },
-      { id: 5, name: "coolbill", category: "Jackets", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
-      { id: 6, name: "coolrunners", category: "Jackets", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
-      { id: 7, name: "coolluke", category: "Jackets", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false },
+      { id: 1, name: "coolpants", category: "pants", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", active: true, features: [{feature: 'cool', value:'notcool'}]},
+      { id: 2, name: "coolhat", category: "hats", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-03.jpg", active: true, features: [{feature: 'cool', value:'notcool'}] },
+      { id: 3, name: "coolshirt", category: "shirts", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-04.jpg", active: true, features: [{feature: 'cool', value:'notcool'}] },
+      { id: 4, name: "coolshoes", category: "Jackets", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: true, features: [{feature: 'cool', value:'notcool'}] },
+      { id: 5, name: "coolbill", category: "Jackets", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false, features: [{feature: 'cool', value:'notcool'}] },
+      { id: 6, name: "coolrunners", category: "Jackets", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false, features: [{feature: 'cool', value:'notcool'}] },
+      { id: 7, name: "coolluke", category: "Jackets", price: "$140.00", url: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg", active: false, features: [{feature: 'cool', value:'notcool'}] },
 
     ]
   );
