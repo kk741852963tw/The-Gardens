@@ -21,13 +21,11 @@ class App extends React.Component {
     })
   }
 
-
-
   render() {
     console.log('in index.js' , this.state.currentCard)
     return (
-      <div className='max-w-[1240px] mx-auto px-4'>
-        <Products currentCard={this.state.currentCard} setCard={this.setCardHandler} />
+      <div className='max-w-[1240px] mx-auto w-4/5'>
+        <Products />
         <RelatedProducts/>
         <QuestionsAnswers/>
         <Ratings_Reviews/>
@@ -37,6 +35,3 @@ class App extends React.Component {
 };
 
 ReactDOM.render(<App />, document.getElementById('app'));
-// const container = document.getElementById('app');
-// const app = createRoot(container);
-// app.render(<React.StrictMode><App></App></React.StrictMode>);
