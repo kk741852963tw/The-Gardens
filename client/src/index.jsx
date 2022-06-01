@@ -16,7 +16,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='max-w-[1240px] mx-auto px-4'>
+      <div className='max-w-[1240px] mx-auto px-4 w-3/4'>
         <Products />
         <RelatedProducts/>
         <QuestionsAnswers/>
@@ -29,4 +29,4 @@ class App extends React.Component {
 ReactDOM.render(<App />, document.getElementById('app'));
 // const container = document.getElementById('app');
 // const app = createRoot(container);
-// app.render(<React.StrictMode><App></App></React.StrictMode>);
+// app.render(<React.StrictMode><App></`App></React.StrictMode>);`

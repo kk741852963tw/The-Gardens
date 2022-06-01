@@ -33,64 +33,71 @@ const SizeQuantSelector = ( { skus, sizeListener, quantityListener, addToCart, c
 
   return (
     <div>
-      <label htmlFor='selectSize'>Select Size</label>
-      <select onChange={(e) => {
-        let data = e.target.value.split(',');
-        let quant = data[0];
-        let size = data[1];
-        sizeListener(size)
-        setListQuant(quant);
-        }}>
+      <div className='flex p-4'>
+        <label htmlFor='selectSize'>Select Size</label>
+        <select
+          className='float-left bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py-2 px-4 rounded'
+          onChange={(e) => {
+          let data = e.target.value.split(',');
+          let quant = data[0];
+          let size = data[1];
+          sizeListener(size)
+          setListQuant(quant);
+          }}>
 
-      <option value="none" selected disabled hidden>Choose Size</option>
-      {buttonData.map((option, index) =>
-        <option value={[option.quantity, option.id]}
-                id={option.id}
-                key={index}
+        <option value="none" selected disabled hidden>Choose Size</option>
+        {buttonData.map((option, index) =>
+          <option value={[option.quantity, option.id]}
+                  id={option.id}
+                  key={index}
 
-                >{option.size}</option>
-      )}
-      </select>
+                  >{option.size}</option>
+        )}
+        </select>
 
-      < div>
-            {(() => {
-              if (cartSize === '') {
-                return (
-                  <div>
+        < div>
+              {(() => {
+                if (cartSize === '') {
+                  return (
+                    <div>
+                      <label htmlFor='quantity' >Select Quantity</label>
+                      <select name='quantity' id='sizeSelector' onChange={(e)=>{quantityListener(e)}}
+                      className='float-right bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py-2 px-4 rounded'>
+                      <option value="none" selected disabled hidden>-</option>
+                      </select>
+                    </div>
+                  )
+                } else if (listedQuant < 15) {
+                  let range = [ ...Array(Number(listedQuant)).keys() ].map( i => i+1);
+                  return (
+                    <div>
                     <label htmlFor='quantity' >Select Quantity</label>
-                    <select name='quantity' id='sizeSelector' onChange={(e)=>{quantityListener(e)}}>
-                    <option value="none" selected disabled hidden>-</option>
+                    <select name='quantity' onChange={(e)=>{quantityListener(e)}}
+                    className='bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py-2 px-4 rounded'>
+                        {range.map((value) =>
+                          <option value={value}
+                                  key={value}>{value}</option>
+                        )}
                     </select>
-                  </div>
-                )
-              } else if (listedQuant < 15) {
-                let range = [ ...Array(Number(listedQuant)).keys() ].map( i => i+1);
-                return (
-                  <div>
-                  <label htmlFor='quantity' >Select Quantity</label>
-                  <select name='quantity' onChange={(e)=>{quantityListener(e)}}>
-                      {range.map((value) =>
-                        <option value={value}
-                                key={value}>{value}</option>
-                      )}
-                  </select>
-                  </div>
-                )
-              } else {
-                let range = [ ...Array(15).keys() ].map( i => i+1);
-                return (
-                  <div>
-                  <label htmlFor='quantity'>Select Quantity</label>
-                  <select name='quantity' onChange={(e)=>{quantityListener(e)}}>
-                      {range.map((value) =>
-                        <option value={value}
-                                key={value}>{value}</option>
-                      )}
-                  </select>
-                  </div>
-                )
-              }
-            })()}
+                    </div>
+                  )
+                } else {
+                  let range = [ ...Array(15).keys() ].map( i => i+1);
+                  return (
+                    <div>
+                    <label htmlFor='quantity'>Select Quantity</label>
+                    <select name='quantity' onChange={(e)=>{quantityListener(e)}}
+                    className='bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py-2 px-4 rounded'>
+                        {range.map((value) =>
+                          <option value={value}
+                                  key={value}>{value}</option>
+                        )}
+                    </select>
+                    </div>
+                  )
+                }
+              })()}
+        </div>
       </div>
       <div>
         {(() => {
@@ -98,7 +105,8 @@ const SizeQuantSelector = ( { skus, sizeListener, quantityListener, addToCart, c
             return null;
           } else {
             return (
-              <button onClick={()=>{addToCart()}}>Add to Cart</button>
+              <button onClick={()=>{addToCart()}}
+              className='bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py-2 px-4 rounded w-12'>Add to Cart</button>
             )
           }
         })()}

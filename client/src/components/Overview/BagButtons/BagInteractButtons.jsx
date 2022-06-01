@@ -9,7 +9,7 @@ const BagInteractButtons = ( { activeStyle, sizeListener, quantityListener, addT
 
 
   return (
-    <div className='grid grid-cols-2 sm:w-40 float-right bg-gray-700 max-h-full float-right'>
+    <div className='grid grid-cols-2 sm:w-40 float-right'>
 
       <SizeQuantSelector skus={skus}
                          sizeListener={sizeListener}

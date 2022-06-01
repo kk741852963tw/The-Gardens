@@ -145,13 +145,10 @@ class Products extends React.Component {
           <Headline />
         </div>
 
-        <div className="relative grid grid-cols-2 gap-4 ">
+        <div className="relative grid grid-cols-2 gap-4 h-1/2">
           <div className='justify-center'>
             <ImageCarousel activeStyle={this.state.activeStyle} />
 
-            <div>
-            <ProductBlurb  productData={this.state.productData} />
-            </div>
           </div>
           <div className='relative grid grid-cols-1 justify-center'>
 
@@ -168,6 +165,9 @@ class Products extends React.Component {
           </div>
         </div>
 
+            <div className="float-none mt-4">
+            <ProductBlurb  productData={this.state.productData} />
+            </div>
       </div>
     )
   }

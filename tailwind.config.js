@@ -4,9 +4,13 @@ module.exports = {
     './src/**/*.{html,js, jsx, ts, tsx}',
   ],
   theme: {
+    fontFamily: {
+
+    },
     extend: {
       maxHeight: {
-        'halfscreen': '50vh'
+        'halfscreen': '50vh',
+        '1/2': '50%'
       }
     },
   },

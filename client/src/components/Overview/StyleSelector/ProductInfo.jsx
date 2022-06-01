@@ -3,9 +3,9 @@ import React from 'react';
 const ProductInfo = ( { productData } ) => {
   return (
     <div>
-      <p>{productData.category}</p>
-      <h2>{productData.name}</h2>
-      <p>{productData.default_price}</p>
+      <p className='text-xl'>{productData.category}</p>
+      <h2 className='text-3xl font-bold'>{productData.name}</h2>
+      <p className='text-xl'>{productData.default_price}</p>
     </div>
   )
 };
