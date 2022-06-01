@@ -14,7 +14,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='max-w-[1240px] mx-auto px-4 w-1/2'>
+      <div className='max-w-[1240px] mx-auto w-4/5'>
         <Products />
         <RelatedProducts/>
         <QuestionsAnswers/>

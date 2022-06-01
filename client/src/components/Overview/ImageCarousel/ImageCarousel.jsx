@@ -45,7 +45,7 @@ const ImageCarousel = ({ activeStyle }) => {
           return (
             <>
                 {index === current && (<img key={index} src={image} alt='random image'
-                className='rounded-md object-cover h-96 max-w-full'/>)}
+                className='-z-5 rounded-md object-cover h-96 max-w-full'/>)}
             </>
           )
         })}

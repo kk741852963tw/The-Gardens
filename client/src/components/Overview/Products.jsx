@@ -141,7 +141,7 @@ class Products extends React.Component {
 
       <div>
 
-        <div className='w-full h-[90px] bg-grey-800'>
+        <div>
           <Headline />
         </div>
 
@@ -157,15 +157,17 @@ class Products extends React.Component {
             <StyleSelector thumbnailArray={thumbnailArray}
                            updateActive={this.updateActive}
                            activeStyle={this.state.activeStyle} />
-            <BagInteractButtons activeStyle={this.state.activeStyle}
-                                sizeListener={this.sizeListener}
-                                quantityListener={this.quantityListener}
-                                addToCart={this.addToCart}
-                                cartSize={this.state.cartSize}/>
+            <div>
+              <BagInteractButtons activeStyle={this.state.activeStyle}
+                                  sizeListener={this.sizeListener}
+                                  quantityListener={this.quantityListener}
+                                  addToCart={this.addToCart}
+                                  cartSize={this.state.cartSize}/>
+            </div>
           </div>
         </div>
 
-            <div className="float-none mt-4">
+            <div className='float-none mt-4 w-2/3'>
             <ProductBlurb  productData={this.state.productData} />
             </div>
       </div>
