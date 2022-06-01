@@ -62,11 +62,15 @@ export default function RelatedProducts() {
 
 
     const { data } = await axios.get('/api/related', { params: { product_id: '37314' } });
+    let currentSelectedProduct = await axios.get('/api/product', { params: { product_id: '37314' } });
+    let card = {};
+    card["id"] = 0;
+    card["features"] = currentSelectedProduct.data.features;
+
 
     let array = [];
-    let i = 0;
-    let currentSelectedProduct = await axios.get('/api/product', { params: { product_id: '37314' } });
-    array.push(currentSelectedProduct);
+    array.push(card);
+    let i = 1;
     for (let id of data) {
       let card = {};
       let product = await axios.get('/api/product', { params: { product_id: id } });
