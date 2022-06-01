@@ -182,12 +182,12 @@ class QuestionsAnswers extends React.Component {
       <div className="font-mono">
         <h2 className="m-auto w-3/5 text-2xl font-extrabold mb-1">{"QUESTIONS & ANSWERS"}</h2>
         <Search text={this.handleSearch}></Search>
-        <div id="Question" className="m-auto w-3/5 max-h-screen">
+        <div id="Question" className="m-auto w-3/5 max-h-screen mb-1">
           {this.state.display.length === 0 ? <></> :
             <>
               {this.state.display.slice(0, this.state.count).map((question, index) => {
                 return <Question
-                key={question.question_id + question.question_helpfulness}
+                key={index}
                 question={question} product_name={this.state.product_name}
                 addHelpful={() => this.addHelpful(question.question_id, question.question_helpfulness, index)}
                 addOneTime={this.state.helpful[question.question_id]}
