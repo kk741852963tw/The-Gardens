@@ -133,16 +133,16 @@ export default function AddAnswer(props) {
                   <h5 className="text-xl font-medium text-gray-900">{props.product_name} : {props.body}</h5><br></br>
                   <div className="mb-6">
                     <label htmlFor="large-input" className="block mb-2 underline font-medium text-gray-900 dark:text-gray-300">Your Answer (*)</label>
-                    <textarea id="large-input" rows="10" cols="100 "maxLength="1000" onChange={handleAnswer} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                    <textarea data-testid="answer_body" id="large-input" rows="10" cols="100 "maxLength="1000" onChange={handleAnswer} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
                   </div>
                   <div className="mb-6">
                     <label htmlFor="base-input" className="block mb-2 underline font-medium text-gray-900 dark:text-gray-300">What is your nickname (*)</label>
-                    <input type="text" id="small-input" maxLength="60" onChange={handleName} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Example: jack543!"></input>
+                    <input data-testid="answer_name" type="text" id="small-input" maxLength="60" onChange={handleName} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Example: jack543!"></input>
                     <span className="text-xs text-gray-900">For privacy reasons, do not use your full name or email address” will appear.</span>
                   </div>
                   <div>
                     <label htmlFor="small-input" className="block mb-2 underline font-medium text-gray-900 dark:text-gray-300">Your email (*)</label>
-                    <input type="text" id="small-input" maxLength="60" onChange={handleEmail} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Example: jack@email.com"></input>
+                    <input data-testid="answer_email" type="text" id="small-input" maxLength="60" onChange={handleEmail} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Example: jack@email.com"></input>
                     <span className="text-xs text-gray-900">For authentication reasons, you will not be emailed” will appear.</span>
                   </div>
                   <br></br>
@@ -151,9 +151,9 @@ export default function AddAnswer(props) {
                     {count < 5 ?
                     <div className="flex justify-start">
                       <input className="hidden" type="file" id="image" onChange={handleImage} accept="image/*" ref={fileInput}></input>
-                      <button className="mr-3 bg-white hover:bg-gray-300 border-2 border-stone-900 shadow shadow-blue-500/40 px-1 rounded-full" onClick={refClick}>Pick File</button>
+                      <button data-testid="answer_button" className="mr-3 bg-white hover:bg-gray-300 border-2 border-stone-900 shadow shadow-blue-500/40 px-1 rounded-full" onClick={refClick}>Pick File</button>
                       <span className="mx-1 flex flex-col justify-center">Or</span>
-                      <input type="text" onChange={handleUrl} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/3 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mx-3" placeholder="Url of the image"></input>
+                      <input data-testid="answer_image" type="text" onChange={handleUrl} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/3 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mx-3" placeholder="Url of the image"></input>
                     </div> : <></>}
                     <br></br>
                     {imagedisplay.map(element => {
@@ -165,8 +165,8 @@ export default function AddAnswer(props) {
               </div>
             </div>
             <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-              <button type="button" onClick={handleSubmit} className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">Submit</button>
-              <button type="button" onClick={handleCancel} className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Cancel</button>
+              <button data-testid="button_submit" type="button" onClick={handleSubmit} className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">Submit</button>
+              <button data-testid="button_cancel" type="button" onClick={handleCancel} className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Cancel</button>
             </div>
           </div>
         </div>

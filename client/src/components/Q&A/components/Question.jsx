@@ -93,7 +93,7 @@ export default function Question(props) {
           </div></div> : <></>}
         <div className="col-span-2">
           {answers.length !== 0 && answers.length > count ?
-          <span className="bg-white hover:bg-gray-300 hover:text-white border-1 border-stone-900 shadow shadow-blue-500/40 py-0.5 px-4 rounded-full cursor-pointer" onClick={moreAnswers}>See more answers</span> : statusLoadA ? <span className="bg-gray-300 text-white border-1 border-stone-900 shadow shadow-blue-500/40 py-0.5 px-4 rounded-full">Collapse answers</span> : <></>}
+          <span data-testid="moreanswer" className="bg-white hover:bg-gray-300 hover:text-white border-1 border-stone-900 shadow shadow-blue-500/40 py-0.5 px-4 rounded-full cursor-pointer" onClick={moreAnswers}>See more answers</span> : statusLoadA ? <span className="bg-gray-300 text-white border-1 border-stone-900 shadow shadow-blue-500/40 py-0.5 px-4 rounded-full">Collapse answers</span> : <></>}
         </div>
         <div></div>
     </div>

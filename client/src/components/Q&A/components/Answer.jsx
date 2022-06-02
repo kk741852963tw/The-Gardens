@@ -38,7 +38,7 @@ export default function Answer(props) {
         <div className="mt-3">{props.answer.body}</div>
         {props.answer.photos.length !== 0 ? props.answer.photos.map((element, index) => {
           if (index === props.answer.photos.length - 1) {
-            return <><img id="answerImage" src={element} className="h-18 w-32 object-contain inline mr-4 hover:opacity-70 rounded-md" onClick={() => handleModal(element)}></img><br></br></>
+            return <><img data-testid="img" id="answerImage" src={element} className="h-18 w-32 object-contain inline mr-4 hover:opacity-70 rounded-md" onClick={() => handleModal(element)}></img><br></br></>
           } else {
             return <img id="answerImage" src={element} className="h-18 w-32 object-contain inline mr-4 hover:opacity-70 rounded-md" onClick={() => handleModal(element)}></img>
           }
@@ -50,8 +50,8 @@ export default function Answer(props) {
         {props.answer.answerer_name === "Seller" ? <span className='font-black'> {props.answer.answerer_name}</span> : <span> {props.answer.answerer_name}</span>}
         <span className="mr-2">, {changeTimeFormat(props.answer.date)}   &#124;</span>
         <span className="mr-2">Helpful? </span>
-        {!props.addOneTimeA[props.answer.id] ? <span className='mr-4 bg-white hover:bg-gray-300 hover:text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer' onClick={() => handleHelpful(props.answer.id)}>Yes({props.answer.helpfulness})</span> : <span className='mr-4  bg-gray-300 text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full'>Yes({props.answer.helpfulness})</span>}
-        {!props.reportA[props.answer.id] ? <span className='bg-white hover:bg-gray-300 hover:text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer' onClick={() => handleReport(props.answer.id)}>Report</span> : <span className='bg-gray-300 text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full'>Reported</span>}
+        {!props.addOneTimeA[props.answer.id] ? <span data-testid="ha" className='mr-4 bg-white hover:bg-gray-300 hover:text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer' onClick={() => handleHelpful(props.answer.id)}>Yes({props.answer.helpfulness})</span> : <span className='mr-4  bg-gray-300 text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full'>Yes({props.answer.helpfulness})</span>}
+        {!props.reportA[props.answer.id] ? <span data-testid="ra" className='bg-white hover:bg-gray-300 hover:text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer' onClick={() => handleReport(props.answer.id)}>Report</span> : <span className='bg-gray-300 text-white border-1 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full'>Reported</span>}
       </div>
     </div>
   );
