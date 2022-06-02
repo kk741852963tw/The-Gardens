@@ -6,7 +6,11 @@ module.exports = {
   theme: {
     extend: {
       maxHeight: {
-        'halfscreen': '50vh'
+        'halfscreen': '50vh',
+        '1/2': '50%'
+      },
+      fontFamily: {
+        'poppins': ['Poppins', 'sans-serif']
       }
     },
   },

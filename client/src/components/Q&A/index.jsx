@@ -179,8 +179,8 @@ class QuestionsAnswers extends React.Component {
 
   render() {
     return (
-      <div className="font-mono">
-        <h2 className="m-auto w-3/5 text-2xl font-extrabold mb-1">{"QUESTIONS & ANSWERS"}</h2>
+      <div>
+        <h2 className="m-auto w-3/5 text-2xl font-extrabold font-poppins mb-1">{"QUESTIONS & ANSWERS"}</h2>
         <Search text={this.handleSearch}></Search>
         <div id="Question" className="m-auto w-3/5 max-h-screen mb-1">
           {this.state.display.length === 0 ? <></> :

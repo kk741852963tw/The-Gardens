@@ -9,20 +9,21 @@ const ProductBlurb = ( { productData } ) => {
   let features = productData.features;
 
   return (
-    <div className="position-relative flex inline-flex">
+    <div className="position-relative flex items-center pt-4">
 
-      <div className='position-relative'>
-        <h2>{productData.slogan}</h2>
-        <p>{productData.description}</p>
+      <div className='ml-11'>
+        <h2 className='text-gray-700 text-6xl font-bold py-6 font-poppins'>{productData.slogan}</h2>
+        <p className='text-gray-700 text-xl position-relative m-0'>{productData.description}</p>
       </div>
-
+        <div className='border-l-4 border-gray-400 h-48 mr-6'></div>
       <div>
        {features.map((feat, index) => {
          return (
-           <div key={index}>
-              <p>{feat.feature}</p>
-              <p>{feat.value}</p>
-          </div>
+
+            <div key={index} className='justify-center'>
+                <p className='font-bold text-gray-700 w-72'>&#10003; {feat.feature}: {feat.value}</p>
+            </div>
+
          )
        })}
       </div>
