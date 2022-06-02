@@ -60,8 +60,7 @@
 }
 
 #gridQ {
-  grid-template-columns: 1fr 26fr 10fr;
-  border-color: #e0cbcb;
+  grid-template-columns: 1fr 24fr 12fr;
 }
 
 #gridA {
@@ -71,8 +70,4 @@
 #answerImage {
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
-}
-
-#gridQA {
-  border-color: #CCCCFF;
 }
