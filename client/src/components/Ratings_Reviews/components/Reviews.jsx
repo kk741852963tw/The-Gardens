@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Reviewer from './Reviewer.jsx';
+import Add from './Add.jsx';
 import axios from 'axios';
 
 const Ratings_Reviews = function (props) {
@@ -9,6 +10,8 @@ const Ratings_Reviews = function (props) {
 
   const [hasLoaded, setHasLoaded] = useState(true);
   const [showInt, setShowInt] = useState(true);
+  const [moreForm, setMoreForm] = useState(false);
+
   const [revs, setRevs] = useState([
     {
         body: '',
@@ -23,7 +26,12 @@ const Ratings_Reviews = function (props) {
         summary: 'There are no reviews!'
       }
   ]);
+
   const [index, setIndex] = useState(2);
+
+  const addForm = function (event) {
+    setMoreForm(true);
+  }
 
   const addMore = function (event) {
 
@@ -59,8 +67,7 @@ const Ratings_Reviews = function (props) {
       })
       .catch (err => console.log('get data from reviews fail', err));
     }
-    // Grab more data when you reach the end of the index value
-    // Change only the page number.
+
   }
 
   const sortDate = function(event) {
@@ -114,10 +121,6 @@ const Ratings_Reviews = function (props) {
     setRevs([...sortArr]);
   }
 
-  useEffect(() => {
-    // setRevs([props.reviewData.results[0], props.reviewData.results[0]]);
-  }, []);
-
   if (props.reviewData.results && props.page) {
 
     if (props.reviewData.results.length >= 2 && props.page === 2 ) {
@@ -168,8 +171,10 @@ const Ratings_Reviews = function (props) {
             props.reviewData.results.length > 2 &&
           <button type="button" id="moreReviewsBtn" className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 mx-2" onClick={addMore}>MORE REVIEWS</button>
           }
-          <button type="button" className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 mx-2">ADD A REVIEW +</button>
+          <button type="button" className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 mx-2" onClick={addForm}>ADD A REVIEW +</button>
         </div>
+
+        {moreForm && <Add clearForm={setMoreForm} character={props.reviewData.characteristics}/>}
 
       </div>
     );
@@ -177,19 +182,3 @@ const Ratings_Reviews = function (props) {
 }
 
 export default Ratings_Reviews;
-
-// Helpful - This sort order will prioritize reviews that have been found helpful. The order can be found by subtracting “No” responses from “Yes” responses and sorting such that the highest score appears at the top.
-
-
-// Newest - This is a straightforward sort based on the date the review was submitted. The most recent reviews should appear first.
-
-
-// Relevant - Relevance will be determined by a combination of both the date that the review was submitted as well as ‘helpfulness’ feedback received. This combination should weigh the two characteristics such that recent reviews appear near the top, but do not outweigh reviews that have been found helpful. Similarly, reviews that have been helpful should appear near the top, but should yield to more recent reviews if they are older.
-
-// check the date and helpfulness values
-// sort by helpfulness
-
-
-// Write a sorting function or see if there is one already created
-
-// Create a btn that is connected to the option selection

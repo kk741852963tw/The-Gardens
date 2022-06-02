@@ -59,7 +59,7 @@ var hackConfig = function (apiDirName, queryString = '?product_id=37314&page=1&c
   return config;
 }
 
-var hackConfigParam = function (apiDirName, {product_id, page = 1, count = 25}, method = 'get', data = '') {
+var hackConfigParam = function (apiDirName, {product_id, page = 1, count = 100}, method = 'get', data = '') {
 
   console.log('page and count', count);
   let newUrl = url + apiDirName;

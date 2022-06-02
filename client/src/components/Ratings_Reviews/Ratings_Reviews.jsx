@@ -4,11 +4,6 @@ import Ratings from './components/Ratings.jsx';
 import axios from 'axios';
 
     // TODO:
-    // // write a function that will grab a page from the api and if the results length greater than
-    // // 0, add 1 to the last page value and call the page again
-    // Make the count 25 per page when calling
-
-    // TODO:
     // Fix the star buttons to accept rate value when clicked
 
     // TODO:
@@ -17,8 +12,6 @@ import axios from 'axios';
     // TODO:
     // Fix the recommend button and the report button
 
-    // TODO:
-    // Add the sort functionality
 
 
 const Ratings_Reviews = function () {
@@ -26,7 +19,7 @@ const Ratings_Reviews = function () {
   const [reviews, setReviews] = useState('reviews initialized');
   const [ratings, setRatings] = useState('ratings initialized');
   const [page, setPage] = useState(1);
-  const [count, setCount] = useState(5);
+  const [count, setCount] = useState(100);
   const [product_id, setProduct_id] = useState(37311);
 
   const reviewOption = {
@@ -65,7 +58,7 @@ const Ratings_Reviews = function () {
 
 
   return (
-    <div id="RatingsReviewsContainer " className= "flex flex-row justify-center">
+    <div id="RatingsReviewsContainer " className= "flex flex-row justify-center mb-5">
       <Ratings ratingsData={ratings}/>
       <Reviews reviewData={reviews} page={page} setPage={setPage} setReviews={setReviews} reviewOption={reviewOption}/>
     </div>
