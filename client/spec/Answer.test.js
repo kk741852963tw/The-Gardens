@@ -1,0 +1,1 @@
+import Answer from '../src/components/Q&A/components/Answer.jsx';
