@@ -121,7 +121,7 @@ export default function RelatedProducts() {
         isStarClicked.isClicked ? <Modal toggleModal={toggleModal} compareCardId={isStarClicked.cardId} cards={related_cards}></Modal> : null
       }
 
-      <div className="relatedProducts pt-60">
+      <div className="relatedProducts pt-20">
         {
           <CardsContext.Provider value={{ cards: related_cards, setParentState: setRelatedCardsState, name: "Related Products", toggleModal: toggleModal }} >
             <Carousel />
