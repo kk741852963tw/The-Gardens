@@ -53,8 +53,10 @@ export default function Question(props) {
   };
 
   const handleHelpful = function(question_id) {
-    axios.put('/questions', { question_id: question_id, type: 'helpful' });
-    props.addHelpful();
+    axios.put('/questions', { question_id: question_id, type: 'helpful' })
+      .then(() => {
+        props.addHelpful();
+      });
   };
 
   const handleAddA = function() {
@@ -68,21 +70,21 @@ export default function Question(props) {
   }
 
   return (
-    <div id="gridQ" className="grid gap-2 border-4 shadow shadow-blue-500/40 rounded-md mb-2">
+    <div id="gridQ" className="grid gap-2 border-2 shadow shadow-blue-500/40 rounded-md mb-2">
       <div className="font-black mt-1 text-xl ml-1">Q:</div>
       <div className="max-h-full font-black mt-1 text-xl">{questionBodySpecHead(question_body)}<span className="bg-yellow-300">{props.text}</span>{questionBodySpecTail(question_body)}</div>
       <div className="flex justify-end mt-1">
         <span className="mr-2">Helpful?</span>
-        {!props.addOneTime ? <span className='mr-4 border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start' onClick={() => handleHelpful(props.question.question_id)}>Yes{`(${props.question.question_helpfulness})`} </span> : <span className="bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py-2 px-2 rounded-full cursor-pointer place-self-start">Yes{`(${props.question.question_helpfulness})`} </span>}
-        <span className="bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start" onClick={handleAddA}>Add Answer</span>
+        {!props.addOneTime ? <span className='mr-4 border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start' onClick={() => handleHelpful(props.question.question_id)}>Yes{`(${props.question.question_helpfulness})`} </span> : <span className="mr-4 border border-1 border-slate bg-gray-700 text-white font-bold py px-2 rounded-full  place-self-start">Yes{`(${props.question.question_helpfulness})`} </span>}
+        <span className="border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start" onClick={handleAddA}>Add Answer</span>
         {statusA ? <AddAnswer status={handleAddA} body={props.question.question_body} product_name={props.product_name} key={i} question_id={props.question.question_id}></AddAnswer> : <></>}
       </div>
         {answers.length !== 0 ?
-        <div id="gridQA" className="col-span-3 border-4 shadow shadow-green-500/40 rounded-md pr-0.5">
+        <div id="gridQA" className="col-span-3 pr-0.5">
           <div id="Answer" className="m-auto max-h-halfscreen">
             {answers.slice(0, count).map((answer, index) => {
               return <Answer
-              key={answer.id}
+              key={answer.id.toString()}
               i={index}
               answer={answer}
               addHelpfulA={props.addHelpfulA}
@@ -93,7 +95,7 @@ export default function Question(props) {
           </div></div> : <></>}
         <div className="col-span-2">
           {answers.length !== 0 && answers.length > count ?
-          <span className="bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py-2 px-4 rounded-full w-full cursor-pointer" onClick={moreAnswers}>See More</span> : statusLoadA ? <span className="bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py-2 px-4 rounded-full w-full cursor-pointer">See Less</span> : <></>}
+          <span className="border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-4 rounded-full w-full cursor-pointer" onClick={moreAnswers}>See More</span> : statusLoadA ? <span className="border border-1 border-slate bg-gray-700 text-white font-bold py px-4 rounded-full w-full">See Less</span> : <></>}
         </div>
         <div></div>
     </div>
