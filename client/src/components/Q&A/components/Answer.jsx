@@ -14,13 +14,17 @@ export default function Answer(props) {
   };
 
   const handleHelpful = function(answer_id) {
-    axios.put('/answers', { answer_id: answer_id, type: 'helpful' });
-    props.addHelpfulA(answer_id, props.answer.helpfulness);
+    axios.put('/answers', { answer_id: answer_id, type: 'helpful' })
+      .then(() => {
+        props.addHelpfulA(answer_id, props.answer.helpfulness);
+      });
   };
 
   const handleReport = function(answer_id) {
-    axios.put('/answers', { answer_id: answer_id, type: 'report' });
-    props.addReportA(answer_id);
+    axios.put('/answers', { answer_id: answer_id, type: 'report' })
+      .then(() => {
+        props.addReportA(answer_id);
+      });
   };
 
   const handleModal = function(url, index) {

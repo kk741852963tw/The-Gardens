@@ -10,8 +10,8 @@ class QuestionsAnswers extends React.Component {
     super(props);
     this.state = {
       display: [],
-      product_id: '37312', //'37408', //'37312',
-      product_name: 'Bright Future Sunglasses', //'Leopold Pants',//'Bright Future Sunglasses',
+      product_id: '37315', //'37408', //'37312',
+      product_name: 'Heir Force Ones', //'Leopold Pants',//'Bright Future Sunglasses',
       count: 2,
       answers: [],
       statusQ: false,
@@ -184,7 +184,7 @@ class QuestionsAnswers extends React.Component {
               })}
             </>)}
             </div>
-        {this.state.display.length > this.state.count ?
+        {this.state.display.length > this.state.count && (!this.state.search || this.state.searchD.length === 0) ?
           <div  className="m-auto w-4/5 flex justify-between">
             <span className="border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start" onClick={this.moreAnsweredQ}>More Answered Questions</span>
             <span className="border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start" onClick={this.handleAddQ}>ADD A QUESTION</span>

@@ -53,8 +53,10 @@ export default function Question(props) {
   };
 
   const handleHelpful = function(question_id) {
-    axios.put('/questions', { question_id: question_id, type: 'helpful' });
-    props.addHelpful();
+    axios.put('/questions', { question_id: question_id, type: 'helpful' })
+      .then(() => {
+        props.addHelpful();
+      });
   };
 
   const handleAddA = function() {
