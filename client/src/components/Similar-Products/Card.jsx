@@ -3,19 +3,25 @@ import { React, useEffect } from 'react'
 export default function Card({ card, toggleModal }) {
 
   useEffect(() => {
+    // calculates average for card unless it is the add to outfit card
+    if(card.name !== 'Add to outfit') {
     let newWidth = card.rating / 5 * 100;
     newWidth = newWidth.toString() + '%';
-    document.getElementById(card.id).style.width = newWidth;
-    document.getElementById(card.id).style.color = 'orange';
+      document.getElementById(card.id).style.width = newWidth;
+      document.getElementById(card.id).style.color = 'orange';
+    }
   });
 
   return (
     <>
-
       <div className="group relative">
-        <div >
-          <i className="z-10 absolute fa-regular fa-star" onClick={(e) => { toggleModal(true, card.id) }}></i>
-        </div>
+        {
+          // add star to everything but the add outfit card
+          card.name !== 'Add to outfit' ?
+        <div className="float-right mr-10">
+          <i className="z-10 absolute fa-regular fa-star text-3xl pt-1.5" onClick={(e) => { toggleModal(true, card.id) }}></i>
+        </div> : null
+        }
         <div
           className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
           <img src={card.url} alt="Front of men&#039;s Basic Tee in black."
@@ -33,6 +39,8 @@ export default function Card({ card, toggleModal }) {
             <p className="mt-1 text-sm text-gray-500">{card.category}</p>
           </div>
           <p className="text-sm font-medium text-gray-900">{card.price}</p>
+          {
+            card.name !== 'Add to outfit' ?
           <div className="float-left pt-5">
             <div className="star-ratings text-lg text-gray-400 relative m-0 p-0 ">
               <div id={card.id} className="fill-ratings p-0 absolute z-[1] block top-0 left-0 truncate ">
@@ -42,7 +50,8 @@ export default function Card({ card, toggleModal }) {
                 <span className="inline-block ">★★★★★</span>
               </div>
             </div>
-          </div>
+          </div> : null
+          }
         </div>
       </div>
     </>

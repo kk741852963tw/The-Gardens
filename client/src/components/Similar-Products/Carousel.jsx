@@ -35,7 +35,7 @@ export default function Carousel() {
     } else {
       //hide left arrow
       let leftArrow = document.getElementById('leftArrow');
-      leftArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0 hidden');
+      leftArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0 opacity-40');
     }
     // setCards(prevState);
     parentContext.setParentState(prevState);
@@ -70,7 +70,7 @@ export default function Carousel() {
       leftArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0');
     } else {
       // hide arrow
-      rightArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0 hidden');
+      rightArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0 opacity-40');
     }
     parentContext.setParentState(prevState);
   };
@@ -78,7 +78,7 @@ export default function Carousel() {
   return (
     <>
       <div className="flex mx-auto max-w-7xl">
-        <div id="leftArrow" className="flex-none m-0 pt-72 max-h-0">
+        <div id="leftArrow" className="flex-none m-0 pt-72 max-h-0 opacity-40">
           <div onClick={() => handleLeftClick()} className="text-xl md:text-5xl cursor-pointer">
             <i className=" w-half fa-regular fa-circle-left flex items-left"></i>
           </div>
