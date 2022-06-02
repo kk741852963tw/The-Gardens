@@ -8,7 +8,7 @@ export default function AddAnswer(props) {
   const [email, setEmail] = useState('');
   const [image, setImage] = useState([]);
   const [imagedisplay, setImageD] = useState([]);
-  const [count, setCount] = useState(0);
+  const [count2, setCount2] = useState(0);
   const [spec, setSpec] = useState([".tiff", ".pjp", ".jfif", ".bmp", ".gif", ".svg", ".png", ".xbm", ".dib", ".jxl", ".jpeg", ".svgz", ".jpg", ".webp", ".ico", ".tif", "pjpeg", ".avif"]);
   const [string, setString] = useState('');
   const fileInput = React.useRef();
@@ -28,7 +28,7 @@ export default function AddAnswer(props) {
   const handleCancel = function() {
     setImage([]);
     setImageD([]);
-    setCount(0);
+    setCount2(0);
     props.status();
   }
 
@@ -58,7 +58,7 @@ export default function AddAnswer(props) {
       });
       setImage([]);
       setImageD([]);
-      setCount(0);
+      setCount2(0);
       props.status();
     }
   }
@@ -76,7 +76,7 @@ export default function AddAnswer(props) {
       };
       axios(obj).then(result => {
         setImage([...image, result.data.data.url]);
-        setCount(count + 1);
+        setCount2(count2 + 1);
         let reader = URL.createObjectURL(e.target.files[0]);
         setString('');
         setImageD([...imagedisplay, reader]);
@@ -86,7 +86,7 @@ export default function AddAnswer(props) {
       // reader.readAsDataURL(e.target.files[0]);
       // reader.onload = function () {
       //   setImage([...image, reader.result]);
-      //   setCount(count + 1);
+      //   setCount2(count2 + 1);
       // }
     } else {
       alert('Data is not the image');
@@ -101,7 +101,7 @@ export default function AddAnswer(props) {
         setImageD([...imagedisplay, e.target.value]);
         setTimeout(() => {
           e.target.value = null;
-          setCount(count + 1);
+          setCount2(count2 + 1);
         }, 500);
       } else {
         alert('Url is not the image');
@@ -148,7 +148,7 @@ export default function AddAnswer(props) {
                   <br></br>
                   <div>
                     <label htmlFor="image" className="block mb-2 underline font-medium text-gray-900 dark:text-gray-300">Upload your photos</label>
-                    {count < 5 ?
+                    {count2 < 5 ?
                     <div className="flex justify-start">
                       <input className="hidden" type="file" id="image" onChange={handleImage} accept="image/*" ref={fileInput}></input>
                       <button data-testid="answer_button" className="mr-3 bg-white hover:bg-gray-300 border-2 border-stone-900 shadow shadow-blue-500/40 px-1 rounded-full" onClick={refClick}>Pick File</button>
