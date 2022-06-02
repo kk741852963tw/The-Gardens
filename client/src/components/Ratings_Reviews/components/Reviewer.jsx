@@ -52,7 +52,6 @@ const Reviewer = function (props) {
 
   return (
     <div className="reviews">
-      {console.log(props)}
       <div>
         <div className="float-left">
           <div className="star-ratings text-lg text-gray-400 relative m-0 p-0">

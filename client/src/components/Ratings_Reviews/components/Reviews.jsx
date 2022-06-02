@@ -5,19 +5,46 @@ import axios from 'axios';
 const Ratings_Reviews = function (props) {
 
   let initialReviews = [];
+  let sortArr = [];
 
-  const [revs, setRevs] = useState([]);
+  const [hasLoaded, setHasLoaded] = useState(true);
+  const [showInt, setShowInt] = useState(true);
+  const [revs, setRevs] = useState([
+    {
+        body: '',
+        data: '2022-01-01T00:00:00.000Z',
+        helpfulness: 0,
+        photos: [],
+        rating: 0,
+        recommend: false,
+        response: null,
+        review_id: 0,
+        reviewer_name: '',
+        summary: 'There are no reviews!'
+      }
+  ]);
   const [index, setIndex] = useState(2);
 
   const addMore = function (event) {
 
     if (props.reviewData.results[index] && props.reviewData.results[index + 1]) {
-      setRevs([...revs, props.reviewData.results[index], props.reviewData.results[index + 1]]);
-      setIndex(index + 2);
+
+      if (showInt) {
+        setRevs([...initialReviews, props.reviewData.results[index], props.reviewData.results[index + 1]]);
+        setShowInt(false);
+      } else {
+
+        setRevs([...revs, props.reviewData.results[index], props.reviewData.results[index + 1]]);
+        setIndex(index + 2);
+      }
 
     } else {
 
-      setRevs([...initialReviews, ...revs, props.reviewData.results[index]]);
+      if (props.reviewData.results[index]) {
+
+        setRevs([...revs, props.reviewData.results[index]]);
+      }
+
 
       axios(props.reviewOption)
       .then((result) => {
@@ -36,13 +63,68 @@ const Ratings_Reviews = function (props) {
     // Change only the page number.
   }
 
+  const sortDate = function(event) {
+    let sortArr = revs;
+    console.log('Should be revs', revs);
+    console.log('Should be sortArr', sortArr);
+
+    if (event.target.value === 'Newest') {
+
+      sortArr.sort((data1, data2) => {
+
+        if (data1.date < data2.date) {
+          return 1;
+        } else if (data1.date > data2.date) {
+          return - 1;
+        }
+        return 0;
+      });
+    } else if (event.target.value === 'Helpful') {
+      sortArr.sort((data1, data2) => {
+        if (data1.helpfulness < data2.helpfulness) {
+          return 1;
+        } else if (data1.helpfulness > data2.helpfulness) {
+          return - 1;
+        }
+
+        return 0;
+      });
+    } else {
+      sortArr.sort((data1, data2) => {
+        if (data1.helpfulness > data2.helpfulness) {
+          return -1;
+        } else if (data1.helpfulness < data2.helpfulness) {
+          return 1;
+        } else {
+          if (data1.date < data2.date) {
+            return 1;
+          } else if (data1.date > data2.date) {
+            return - 1;
+          }
+
+          return 0;
+        }
+      });
+    }
+
+
+    console.log('sortArr', sortArr);
+
+
+    setRevs([...sortArr]);
+  }
+
+  useEffect(() => {
+    // setRevs([props.reviewData.results[0], props.reviewData.results[0]]);
+  }, []);
+
   if (props.reviewData.results && props.page) {
 
-    if (props.reviewData.results.length >= 2 && props.page === 2) {
+    if (props.reviewData.results.length >= 2 && props.page === 2 ) {
 
       initialReviews.push(props.reviewData.results[0]);
       initialReviews.push(props.reviewData.results[1]);
-    } else if (props.reviewData.results.length >= 2 && props.page === 2) {
+    } else if (props.reviewData.results.length >= 1 && props.page === 2) {
 
       initialReviews.push(props.reviewData.results[0]);
     } else if (props.reviewData.results.length < 1) {
@@ -61,17 +143,19 @@ const Ratings_Reviews = function (props) {
       });
     }
 
+
+
     return (
       <div id="Reviews" className= "text-xs basis-2/3 content-center  border-2 border-solid mx-8">
         <div className="font-bold">
-          {props.reviewData.count} reviews, sorted by <select type="dropdown" className="font-bold underline decoration-9">
-            <option value="sortOption">Relevant</option>
-            <option value="sortOption">Newest</option>
-            <option value="sortOption">Helpful</option>
+          {props.reviewData.results.length} reviews, sorted by <select onChange={sortDate} type="dropdown" className="font-bold underline decoration-9">
+            <option value="Relevant">Relevant</option>
+            <option value="Newest">Newest</option>
+            <option value="Helpful">Helpful</option>
           </select>
         </div>
         <div className="overflow-y-auto max-h-96">
-          {initialReviews.map(result => (
+          {showInt && initialReviews.map(result => (
             <Reviewer data={result}/>
           ))}
           {revs.map(result => (
