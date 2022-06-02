@@ -33,8 +33,8 @@ const ImageCarousel = ({ activeStyle }) => {
 
   //  Carousel Construct
   return (
-    <section className='relative flex flex-col justify-center max-h-full'>
-      <div className="flex flex-col justify-center max-h-full">
+    <section className='relative flex flex-col justify-center max-h-full overflow-hidden'>
+      <div className="flex flex-col justify-center max-h-3/4 w-full overflow-hidden object-cover object-bottom">
         <div className='absolute top-1/2 left-8 z-10 cursor-pointer select-none text-5xl'>
             <FaArrowAltCircleLeft onClick={prevSlide}/>
         </div>
@@ -45,7 +45,7 @@ const ImageCarousel = ({ activeStyle }) => {
           return (
             <>
                 {index === current && (<img key={index} src={image} alt='random image'
-                className='-z-5 rounded-md object-cover h-96 max-w-full'/>)}
+                className='-z-5 rounded-md'/>)}
             </>
           )
         })}

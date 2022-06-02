@@ -5,7 +5,8 @@ import Logo from './Logo.jsx';
 const Headline = (props) => {
   //log here
   return (
-    <header className='max-w-[1240px] mx-auto px-4 flex justify-between'>
+    <div className="relative h-11 justify-content pt-2">
+
       <div className='float-left'>
         <Logo />
       </div>
@@ -13,7 +14,7 @@ const Headline = (props) => {
          <SearchBar />
       </div>
 
-    </header>
+    </div>
   )
 };
 

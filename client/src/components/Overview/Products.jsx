@@ -39,7 +39,7 @@ class Products extends React.Component {
 
 
   fetchDataStyle() {
-    axios.get('/styleData', { params : {product_id: 37315}})
+    axios.get('/styleData', { params : {product_id: 37313}})
       .then((res) => {
         //Adds active property.
         //default style is active first
@@ -49,7 +49,7 @@ class Products extends React.Component {
           } else {
             return {...obj, active: false};
           }});
-
+          console.log(data);
         //Isolate active style
         let active = data.filter(element => element['default?']);
 
@@ -65,7 +65,7 @@ class Products extends React.Component {
     }
 
     fetchDataProduct() {
-      axios.get('/productData', { params : {product_id: 37315}})
+      axios.get('/productData', { params : {product_id: 37313}})
       .then((res) => {
         this.setState({
           productData: res.data
@@ -100,11 +100,10 @@ class Products extends React.Component {
     addToCart() {
       if (this.state.cartSize === '') {
         alert('You must choose a size.');
-
       } else {
         axios.post('/cartData', {id: this.state.cartSize})
         .then((res) => {
-          console.log('Item Added!');
+          alert('Item Added to Cart.');
         })
         .catch((err) => {
           console.log('Failed to add to cart.', err);
@@ -148,8 +147,8 @@ class Products extends React.Component {
           <Headline />
         </div>
 
-        <div className="grid grid-cols-5 gap-4 h-96">
-          <div className='h-full flex flex-col col-span-4 justify-center'>
+        <div className="grid grid-cols-5 gap-4 h-full">
+          <div className='flex flex-col col-span-4 justify-center'>
             <ImageCarousel activeStyle={this.state.activeStyle} />
 
           </div>
