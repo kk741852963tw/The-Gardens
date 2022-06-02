@@ -14,14 +14,13 @@ class QuestionsAnswers extends React.Component {
       product_name: 'Bright Future Sunglasses', //'Leopold Pants',//'Bright Future Sunglasses',
       count: 2,
       answers: [],
-      temp: [],
       statusQ: false,
       helpful: {},
       helpfulA: {},
       reportA: {},
       text: '',
-      tempA: [],
-      tempA: []
+      search: false,
+      searchD: []
     }
     this.moreAnsweredQ = this.moreAnsweredQ.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -53,7 +52,6 @@ class QuestionsAnswers extends React.Component {
         }
         this.setState({
           display: array,
-          temp: array,
           helpful: objQ,
           helpfulA: objA,
           reportA: objAR
@@ -67,67 +65,31 @@ class QuestionsAnswers extends React.Component {
       count: this.state.display.length
     });
   }
-  //upperCase!!!!
+
   handleSearch(text) {
     if (text.length > 2) {
-      const array = [];
-      for (let i = 0; i < this.state.temp.length; i++) {
-        if (this.state.temp[i].question_body.includes(text)) {
-          array.push(this.state.temp[i]);
-        }
-      }
-      const objQ = {};
-      const objA = {};
-      const objAR = {};
-      const tempAarray = [];
-      const tempQarray = [];
-      for (let i = 0; i < array.length; i++) {
-        objQ[array[i].question_id] = this.state.helpful[array[i].question_id];
-        tempQarray.push(array[i].question_id);
-        for (let key in array[i].answers) {
-          objA[array[i].answers[key].id] = this.state.helpfulA[array[i].answers[key].id];
-          objAR[array[i].answers[key].id] = this.state.reportA[array[i].answers[key].id];
-          tempAarray.push(array[i].answers[key].id);
-        }
-      }
-      this.setState({
-        tempAhelpful: this.state.helpfulA,
-        tempQhelpful: this.state.helpful,
-        tempAreport: this.state.reportA,
-        display: array,
-        text: text,
-        helpful: objQ,
-        helpfulA: objA,
-        reportA: objAR,
-        tempA: tempAarray,
-        tempQ: tempQarray
-      });
-    } else {
-      const objQ = {};
-      const objA = {};
-      const objAR = {};
-      for (let i = 0; i < this.state.temp.length; i++) {
-        if (this.state.tempQ.includes(this.state.temp[i].question_id)) {
-          objQ[this.state.temp[i].question_id] = this.state.helpful[this.state.temp[i].question_id];
-        } else {
-          objQ[this.state.temp[i].question_id] = this.state.tempQhelpful[this.state.temp[i].question_id];
-        }
-        for (let key in this.state.temp[i].answers) {
-          if (this.state.tempA.includes(this.state.temp[i].answers[key].id)) {
-            objA[this.state.temp[i].answers[key].id] = this.state.helpfulA[this.state.temp[i].answers[key].id];
-            objAR[this.state.temp[i].answers[key].id] = this.state.reportA[this.state.temp[i].answers[key].id];
-          } else {
-            objA[this.state.temp[i].answers[key].id] = this.state.tempAhelpful[this.state.temp[i].answers[key].id];
-            objAR[this.state.temp[i].answers[key].id] = this.state.tempAreport[this.state.temp[i].answers[key].id];
+      let array = [];
+      console.log(this.state.display);
+      for (let i = 0; i < this.state.display.length; i++) {
+        if (this.state.display[i].question_body.includes(text)) {
+          for (let i = 0; i < this.state.display.length; i++) {
+            if (this.state.display[i].question_body.includes(text)) {
+              array.push(this.state.display[i]);
+            }
           }
+          this.setState({
+            search: true,
+            text: text,
+            searchD: array
+          });
+          break;
         }
       }
+    } else {
       this.setState({
-        display: this.state.temp,
         text: '',
-        helpful: objQ,
-        helpfulA: objA,
-        reportA: objAR
+        search: false,
+        searchD: []
       });
     }
   }
@@ -146,7 +108,11 @@ class QuestionsAnswers extends React.Component {
 
   addHelpful(question_id, question_helpfulness, index) {
     let obj2 = this.state.display;
-    obj2[index]['question_helpfulness'] = question_helpfulness + 1;
+    for (let i = 0; i < obj2.length; i++) {
+      if (obj2[i].question_id === question_id) {
+        obj2[i].question_helpfulness = question_helpfulness + 1;
+      }
+    }
     let obj = this.state.helpful;
     obj[question_id] = true;
     const array = obj2.sort((a, b) => {
@@ -160,7 +126,13 @@ class QuestionsAnswers extends React.Component {
 
   addHelpfulA(answer_id, answer_helpful, index) {
     let obj2 = this.state.display;
-    obj2[index]['answers'][answer_id.toString()].helpfulness = answer_helpful + 1;
+    for (let i = 0; i < obj2.length; i++) {
+      for (let key in obj2[i].answers) {
+        if (key === answer_id.toString()) {
+          obj2[i]['answers'][answer_id.toString()].helpfulness = answer_helpful + 1;
+        }
+      }
+    }
     let obj = this.state.helpfulA;
     obj[answer_id] = true;
     this.setState({
@@ -179,33 +151,47 @@ class QuestionsAnswers extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2 className="m-auto w-3/5 text-2xl font-extrabold font-poppins mb-1">{"QUESTIONS & ANSWERS"}</h2>
+      <div className="my-6">
+        <h2 className="m-auto w-4/5 text-2xl font-extrabold font-poppins mb-1">{"QUESTIONS & ANSWERS"}</h2>
         <Search text={this.handleSearch}></Search>
-        <div id="Question" className="m-auto w-3/5 max-h-screen mb-1">
-          {this.state.display.length === 0 ? <></> :
+        <div id="Question" className="m-auto w-4/5 max-h-screen mb-1">
+          {this.state.search && this.state.searchD.length !== 0 ?
+          (<>
+            {this.state.searchD.map((question, index) => {
+              return <Question
+              key={question.question_id}
+              question={question} product_name={this.state.product_name}
+              addHelpful={() => this.addHelpful(question.question_id, question.question_helpfulness, index)}
+              addOneTime={this.state.helpful[question.question_id]}
+              addHelpfulA={(answer_id, answer_helpful) => this.addHelpfulA(answer_id, answer_helpful, index)}
+              addOneTimeA={this.state.helpfulA} addReportA={(answer_id) => this.addReportA(answer_id, index)}
+              reportA={this.state.reportA}
+              text={this.state.text}></Question>
+            })}
+          </>) :
+          (this.state.display.length === 0 ? <></> :
             <>
               {this.state.display.slice(0, this.state.count).map((question, index) => {
                 return <Question
-                key={index}
+                key={question.question_id}
                 question={question} product_name={this.state.product_name}
                 addHelpful={() => this.addHelpful(question.question_id, question.question_helpfulness, index)}
                 addOneTime={this.state.helpful[question.question_id]}
                 addHelpfulA={(answer_id, answer_helpful) => this.addHelpfulA(answer_id, answer_helpful, index)}
                 addOneTimeA={this.state.helpfulA} addReportA={(answer_id) => this.addReportA(answer_id, index)}
                 reportA={this.state.reportA}
-                text={this.state.text}></Question>
+                text={''}></Question>
               })}
-            </>}
+            </>)}
             </div>
         {this.state.display.length > this.state.count ?
-          <div  className="m-auto w-3/5 flex justify-between">
-            <span className="bg-white hover:bg-gray-300 hover:text-white border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer" onClick={this.moreAnsweredQ}>More Answered Questions</span>
-            <span className="bg-white hover:bg-gray-300 hover:text-white border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer" onClick={this.handleAddQ}>ADD A QUESTION</span>
+          <div  className="m-auto w-4/5 flex justify-between">
+            <span className="border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start" onClick={this.moreAnsweredQ}>More Answered Questions</span>
+            <span className="border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start" onClick={this.handleAddQ}>ADD A QUESTION</span>
             {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
           </div> :
-          <div  className="m-auto w-3/5 flex justify-between">
-            <span data-testid="addaQuestion" className="hover:bg-gray-300 hover:text-white border-2 border-stone-900 shadow shadow-blue-500/40 py px-2 rounded-full cursor-pointer">
+          <div  className="m-auto w-4/5 flex justify-between">
+            <span data-testid="addaQuestion" className="border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start">
               <button onClick={this.handleAddQ}>ADD A QUESTION</button>
               {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
             </span>
