@@ -50,8 +50,6 @@ const ImageCarousel = ({ activeStyle }) => {
             className="w-full h-full object-center object-cover lg:w-full lg:h-full">
           </img>
         </div>}
-                {/* {index === current && (<img key={index} src={image} alt='random image'
-                className='-z-5 rounded-md'/>)} */}
             </>
           )
         })}
