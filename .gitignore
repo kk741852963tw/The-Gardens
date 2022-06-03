@@ -4,3 +4,4 @@
 config.js
 node_modules/
 package-lock.json
+./client/src/components/Ratings_Reviews/components/scratch.js
