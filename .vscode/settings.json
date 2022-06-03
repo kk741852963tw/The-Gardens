@@ -1,7 +1,6 @@
 {
 
   "workbench.colorCustomizations": {
-<<<<<<< HEAD
     "eidtor.codeLens": true,
     "activityBar.activeBackground": "#00d300",
     "activityBar.activeBorder": "#6060ff",
@@ -20,9 +19,7 @@
     "titleBar.activeForeground": "#e7e7e7",
     "titleBar.inactiveBackground": "#00a00099",
     "titleBar.inactiveForeground": "#e7e7e799"
-=======
-    "eidtor.codeLens": true
->>>>>>> ac98c3630375f72afd77c679818353a6ef83d81e
+
   },
   "peacock.color": "#00a000"
 
