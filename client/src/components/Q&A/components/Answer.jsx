@@ -56,8 +56,8 @@ export default function Answer(props) {
         {props.answer.answerer_name === "Seller" ? <span className='font-black'> {props.answer.answerer_name}</span> : <span> {props.answer.answerer_name}</span>}
         <span className="mr-2">, {changeTimeFormat(props.answer.date)}   &#124;</span>
         <span className="mr-2">Helpful? </span>
-        {!props.addOneTimeA[props.answer.id] ? <span data-testid="ha" className='mr-4 border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray py px-2 rounded-full cursor-pointer place-self-start' onClick={() => handleHelpful(props.answer.id)}>Yes({props.answer.helpfulness})</span> : <span className='mr-4 border border-1 border-slate bg-gray-700 text-white py px-2 rounded-full  place-self-start'>Yes({props.answer.helpfulness})</span>}
-        {!props.reportA[props.answer.id] ? <span data-testid="ra" className='border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray py px-2 rounded-full cursor-pointer place-self-start' onClick={() => handleReport(props.answer.id)}>Report</span> : <span className='border border-1 border-slate bg-gray-700 text-white py px-2 rounded-full  place-self-start'>Reported</span>}
+        {!props.addOneTimeA[props.answer.id] ? <span data-testid="ha" className='mr-4 border border-1 border-gray-500 hover:bg-gray-700 hover:text-white text-gray py px-2 rounded-full cursor-pointer place-self-start' onClick={() => handleHelpful(props.answer.id)}>Yes({props.answer.helpfulness})</span> : <span className='mr-4 border border-1 border-gray-500 bg-gray-700 text-white py px-2 rounded-full  place-self-start'>Yes({props.answer.helpfulness})</span>}
+        {!props.reportA[props.answer.id] ? <span data-testid="ra" className='border border-1 border-gray-500 hover:bg-gray-700 hover:text-white text-gray py px-2 rounded-full cursor-pointer place-self-start' onClick={() => handleReport(props.answer.id)}>Report</span> : <span className='border border-1 border-gray-500 bg-gray-700 text-white py px-2 rounded-full  place-self-start'>Reported</span>}
       </div>
     </div>
   );

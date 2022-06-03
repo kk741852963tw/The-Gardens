@@ -6,8 +6,8 @@ export default function Search(props) {
   }
 
   return (
-    <div className="flex m-auto w-4/5 border-2 border-gray-400 border-solid rounded relative mb-1">
-      <input data-testid="search" className="w-full h-8 m-2 focus:outline-none" typt='text' placeholder='Have a question? Search for answers…' onChange={handleChange}></input>
+    <div className="flex m-auto w-full border-2 border-gray-400 border-solid rounded relative mb-1">
+      <input id="inputSearch" data-testid="search" className="w-full h-8 m-2 focus:outline-none" typt='text' placeholder='Have a question? Search for answers…' onChange={handleChange}></input>
       <span className="flex flex-col justify-center mr-2">
         <svg className="fill-white text-zinc-400" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30">
           <path
