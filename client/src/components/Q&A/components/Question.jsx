@@ -75,8 +75,8 @@ export default function Question(props) {
       <div className="max-h-full font-black mt-1 text-xl">{questionBodySpecHead(question_body)}<span className="bg-yellow-300">{props.text}</span>{questionBodySpecTail(question_body)}</div>
       <div className="flex justify-end mt-1">
         <span className="mr-2">Helpful?</span>
-        {!props.addOneTime ? <span className='mr-4 border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start' onClick={() => handleHelpful(props.question.question_id)}>Yes{`(${props.question.question_helpfulness})`} </span> : <span className="mr-4 border border-1 border-slate bg-gray-700 text-white font-bold py px-2 rounded-full  place-self-start">Yes{`(${props.question.question_helpfulness})`} </span>}
-        <span className="border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start" onClick={handleAddA}>Add Answer</span>
+        {!props.addOneTime ? <span className='mr-4 border border-1 border-gray-500 hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start' onClick={() => handleHelpful(props.question.question_id)}>Yes{`(${props.question.question_helpfulness})`} </span> : <span className="mr-4 border border-1 border-gray-500 bg-gray-700 text-white font-bold py px-2 rounded-full  place-self-start">Yes{`(${props.question.question_helpfulness})`} </span>}
+        <span className="border border-1 border-gray-500 hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start" onClick={handleAddA}>Add Answer</span>
         {statusA ? <AddAnswer status={handleAddA} body={props.question.question_body} product_name={props.product_name} key={i} question_id={props.question.question_id}></AddAnswer> : <></>}
       </div>
         {answers.length !== 0 ?
@@ -95,7 +95,7 @@ export default function Question(props) {
           </div></div> : <></>}
         <div className="col-span-2">
           {answers.length !== 0 && answers.length > count ?
-          <span className="border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-4 rounded-full w-full cursor-pointer" onClick={moreAnswers}>See More</span> : statusLoadA ? <span className="border border-1 border-slate bg-gray-700 text-white font-bold py px-4 rounded-full w-full">See Less</span> : <></>}
+          <span className="border border-1 border-gray-500 hover:bg-gray-700 hover:text-white text-gray font-bold py px-4 rounded-full w-full cursor-pointer" onClick={moreAnswers}>See More</span> : statusLoadA ? <span className="border border-1 border-gray-500 bg-gray-700 text-white font-bold py px-4 rounded-full w-full">See Less</span> : <></>}
         </div>
         <div></div>
     </div>

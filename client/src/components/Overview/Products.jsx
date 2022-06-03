@@ -5,6 +5,7 @@ import BagInteractButtons from './BagButtons/BagInteractButtons.jsx';
 import StyleSelector from './StyleSelector/StyleSelector.jsx';
 import ProductInfo from './StyleSelector/ProductInfo.jsx';
 import ProductBlurb from './ProductDesc/ProductBlurb.jsx';
+
 const axios = require('axios');
 
 class Products extends React.Component {
@@ -49,7 +50,6 @@ class Products extends React.Component {
           } else {
             return {...obj, active: false};
           }});
-          console.log(data);
         //Isolate active style
         let active = data.filter(element => element['default?']);
 

@@ -30,12 +30,12 @@ export default function Carousel() {
       lastActiveElement.active = false;
       //unhide right arrow arrow
       let rightArrow = document.getElementById('rightArrow');
-      rightArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0');
+      rightArrow.setAttribute('class', 'flex-none m-0 pt-48 pl-12 max-h-0');
 
     } else {
       //hide left arrow
       let leftArrow = document.getElementById('leftArrow');
-      leftArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0 opacity-40');
+      leftArrow.setAttribute('class', 'flex-none m-0 pr-12 pt-48 max-h-0 opacity-40');
     }
     // setCards(prevState);
     parentContext.setParentState(prevState);
@@ -67,10 +67,10 @@ export default function Carousel() {
 
       //unhide left arrow
       let leftArrow = document.getElementById('leftArrow');
-      leftArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0');
+      leftArrow.setAttribute('class', 'flex-none m-0 pr-12 pt-48 max-h-0');
     } else {
       // hide arrow
-      rightArrow.setAttribute('class', 'flex-none m-0 pt-72 max-h-0 opacity-40');
+      rightArrow.setAttribute('class', 'flex-none m-0 pt-48 pl-12 max-h-0 opacity-40');
     }
     parentContext.setParentState(prevState);
   };
@@ -78,13 +78,13 @@ export default function Carousel() {
   return (
     <>
       <div className="flex mx-auto max-w-7xl">
-        <div id="leftArrow" className="flex-none m-0 pt-72 max-h-0 opacity-40">
+        <div id="leftArrow" className="flex-none m-0 pr-12 pt-48 max-h-0 opacity-40">
           <div onClick={() => handleLeftClick()} className="text-xl md:text-5xl cursor-pointer">
             <i className=" w-half fa-regular fa-circle-left flex items-left"></i>
           </div>
         </div>
         <div className="flex-1 w-64">
-          <div className="bg-white max-w-7xl" >
+          <div id="cardDiv" className="max-w-7xl" >
             <div className="max-w-2xl mx-auto py-0 px-4 sm:py-0 sm:px-6 lg:max-w-7xl lg:px-8">
               <div>
                 <h2 className="text-2xl font-extrabold tracking-tight text-gray-700 font-poppins">{parentContext.name}</h2>
@@ -102,7 +102,7 @@ export default function Carousel() {
             </div>
           </div>
         </div>
-        <div id="rightArrow" className="flex-none m-0 pt-72 max-h-0">
+        <div id="rightArrow" className="flex-none m-0 pt-48 pl-12 max-h-0">
           <div onClick={() => handleRightClick()} className="text-xl md:text-5xl cursor-pointer">
             <i className="fa-regular fa-circle-right items-right"></i>
           </div>

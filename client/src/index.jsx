@@ -24,14 +24,12 @@ class App extends React.Component {
 
   render() {
     return (
-
         <div className='mx-auto w-4/5'>
           <Products />
           <RelatedProducts/>
-          <QuestionsAnswers/>
-          <Ratings_Reviews/>
+            <QuestionsAnswers/>
+            <Ratings_Reviews/>
         </div>
-
     )
   }
 };
