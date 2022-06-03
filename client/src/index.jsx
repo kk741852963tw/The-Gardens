@@ -27,8 +27,8 @@ class App extends React.Component {
         <div className='mx-auto w-4/5'>
           <Products />
           <RelatedProducts/>
-            <Ratings_Reviews/>
             <QuestionsAnswers/>
+            <Ratings_Reviews/>
         </div>
     )
   }
