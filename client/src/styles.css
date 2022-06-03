@@ -71,3 +71,26 @@
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
 }
+
+body {
+  background: url("https://media.istockphoto.com/photos/background-brick-wall-painted-white-picture-id183387282?b=1&k=20&m=183387282&s=170667a&w=0&h=wW5V6eGGyb3WpzuL37w3j3dxS0FC-M0bWfujSCAD5eI=");
+  background-attachment: fixed;
+
+ /* background-position: center;  Center the image */
+  /*background-repeat: no-repeat;  Do not repeat the image */
+  /*background-size: ;  Resize the background image to cover the entire contain */
+}
+
+#cardDiv {
+  background: rgb(223, 223, 223);
+  border-style: dashed;
+ /*  border-image: url("https://img.freepik.com/free-photo/bleached-wood-textured-design-background_53876-150052.jpg?w=2000"); */
+}
+
+#QA {
+  background: rgb(223, 223, 223);
+}
+
+#inputSearch {
+  background: rgb(223, 223, 223);
+}

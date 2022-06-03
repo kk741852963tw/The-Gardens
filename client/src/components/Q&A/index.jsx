@@ -10,8 +10,8 @@ class QuestionsAnswers extends React.Component {
     super(props);
     this.state = {
       display: [],
-      product_id: '37315', //'37408', //'37312',
-      product_name: 'Heir Force Ones', //'Leopold Pants',//'Bright Future Sunglasses',
+      product_id: '37313', //'37408', //'37312',
+      product_name: 'Morning Joggers', //'Leopold Pants',//'Bright Future Sunglasses',
       count: 2,
       answers: [],
       statusQ: false,
@@ -151,10 +151,10 @@ class QuestionsAnswers extends React.Component {
 
   render() {
     return (
-      <div className="my-6">
-        <h2 className="m-auto w-4/5 text-2xl font-extrabold font-poppins mb-1">{"QUESTIONS & ANSWERS"}</h2>
+      <div id="QA" className="my-6 w-4/5 m-auto">
+        <h2 className="m-auto w-full text-2xl font-extrabold font-poppins mb-1">{"QUESTIONS & ANSWERS"}</h2>
         <Search text={this.handleSearch}></Search>
-        <div id="Question" className="m-auto w-4/5 max-h-screen mb-1">
+        <div id="Question" className="m-auto w-full max-h-screen mb-1">
           {this.state.search && this.state.searchD.length !== 0 ?
           (<>
             {this.state.searchD.map((question, index) => {
@@ -185,13 +185,13 @@ class QuestionsAnswers extends React.Component {
             </>)}
             </div>
         {this.state.display.length > this.state.count && (!this.state.search || this.state.searchD.length === 0) ?
-          <div  className="m-auto w-4/5 flex justify-between">
-            <span className="border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start" onClick={this.moreAnsweredQ}>More Answered Questions</span>
-            <span className="border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start" onClick={this.handleAddQ}>ADD A QUESTION</span>
+          <div  className="m-auto w-full flex justify-between">
+            <span className="border border-1 border-gray-500 hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start" onClick={this.moreAnsweredQ}>More Answered Questions</span>
+            <span className="border border-1 border-gray-500 hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start" onClick={this.handleAddQ}>ADD A QUESTION</span>
             {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
           </div> :
-          <div  className="m-auto w-4/5 flex justify-between">
-            <span data-testid="addaQuestion" className="border border-1 border-slate bg-transparent hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start">
+          <div  className="m-auto w-full flex justify-between">
+            <span data-testid="addaQuestion" className="border border-1 border-gray-500 hover:bg-gray-700 hover:text-white text-gray font-bold py px-2 rounded-full cursor-pointer place-self-start">
               <button onClick={this.handleAddQ}>ADD A QUESTION</button>
               {this.state.statusQ ? <AddQuestion product_name={this.state.product_name} status={this.handleAddQ} product_id={this.state.product_id}></AddQuestion> : <></>}
             </span>
