@@ -36,20 +36,20 @@ const ImageCarousel = ({ activeStyle }) => {
     <section className='relative flex flex-col justify-center max-h-full overflow-hidden'>
       <div className="flex flex-col justify-center max-h-min w-full overflow-hidden object-cover object-bottom">
         <div className='absolute top-1/2 left-8 z-10 cursor-pointer select-none text-5xl'>
-            <FaArrowAltCircleLeft onClick={prevSlide}/>
+          <FaArrowAltCircleLeft onClick={prevSlide} />
         </div>
         <div className='absolute top-1/2 right-8 z-10 cursor-pointer select-none text-5xl'>
-            <FaArrowAltCircleRight onClick={nextSlide}/>
+          <FaArrowAltCircleRight onClick={nextSlide} />
         </div>
         {photoUrl.map((image, index) => {
           return (
             <>
-           { index === current && <div
-          className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-screen lg:aspect-none">
-          <img src={image} alt="random image"
-            className="w-full h-full object-center object-cover lg:w-full lg:h-full">
-          </img>
-        </div>}
+              {index === current && <div
+                className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-screen lg:aspect-none">
+                <img src={image} alt="random image"
+                  className="w-full h-full object-center object-cover lg:w-full lg:h-full">
+                </img>
+              </div>}
             </>
           )
         })}
