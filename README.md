@@ -90,7 +90,7 @@ The site is currently deployed in AWS EC2.
 
 ## Contributors
 
-* Po-Chang CHEN - Questions & Answers
+* Po-Chang Chen - Questions & Answers
 * Philip Koller - Related Products and Wishlist Carousels & Header
 * Cam Estep - Product Information
 * Hakeem Abdulmalik - Ratings & Reviews
